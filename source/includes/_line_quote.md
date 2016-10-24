@@ -1,6 +1,6 @@
 # Line quote
 
-## Submit a line quote
+## Request a line quote
 
 ```shell
 curl "https://api.novicap.com/line_quote" --data api_key=abcd \
@@ -30,7 +30,7 @@ Parameter  | Default | Required | Description
 ---------  | ------- | -------- | -----------
 api_key    |         | ✓        | Your api key for authentication.
 company_id |         | ✓        | The BVD ID of the company you want a quote for.
-debtor_ids |         |          | An array of BVD IDs of debtors you want quotes for.
+debtor_ids | []        |          | An array of BVD IDs of debtors you want quotes for.
 
 <aside class="notice">
 You must submit one company at a time, but you may submit as many debtors per company as you want.
@@ -56,14 +56,14 @@ curl "https://api.novicap.com/line_quote" --data api_key=abcd \
 
 Exchange a quote ID for a quote.
 
-The response has a `status` parameter. If this is `ok`, the quote is ready to use. Any other status means that the quote is not available:
+The response has a `status` parameter. If this is `ok`, the quote is ready to use. Any other status means that the quote is not available or may be incomplete:
 
-Status | Explanation
------- | -----------
-ok     | Quote successful, included in the response.
-review | NoviCap could not provide an automatic price quote. The quote may be provided at a later date, or the team may be in contact.
+Status   | Explanation
+---------|------------------------------------------------------------------------------------------------------------------------------
+ok       | Quote successful, included in the response.
+review   | NoviCap could not provide an automatic price quote. The quote may be provided at a later date, or the team may be in contact.
 rejected | NoviCap cannot provide a quote because the company does not pass financing requirements.
-taken | The company already has an account with NoviCap, or a different partner is already associated with the company.
+taken    | The company already has an account with NoviCap, or a different partner is already associated with the company.
 
 ### HTTP Request
 
@@ -78,13 +78,23 @@ quote_id   |         | ✓        | The quote ID retrieved from the previous ste
 
 ### Response
 
-A successful response is a JSON payload with the field `"status": "ok"`. It has these other fields:
+A successful response is a JSON payload with these fields:
 
-Variable | Type | Unit | Description
--------- | ---- | ---- | -----------
-credit_limit | Number | € | The size of the credit line NoviCap can provide to the company.
-opening_fee | Number | % | The fee NoviCap will charge to open the credit line as a percentage of the credit limit.
-commission | Number | € | The commission the partner will make if the company opens the line.
-debtors | Array | | A list of debtors that were priced as part of the quote.
+Variable     | Type   | Unit | Description
+-------------|--------|------|-----------------------------------------------------------------------------------------
+status       | String |      | One of "ok", "review", or "rejected".
+credit_limit | Number | €    | The size of the credit line NoviCap can provide to the company.
+opening_fee  | Number | %    | The fee NoviCap will charge to open the credit line as a percentage of the credit limit.
+commission   | Number | €    | The commission the partner will make if the company opens the line.
+debtors      | Array  |      | A list of debtors that were priced as part of the quote.
 
-<!-- Each debtor in `debtors` has these fields: -->
+Each debtor in `debtors` has these fields:
+
+Variable              | Type   | Unit | Description
+----------------------|--------|------|------------------------------------------------------------------------------------------------
+status                | String |      | One of "ok", "review", or "rejected".
+apr_on_invoice        | Number | %    | The annual interest rate NoviCap will charge as a percentage of the total value of the invoice.
+apr_on_advanced       | Number | %    | The annual interest rate NoviCap will charge as a percentage of the amount advanced.
+fixed_fee_on_invoice  | Number | %    | The fee NoviCap will charge as a percentage of the total value of the invoice.
+fixed_fee_on_advanced | Number | %    | The fee NoviCap will charge as a percentage of the amount advanced.
+advanced              | Number | %    | The percentage of the total value of the invoice NoviCap will advance.

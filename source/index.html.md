@@ -9,6 +9,7 @@ toc_footers:
 
 includes:
   - line_quote
+  - invoice_quote
   - errors
 
 search: true
