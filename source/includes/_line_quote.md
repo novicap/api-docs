@@ -47,6 +47,7 @@ curl "https://api.novicap.com/line_quote" --data api_key=abcd \
 
 ```json
 {
+  "status": "ok",
   "credit_limit": 200000,
   "opening_fee": 2.25,
   "commission": 900
@@ -54,6 +55,15 @@ curl "https://api.novicap.com/line_quote" --data api_key=abcd \
 ```
 
 Exchange a quote ID for a quote.
+
+The response has a `status` parameter. If this is `ok`, the quote is ready to use. Any other status means that the quote is not available:
+
+Status | Explanation
+------ | -----------
+ok     | Quote successful, included in the response.
+review | NoviCap could not provide an automatic price quote. The quote may be provided at a later date, or the team may be in contact.
+rejected | NoviCap cannot provide a quote because the company does not pass financing requirements.
+taken | The company already has an account with NoviCap, or a different partner is already associated with the company.
 
 ### HTTP Request
 
@@ -65,3 +75,16 @@ Parameter  | Default | Required | Description
 ---------  | ------- | -------- | -----------
 api_key    |         | ✓        | Your api key for authentication.
 quote_id   |         | ✓        | The quote ID retrieved from the previous step.
+
+### Response
+
+A successful response is a JSON payload with the field `"status": "ok"`. It has these other fields:
+
+Variable | Type | Unit | Description
+-------- | ---- | ---- | -----------
+credit_limit | Number | € | The size of the credit line NoviCap can provide to the company.
+opening_fee | Number | % | The fee NoviCap will charge to open the credit line as a percentage of the credit limit.
+commission | Number | € | The commission the partner will make if the company opens the line.
+debtors | Array | | A list of debtors that were priced as part of the quote.
+
+<!-- Each debtor in `debtors` has these fields: -->
