@@ -6,10 +6,10 @@
 curl https://api.novicap.com/quote --header "Content-Type: application/json" --data <<EOF
   {
     "api_key": abcd,
-    "company_id": "ESB94021474",
+    "company_novicap_id": "ESB94021474",
     "invoices": [
       {
-        "debtor_id": "ESB20707378",
+        "debtor_novicap_id": "ESB20707378",
         "invoice_id": "efgh",
         "amount": 50_000.0,
         "days_remaining": 30,
@@ -17,7 +17,7 @@ curl https://api.novicap.com/quote --header "Content-Type: application/json" --d
         "currency": "EUR"
       },
       {
-        "debtor_id": "ESB86126216",
+        "debtor_novicap_id": "ESB86126216",
         "invoice_id": "ijkl",
         "amount": 35_000.0,
         "days_remaining": 15,
@@ -45,22 +45,22 @@ Returns a quote ID that can be used to poll for the quote.
 `POST http://api.novicap.com/v1/quote`
 ### Query Parameters
 
-Parameter  | Default | Required | Example     | Description
------------|---------|----------|-------------|------------------------------------------------
-api_key    |         | ✓        | "abcd"      | Your api key for authentication.
-company_id |         | ✓        | "ES1234567" | The BVD ID of the company you want a quote for.
-invoices   | []      |          |             | An array of invoices you want quotes for.
+Parameter          | Default | Required | Example     | Description
+-------------------|---------|----------|-------------|------------------------------------------------
+api_key            |         | ✓        | "abcd"      | Your api key for authentication.
+company_novicap_id |         | ✓        | "ES1234567" | The BVD ID of the company you want a quote for.
+invoices           | []      |          |             | An array of invoices you want quotes for.
 
 Each invoice may have these parameters:
 
-Parameter      | Default         | Required | Example         | Description
----------------|-----------------|----------|-----------------|-----------------------------------------------------------------------------------------------------
-debtor_id      |                 | ✓        | "ES1234567"     | The BVD ID of the company you want a quote for.
-amount         |                 | ✓        | 20000.0         | The currency amount of the invoice. This example is €20,000.00.
-days_remaining |                 | ✓        | 50              | The number of days before the invoice is paid. This example is 50 days.
-payment_method | "bank_transfer" |          | "bank_transfer" | One of "bank_transfer", "transferable_promissory_note", "non_transferable_promissory_note", "other".
-invoice_id     | ""              |          | "12345"         | An identifier for the invoice that can be matched to the corresponding quote later.
-currency       | "EUR"           |          | "EUR"           | The currency of the invoice.
+Parameter      | Default         | Required               | Example         | Description |                 |
+------------------|-----------------|-------------|-----------------|-----------------------------------------------------------------------------------------------------
+debtor_novicap_id |                 | ✓           | "ES1234567"     | The BVD ID of the company you want a quote for.
+amount            |                 | ✓           | 20000.0         | The currency amount of the invoice. This example is €20,000.00.
+days_remaining    |                 | ✓           | 50              | The number of days before the invoice is paid. This example is 50 days.
+payment_method    | "bank_transfer" |             | "bank_transfer" | One of "bank_transfer", "transferable_promissory_note", "non_transferable_promissory_note", "other".
+invoice_id        | ""              |             | "12345"         | An identifier for the invoice that can be matched to the corresponding quote later.
+currency          | "EUR"           |             | "EUR"           | The currency of the invoice.
 
 ## Retrieve an invoice quote
 

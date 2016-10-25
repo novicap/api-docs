@@ -4,9 +4,9 @@
 
 ```shell
 curl "https://api.novicap.com/line_quote" --data api_key=abcd \
-                                                 &company_id=ES123456 \
-                                                 &debtor_ids[]=ES234567 \
-                                                 &debtor_ids[]=ES345678
+                                                 &company_novicap_id=ES123456 \
+                                                 &debtor_novicap_ids[]=ES234567 \
+                                                 &debtor_novicap_ids[]=ES345678
 ```
 
 > The above command returns JSON structured like this:
@@ -26,11 +26,11 @@ Returns a quote ID that can be used to poll for the quote.
 
 ### Query Parameters
 
-Parameter  | Default | Required | Description
----------  | ------- | -------- | -----------
-api_key    |         | ✓        | Your api key for authentication.
-company_id |         | ✓        | The BVD ID of the company you want a quote for.
-debtor_ids | []        |          | An array of BVD IDs of debtors you want quotes for.
+Parameter          | Default | Required | Description
+-------------------|---------|----------|----------------------------------------------------
+api_key            |         | ✓        | Your api key for authentication.
+company_novicap_id |         | ✓        | The BVD ID of the company you want a quote for.
+debtor_novicap_ids | []      |          | An array of BVD IDs of debtors you want quotes for.
 
 <aside class="notice">
 You must submit one company at a time, but you may submit as many debtors per company as you want.
