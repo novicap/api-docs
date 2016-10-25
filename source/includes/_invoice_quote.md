@@ -43,6 +43,7 @@ Returns a quote ID that can be used to poll for the quote.
 ### HTTP Request
 
 `POST http://api.novicap.com/v1/quote`
+
 ### Query Parameters
 
 Parameter          | Default | Required | Example     | Description
@@ -53,14 +54,14 @@ invoices           | []      |          |             | An array of invoices you
 
 Each invoice may have these parameters:
 
-Parameter      | Default         | Required               | Example         | Description |                 |
-------------------|-----------------|-------------|-----------------|-----------------------------------------------------------------------------------------------------
-debtor_novicap_id |                 | ✓           | "ES1234567"     | The BVD ID of the company you want a quote for.
-amount            |                 | ✓           | 20000.0         | The currency amount of the invoice. This example is €20,000.00.
-days_remaining    |                 | ✓           | 50              | The number of days before the invoice is paid. This example is 50 days.
-payment_method    | "bank_transfer" |             | "bank_transfer" | One of "bank_transfer", "transferable_promissory_note", "non_transferable_promissory_note", "other".
-invoice_id        | ""              |             | "12345"         | An identifier for the invoice that can be matched to the corresponding quote later.
-currency          | "EUR"           |             | "EUR"           | The currency of the invoice.
+Parameter         | Default         | Required | Example         | Description
+------------------|-----------------|----------|-----------------|-----------------------------------------------------------------------------------------------------
+debtor_novicap_id |                 | ✓        | "ES1234567"     | The BVD ID of the company you want a quote for.
+amount            |                 | ✓        | 20000.0         | The currency amount of the invoice. This example is €20,000.00.
+days_remaining    |                 | ✓        | 50              | The number of days before the invoice is paid. This example is 50 days.
+payment_method    | "bank_transfer" |          | "bank_transfer" | One of "bank_transfer", "transferable_promissory_note", "non_transferable_promissory_note", "other".
+invoice_id        | ""              |          | "12345"         | An identifier for the invoice that can be matched to the corresponding quote later.
+currency          | "EUR"           |          | "EUR"           | The currency of the invoice.
 
 ## Retrieve an invoice quote
 
