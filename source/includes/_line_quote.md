@@ -58,12 +58,13 @@ Exchange a quote ID for a quote.
 
 The response has a `status` parameter. If this is `ok`, the quote is ready to use. Any other status means that the quote is not available or may be incomplete:
 
-Status   | Explanation
----------|------------------------------------------------------------------------------------------------------------------------------
-ok       | Quote successful, included in the response.
-review   | NoviCap could not provide an automatic price quote. The quote may be provided at a later date, or the team may be in contact.
-rejected | NoviCap cannot provide a quote because the company does not pass financing requirements.
-taken    | The company already has an account with NoviCap, or a different partner is already associated with the company.
+Status     | Explanation
+-----------|------------------------------------------------------------------------------------------------------------------------------
+ok         | Quote successful, included in the response.
+processing | The quote is still processing. Try again in a few seconds.
+review     | NoviCap could not provide an automatic price quote. The quote may be provided at a later date, or the team may be in contact.
+rejected   | NoviCap cannot provide a quote because the company does not pass financing requirements.
+taken      | The company already has an account with NoviCap, or a different partner is already associated with the company.
 
 ### HTTP Request
 
