@@ -49,14 +49,14 @@ Returns a quote ID that can be used to poll for the quote.
 Parameter          | Default | Required | Example     | Description
 -------------------|---------|----------|-------------|------------------------------------------------
 api_key            |         | ✓        | "abcd"      | Your api key for authentication.
-company_novicap_id |         | ✓        | "ES1234567" | The BVD ID of the company you want a quote for.
+company_novicap_id |         | ✓        | "ES1234567" | The NoviCap ID of the company you want a quote for.
 invoices           | []      |          |             | An array of invoices you want quotes for.
 
 Each invoice may have these parameters:
 
 Parameter         | Default         | Required | Example         | Description
 ------------------|-----------------|----------|-----------------|-----------------------------------------------------------------------------------------------------
-debtor_novicap_id |                 | ✓        | "ES1234567"     | The BVD ID of the company you want a quote for.
+debtor_novicap_id |                 | ✓        | "ES1234567"     | The NoviCap ID of the company you want a quote for.
 amount            |                 | ✓        | 20000.0         | The currency amount of the invoice. This example is €20,000.00.
 days_remaining    |                 | ✓        | 50              | The number of days before the invoice is paid. This example is 50 days.
 payment_method    | "bank_transfer" |          | "bank_transfer" | One of "bank_transfer", "transferable_promissory_note", "non_transferable_promissory_note", "other".
@@ -66,8 +66,7 @@ currency          | "EUR"           |          | "EUR"           | The currency 
 ## Retrieve an invoice quote
 
 ```shell
-curl "https://api.novicap.com/quote" --data api_key=abcd \
-                                            &quote_id=wxyz \
+curl "https://api.novicap.com/quote?api_key=abcd&quote_id=wxyz"
 ```
 
 > The above command returns JSON structured like this:
@@ -77,7 +76,14 @@ curl "https://api.novicap.com/quote" --data api_key=abcd \
   "status": "ok",
   "credit_limit": 200000,
   "opening_fee": 2.25,
-  "commission": 900
+  "commission": 900,
+  "invoices": [
+    {
+      "status": "ok",
+      "apr_on_invoice": 4.2,
+
+    }
+  ]
 }
 ```
 
@@ -118,15 +124,16 @@ invoices     | Array  |      | A list of invoices that were priced as part of th
 
 Each invoice in `invoices` has these fields:
 
-Variable                     | Type   | Unit | Example | Description
------------------------------|--------|------|---------|----------------------------------------------------------------------------------------------------------------------
-status                       | String |      |         | One of "ok", "review", or "rejected".
-apr_on_invoice               | Number | %    | 4.2     | The annual interest rate NoviCap will charge as a percentage of the total value of the invoice. This example is 4.2%.
-apr_on_advanced              | Number | %    | 6       | The annual interest rate NoviCap will charge as a percentage of the amount advanced. This example is 6%.
-apr_on_invoice_amount        | Number | €    | 2100.0  | The interest NoviCap will charge. This example is €2100.0
-fixed_fee_on_invoice         | Number | %    |         | The fee NoviCap will charge as a percentage of the total value of the invoice.
-fixed_fee_on_advanced        | Number | %    |         | The fee NoviCap will charge as a percentage of the amount advanced.
-fixed_fee_on_invoice_amount  | Number | €    |         | The fee NoviCap will charge.
-fixed_fee_on_advanced_amount | Number | €    |         | The fee NoviCap will charge.
-advanced                     | Number | %    |         | The percentage of the total value of the invoice NoviCap will advance.
-advanced_amount              | Number | €    |         | The amount of the invoice that NoviCap will advance.
+Variable                     | Type   | Unit | Example                            | Description |   |        |
+-----------------------------|-------------|---|--------|----------------------------------------------------------------------------------------------------------------------
+status                       | String      |   |        | One of "ok", "review", or "rejected".
+apr_on_invoice               | Number      | % | 4.2    | The annual interest rate NoviCap will charge as a percentage of the total value of the invoice. This example is 4.2%.
+apr_on_advanced              | Number      | % | 6      | The annual interest rate NoviCap will charge as a percentage of the amount advanced. This example is 6%.
+apr_on_invoice_amount        | Number      | € | 2100.0 | The interest NoviCap will charge. This example is €2100.0
+fixed_fee_on_invoice         | Number      | % |        | The fee NoviCap will charge as a percentage of the total value of the invoice.
+fixed_fee_on_advanced        | Number      | % |        | The fee NoviCap will charge as a percentage of the amount advanced.
+fixed_fee_on_invoice_amount  | Number      | € |        | The fee NoviCap will charge.
+fixed_fee_on_advanced_amount | Number      | € |        | The fee NoviCap will charge.
+advanced                     | Number      | % |        | The percentage of the total value of the invoice NoviCap will advance.
+advanced_amount              | Number      | € |        | The amount of the invoice that NoviCap will advance.
+invoice_id                   | String      |   | "efgh" | The invoice ID given to us during the quote request. Can be used to match this quote to your own records.

@@ -29,8 +29,8 @@ Returns a quote ID that can be used to poll for the quote.
 Parameter          | Default | Required | Description
 -------------------|---------|----------|----------------------------------------------------
 api_key            |         | ✓        | Your api key for authentication.
-company_novicap_id |         | ✓        | The BVD ID of the company you want a quote for.
-debtor_novicap_ids | []      |          | An array of BVD IDs of debtors you want quotes for.
+company_novicap_id |         | ✓        | The NoviCap ID of the company you want a quote for.
+debtor_novicap_ids | []      |          | An array of NoviCap IDs of debtors you want quotes for.
 
 <aside class="notice">
 You must submit one company at a time, but you may submit as many debtors per company as you want.
@@ -39,8 +39,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 ## Retrieve a line quote
 
 ```shell
-curl "https://api.novicap.com/line_quote" --data api_key=abcd \
-                                                 &quote_id=wxyz \
+curl "https://api.novicap.com/line_quote?api_key=abcd&quote_id=wxyz"
 ```
 
 > The above command returns JSON structured like this:
