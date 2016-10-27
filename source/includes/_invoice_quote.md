@@ -81,7 +81,8 @@ curl "https://api.novicap.com/quote?api_key=abcd&quote_id=wxyz"
     {
       "status": "ok",
       "apr_on_invoice": 4.2,
-
+      "apr_on_advanced": 6,
+      "advanced": 90
     }
   ]
 }
@@ -124,16 +125,16 @@ invoices     | Array  |      | A list of invoices that were priced as part of th
 
 Each invoice in `invoices` has these fields:
 
-Variable                     | Type   | Unit | Example                            | Description |   |        |
------------------------------|-------------|---|--------|----------------------------------------------------------------------------------------------------------------------
-status                       | String      |   |        | One of "ok", "review", or "rejected".
-apr_on_invoice               | Number      | % | 4.2    | The annual interest rate NoviCap will charge as a percentage of the total value of the invoice. This example is 4.2%.
-apr_on_advanced              | Number      | % | 6      | The annual interest rate NoviCap will charge as a percentage of the amount advanced. This example is 6%.
-apr_on_invoice_amount        | Number      | € | 2100.0 | The interest NoviCap will charge. This example is €2100.0
-fixed_fee_on_invoice         | Number      | % |        | The fee NoviCap will charge as a percentage of the total value of the invoice.
-fixed_fee_on_advanced        | Number      | % |        | The fee NoviCap will charge as a percentage of the amount advanced.
-fixed_fee_on_invoice_amount  | Number      | € |        | The fee NoviCap will charge.
-fixed_fee_on_advanced_amount | Number      | € |        | The fee NoviCap will charge.
-advanced                     | Number      | % |        | The percentage of the total value of the invoice NoviCap will advance.
-advanced_amount              | Number      | € |        | The amount of the invoice that NoviCap will advance.
-invoice_id                   | String      |   | "efgh" | The invoice ID given to us during the quote request. Can be used to match this quote to your own records.
+Variable                     | Type   | Unit | Example | Description                                                                                                           
+-----------------------------|--------|------|---------|-----------------------------------------------------------------------------------------------------------------------
+status                       | String |      |         | One of "ok", "review", or "rejected".                                                                                 
+apr_on_invoice               | Number | %    | 4.2     | The annual interest rate NoviCap will charge as a percentage of the total value of the invoice. This example is 4.2%.
+apr_on_advanced              | Number | %    | 6       | The annual interest rate NoviCap will charge as a percentage of the amount advanced. This example is 6%.              
+apr_on_invoice_amount        | Number | €    | 2100.0  | The interest NoviCap will charge. This example is €2100.0                                                             
+fixed_fee_on_invoice         | Number | %    |         | The fee NoviCap will charge as a percentage of the total value of the invoice.                                        
+fixed_fee_on_advanced        | Number | %    |         | The fee NoviCap will charge as a percentage of the amount advanced.                                                   
+fixed_fee_on_invoice_amount  | Number | €    |         | The fee NoviCap will charge.                                                                                          
+fixed_fee_on_advanced_amount | Number | €    |         | The fee NoviCap will charge.                                                                                          
+advanced                     | Number | %    |         | The percentage of the total value of the invoice NoviCap will advance.                                                
+advanced_amount              | Number | €    |         | The amount of the invoice that NoviCap will advance.                                                                  
+invoice_id                   | String |      | "efgh"  | The invoice ID given to us during the quote request. Can be used to match this quote to your own records.             
