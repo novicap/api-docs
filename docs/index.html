@@ -1,0 +1,860 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #f8f8f2;
+  background-color: #272822;
+}
+.highlight .err {
+  color: #151515;
+  background-color: #ac4142;
+}
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #505050;
+}
+.highlight .cp {
+  color: #f4bf75;
+}
+.highlight .nt {
+  color: #f4bf75;
+}
+.highlight .o, .highlight .ow {
+  color: #d0d0d0;
+}
+.highlight .p, .highlight .pi {
+  color: #d0d0d0;
+}
+.highlight .gi {
+  color: #90a959;
+}
+.highlight .gd {
+  color: #ac4142;
+}
+.highlight .gh {
+  color: #6a9fb5;
+  background-color: #151515;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #aa759f;
+}
+.highlight .kc {
+  color: #d28445;
+}
+.highlight .kt {
+  color: #d28445;
+}
+.highlight .kd {
+  color: #d28445;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #90a959;
+}
+.highlight .sr {
+  color: #75b5aa;
+}
+.highlight .si {
+  color: #8f5536;
+}
+.highlight .se {
+  color: #8f5536;
+}
+.highlight .nn {
+  color: #f4bf75;
+}
+.highlight .nc {
+  color: #f4bf75;
+}
+.highlight .no {
+  color: #f4bf75;
+}
+.highlight .na {
+  color: #6a9fb5;
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+  color: #90a959;
+}
+.highlight .ss {
+  color: #90a959;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="index" data-languages="[&quot;shell&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img src="images/logo.png" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="shell">shell</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+        <ul class="toc-footer">
+            <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="introduction">Introduction</h1>
+
+<p>Welcome to the NoviCap invoice discounting API. You can use this service to get fast, automated quotes for companies and specific invoices.</p>
+
+<h1 id="authentication">Authentication</h1>
+
+<blockquote>
+<p>To authorize while using the endpoint <code class="prettyprint">line_quote</code>:</p>
+</blockquote>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/line_quote"</span> --data <span class="nv">api_key</span><span class="o">=</span>abcd
+</code></pre>
+
+<blockquote>
+<p>where <code class="prettyprint">abcd</code> should be replaced with your API key.</p>
+</blockquote>
+
+<p>We use API keys to authenticate. You can generate a new API key by logging into your partner account at <a href="https://www.novicap.com">novicap.com</a></p>
+
+<p>The API key should be included in all requests to the server as an HTTP request parameter named <code class="prettyprint">api_key</code>.</p>
+
+          <h1 id="search">Search</h1>
+
+<h2 id="search-for-a-company-by-name-or-cif">Search for a company by name or CIF</h2>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/v1/search?api_key=abcd&amp;query=PREPARTS+SL&amp;country=ES"</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PRECISSION PARTS PREPARTS SL."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Barcelona"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"is_public_entity"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"registration_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B65354490"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ES"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"novicap_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ESB65354490"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Searches for a company in our database. Returns a unique NoviCap ID which is used to represent that company in all other requests.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://api.novicap.com/v1/search</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>api_key</td>
+<td></td>
+<td>✓</td>
+<td>Your api key for authentication.</td>
+</tr>
+<tr>
+<td>query</td>
+<td></td>
+<td>✓</td>
+<td>The search query. Can be a company name, e.g. &ldquo;PREPARTS SL&rdquo; or a CIF/VAT number, e.g. &ldquo;B65354490&rdquo;</td>
+</tr>
+<tr>
+<td>country</td>
+<td>&ldquo;ES&rdquo;</td>
+<td></td>
+<td>An ISO Alpha-2 country code. The company should be incorporated in this country.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<p>A successful response is a JSON payload with these fields:</p>
+
+<table><thead>
+<tr>
+<th>Variable</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>location</td>
+<td>String</td>
+<td>The location of incorporation of the company.</td>
+</tr>
+<tr>
+<td>country</td>
+<td>String</td>
+<td>An ISO Alpha-2 country code matching the location.</td>
+</tr>
+<tr>
+<td>is_public_entity</td>
+<td>Boolean</td>
+<td>Whether the company is listed as a public administration.</td>
+</tr>
+<tr>
+<td>registration_number</td>
+<td>String</td>
+<td>A legal identifier of the company. In Spain, this is the CIF code.</td>
+</tr>
+<tr>
+<td>size</td>
+<td>String</td>
+<td>The approximate size of the company (revenue). One of: very_large, large, medium, small, very_small, unknown.</td>
+</tr>
+<tr>
+<td>novicap_id</td>
+<td>String</td>
+<td>The NoviCap ID of the company. This will not change and can be used in subsequent requests.</td>
+</tr>
+</tbody></table>
+
+          <h1 id="line-quote">Line quote</h1>
+
+<h2 id="request-a-line-quote">Request a line quote</h2>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/line_quote"</span> --data <span class="nv">api_key</span><span class="o">=</span>abcd <span class="se">\</span>
+                                                 &amp;company_novicap_id<span class="o">=</span>ES123456 <span class="se">\</span>
+                                                 &amp;debtor_novicap_ids[]<span class="o">=</span>ES234567 <span class="se">\</span>
+                                                 &amp;debtor_novicap_ids[]<span class="o">=</span>ES345678
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"quote_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wxyz"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Submit a company and an optional list of debtors for an automatic price quote.
+Returns a quote ID that can be used to poll for the quote.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST http://api.novicap.com/v1/line_quote</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>api_key</td>
+<td></td>
+<td>✓</td>
+<td>Your api key for authentication.</td>
+</tr>
+<tr>
+<td>company_novicap_id</td>
+<td></td>
+<td>✓</td>
+<td>The NoviCap ID of the company you want a quote for.</td>
+</tr>
+<tr>
+<td>debtor_novicap_ids</td>
+<td>[]</td>
+<td></td>
+<td>An array of NoviCap IDs of debtors you want quotes for.</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+You must submit one company at a time, but you may submit as many debtors per company as you want.
+</aside>
+
+<h2 id="retrieve-a-line-quote">Retrieve a line quote</h2>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/line_quote?api_key=abcd&amp;quote_id=wxyz"</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"credit_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">200000</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"opening_fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.25</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"commission"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Exchange a quote ID for a quote.</p>
+
+<p>The response has a <code class="prettyprint">status</code> parameter. If this is <code class="prettyprint">ok</code>, the quote is ready to use. Any other status means that the quote is not available or may be incomplete:</p>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Explanation</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ok</td>
+<td>Quote successful, included in the response.</td>
+</tr>
+<tr>
+<td>processing</td>
+<td>The quote is still processing. Try again in a few seconds.</td>
+</tr>
+<tr>
+<td>review</td>
+<td>NoviCap could not provide an automatic price quote. The quote may be provided at a later date, or the team may be in contact.</td>
+</tr>
+<tr>
+<td>rejected</td>
+<td>NoviCap cannot provide a quote because the company does not pass financing requirements.</td>
+</tr>
+<tr>
+<td>taken</td>
+<td>The company already has an account with NoviCap, or a different partner is already associated with the company.</td>
+</tr>
+</tbody></table>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://api.novicap.com/v1/line_quote</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>api_key</td>
+<td></td>
+<td>✓</td>
+<td>Your api key for authentication.</td>
+</tr>
+<tr>
+<td>quote_id</td>
+<td></td>
+<td>✓</td>
+<td>The quote ID retrieved from the previous step.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<p>A successful response is a JSON payload with these fields:</p>
+
+<table><thead>
+<tr>
+<th>Variable</th>
+<th>Type</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status</td>
+<td>String</td>
+<td></td>
+<td>One of &ldquo;ok&rdquo;, &ldquo;review&rdquo;, or &ldquo;rejected&rdquo;.</td>
+</tr>
+<tr>
+<td>credit_limit</td>
+<td>Number</td>
+<td>€</td>
+<td>The size of the credit line NoviCap can provide to the company.</td>
+</tr>
+<tr>
+<td>opening_fee</td>
+<td>Number</td>
+<td>%</td>
+<td>The fee NoviCap will charge to open the credit line as a percentage of the credit limit.</td>
+</tr>
+<tr>
+<td>commission</td>
+<td>Number</td>
+<td>€</td>
+<td>The commission the partner will make if the company opens the line.</td>
+</tr>
+<tr>
+<td>debtors</td>
+<td>Array</td>
+<td></td>
+<td>A list of debtors that were priced as part of the quote.</td>
+</tr>
+</tbody></table>
+
+<p>Each debtor in <code class="prettyprint">debtors</code> has these fields:</p>
+
+<table><thead>
+<tr>
+<th>Variable</th>
+<th>Type</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status</td>
+<td>String</td>
+<td></td>
+<td>One of &ldquo;ok&rdquo;, &ldquo;review&rdquo;, or &ldquo;rejected&rdquo;.</td>
+</tr>
+<tr>
+<td>apr_on_invoice</td>
+<td>Number</td>
+<td>%</td>
+<td>The annual interest rate NoviCap will charge as a percentage of the total value of the invoice.</td>
+</tr>
+<tr>
+<td>apr_on_advanced</td>
+<td>Number</td>
+<td>%</td>
+<td>The annual interest rate NoviCap will charge as a percentage of the amount advanced.</td>
+</tr>
+<tr>
+<td>fixed_fee_on_invoice</td>
+<td>Number</td>
+<td>%</td>
+<td>The fee NoviCap will charge as a percentage of the total value of the invoice.</td>
+</tr>
+<tr>
+<td>fixed_fee_on_advanced</td>
+<td>Number</td>
+<td>%</td>
+<td>The fee NoviCap will charge as a percentage of the amount advanced.</td>
+</tr>
+<tr>
+<td>advanced</td>
+<td>Number</td>
+<td>%</td>
+<td>The percentage of the total value of the invoice NoviCap will advance.</td>
+</tr>
+</tbody></table>
+
+          <h1 id="invoice-quote">Invoice quote</h1>
+
+<h2 id="request-an-invoice-quote">Request an invoice quote</h2>
+<pre class="highlight shell"><code>curl https://api.novicap.com/quote --header <span class="s2">"Content-Type: application/json"</span> --data <span class="sh">&lt;&lt;EOF
+  {
+    "api_key": abcd,
+    "company_novicap_id": "ESB94021474",
+    "invoices": [
+      {
+        "debtor_novicap_id": "ESB20707378",
+        "invoice_id": "efgh",
+        "amount": 50_000.0,
+        "days_remaining": 30,
+        "payment_method": "bank_transfer",
+        "currency": "EUR"
+      },
+      {
+        "debtor_novicap_id": "ESB86126216",
+        "invoice_id": "ijkl",
+        "amount": 35_000.0,
+        "days_remaining": 15,
+        "payment_method": "bank_transfer",
+        "currency": "EUR"
+      }
+    ]
+  }
+EOF
+</span></code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"quote_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wxyz"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Submit a company and an optional list of invoices for an automatic price quote.
+Returns a quote ID that can be used to poll for the quote.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST http://api.novicap.com/v1/quote</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>api_key</td>
+<td></td>
+<td>✓</td>
+<td>&ldquo;abcd&rdquo;</td>
+<td>Your api key for authentication.</td>
+</tr>
+<tr>
+<td>company_novicap_id</td>
+<td></td>
+<td>✓</td>
+<td>&ldquo;ES1234567&rdquo;</td>
+<td>The NoviCap ID of the company you want a quote for.</td>
+</tr>
+<tr>
+<td>invoices</td>
+<td>[]</td>
+<td></td>
+<td></td>
+<td>An array of invoices you want quotes for.</td>
+</tr>
+</tbody></table>
+
+<p>Each invoice may have these parameters:</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>debtor_novicap_id</td>
+<td></td>
+<td>✓</td>
+<td>&ldquo;ES1234567&rdquo;</td>
+<td>The NoviCap ID of the company you want a quote for.</td>
+</tr>
+<tr>
+<td>amount</td>
+<td></td>
+<td>✓</td>
+<td>20000.0</td>
+<td>The currency amount of the invoice. This example is €20,000.00.</td>
+</tr>
+<tr>
+<td>days_remaining</td>
+<td></td>
+<td>✓</td>
+<td>50</td>
+<td>The number of days before the invoice is paid. This example is 50 days.</td>
+</tr>
+<tr>
+<td>payment_method</td>
+<td>&ldquo;bank_transfer&rdquo;</td>
+<td></td>
+<td>&ldquo;bank_transfer&rdquo;</td>
+<td>One of &ldquo;bank_transfer&rdquo;, &ldquo;transferable_promissory_note&rdquo;, &ldquo;non_transferable_promissory_note&rdquo;, &ldquo;other&rdquo;.</td>
+</tr>
+<tr>
+<td>invoice_id</td>
+<td>&ldquo;&rdquo;</td>
+<td></td>
+<td>&ldquo;12345&rdquo;</td>
+<td>An identifier for the invoice that can be matched to the corresponding quote later.</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>&ldquo;EUR&rdquo;</td>
+<td></td>
+<td>&ldquo;EUR&rdquo;</td>
+<td>The currency of the invoice.</td>
+</tr>
+</tbody></table>
+
+<h2 id="retrieve-an-invoice-quote">Retrieve an invoice quote</h2>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/quote?api_key=abcd&amp;quote_id=wxyz"</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"credit_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">200000</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"opening_fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.25</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"commission"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"invoices"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"apr_on_invoice"</span><span class="p">:</span><span class="w"> </span><span class="mf">4.2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"apr_on_advanced"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"advanced"</span><span class="p">:</span><span class="w"> </span><span class="mi">90</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Exchange a quote ID for a quote.</p>
+
+<p>The response has a <code class="prettyprint">status</code> parameter. If this is <code class="prettyprint">ok</code>, the quote is ready to use. Any other status means that the quote is not available or may be incomplete.</p>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Explanation</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ok</td>
+<td>Quote successful, included in the response.</td>
+</tr>
+<tr>
+<td>processing</td>
+<td>The quote is still processing. Try again in a few seconds.</td>
+</tr>
+<tr>
+<td>review</td>
+<td>NoviCap could not provide an automatic price quote. The quote may be provided at a later date, or the team may be in contact.</td>
+</tr>
+<tr>
+<td>rejected</td>
+<td>NoviCap cannot provide a quote because the company does not pass financing requirements.</td>
+</tr>
+<tr>
+<td>taken</td>
+<td>The company already has an account with NoviCap, or a different partner is already associated with the company.</td>
+</tr>
+</tbody></table>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://api.novicap.com/v1/quote</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>api_key</td>
+<td></td>
+<td>✓</td>
+<td>Your api key for authentication.</td>
+</tr>
+<tr>
+<td>quote_id</td>
+<td></td>
+<td>✓</td>
+<td>The quote ID retrieved from the previous step.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<p>A successful response is a JSON payload with these fields:</p>
+
+<table><thead>
+<tr>
+<th>Variable</th>
+<th>Type</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status</td>
+<td>String</td>
+<td></td>
+<td>One of &ldquo;ok&rdquo;, &ldquo;review&rdquo;, or &ldquo;rejected&rdquo;.</td>
+</tr>
+<tr>
+<td>credit_limit</td>
+<td>Number</td>
+<td>€</td>
+<td>The size of the credit invoice NoviCap can provide to the company.</td>
+</tr>
+<tr>
+<td>opening_fee</td>
+<td>Number</td>
+<td>%</td>
+<td>The fee NoviCap will charge to open the credit line as a percentage of the credit limit.</td>
+</tr>
+<tr>
+<td>commission</td>
+<td>Number</td>
+<td>€</td>
+<td>The commission the partner will make if the company opens the line.</td>
+</tr>
+<tr>
+<td>invoices</td>
+<td>Array</td>
+<td></td>
+<td>A list of invoices that were priced as part of the quote.</td>
+</tr>
+</tbody></table>
+
+<p>Each invoice in <code class="prettyprint">invoices</code> has these fields:</p>
+
+<table><thead>
+<tr>
+<th>Variable</th>
+<th>Type</th>
+<th>Unit</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status</td>
+<td>String</td>
+<td></td>
+<td></td>
+<td>One of &ldquo;ok&rdquo;, &ldquo;review&rdquo;, or &ldquo;rejected&rdquo;.</td>
+</tr>
+<tr>
+<td>apr_on_invoice</td>
+<td>Number</td>
+<td>%</td>
+<td>4.2</td>
+<td>The annual interest rate NoviCap will charge as a percentage of the total value of the invoice. This example is 4.2%.</td>
+</tr>
+<tr>
+<td>apr_on_advanced</td>
+<td>Number</td>
+<td>%</td>
+<td>6</td>
+<td>The annual interest rate NoviCap will charge as a percentage of the amount advanced. This example is 6%.</td>
+</tr>
+<tr>
+<td>apr_on_invoice_amount</td>
+<td>Number</td>
+<td>€</td>
+<td>2100.0</td>
+<td>The interest NoviCap will charge. This example is €2100.0</td>
+</tr>
+<tr>
+<td>fixed_fee_on_invoice</td>
+<td>Number</td>
+<td>%</td>
+<td></td>
+<td>The fee NoviCap will charge as a percentage of the total value of the invoice.</td>
+</tr>
+<tr>
+<td>fixed_fee_on_advanced</td>
+<td>Number</td>
+<td>%</td>
+<td></td>
+<td>The fee NoviCap will charge as a percentage of the amount advanced.</td>
+</tr>
+<tr>
+<td>fixed_fee_on_invoice_amount</td>
+<td>Number</td>
+<td>€</td>
+<td></td>
+<td>The fee NoviCap will charge.</td>
+</tr>
+<tr>
+<td>fixed_fee_on_advanced_amount</td>
+<td>Number</td>
+<td>€</td>
+<td></td>
+<td>The fee NoviCap will charge.</td>
+</tr>
+<tr>
+<td>advanced</td>
+<td>Number</td>
+<td>%</td>
+<td></td>
+<td>The percentage of the total value of the invoice NoviCap will advance.</td>
+</tr>
+<tr>
+<td>advanced_amount</td>
+<td>Number</td>
+<td>€</td>
+<td></td>
+<td>The amount of the invoice that NoviCap will advance.</td>
+</tr>
+<tr>
+<td>invoice_id</td>
+<td>String</td>
+<td></td>
+<td>&ldquo;efgh&rdquo;</td>
+<td>The invoice ID given to us during the quote request. Can be used to match this quote to your own records.</td>
+</tr>
+</tbody></table>
+
+          <h1 id="errors">Errors</h1>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request &ndash; The formatting of the request is wrong</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized &ndash; Your API key is wrong</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden &ndash; You do not have permission to perform that action</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found &ndash; The specified quote ID could not be found</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error &ndash; We had a problem with our server - contact support or try again later</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable &ndash; We&rsquo;re temporarily offline for maintenance - try again later</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="shell">shell</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
