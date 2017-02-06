@@ -1,4 +1,4 @@
-# Errors
+## Errors
 
 Error Code | Meaning
 ---------- | -------
