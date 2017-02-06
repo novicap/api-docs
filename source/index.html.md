@@ -20,7 +20,7 @@ search: true
 
 # Introduction
 
-Welcome to the NoviCap invoice discounting API. You can use this service to get fast, automated quotes for companies and specific invoices.
+Welcome to the NoviCap early payments API. You can use our API to receive automatic quotes for companies. The API is a work in progress and we have documented here the endpoints that are stable.
 
 # Authentication
 

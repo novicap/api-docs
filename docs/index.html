@@ -118,7 +118,7 @@
       <div class="content">
         <h1 id="introduction">Introduction</h1>
 
-<p>Welcome to the NoviCap invoice discounting API. You can use this service to get fast, automated quotes for companies and specific invoices.</p>
+<p>Welcome to the NoviCap early payments API. You can use our API to receive automatic quotes for companies. The API is a work in progress and we have documented here the endpoints that are stable.</p>
 
 <h1 id="authentication">Authentication</h1>
 
@@ -345,9 +345,7 @@
 </tr>
 </tbody></table>
 
-          <h1 id="line-quote">Line quote</h1>
-
-<h2 id="request-a-line-quote">Request a line quote</h2>
+          <h2 id="request-a-line-quote">Request a line quote</h2>
 <pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/line_quote"</span> --data <span class="nv">api_key</span><span class="o">=</span>abcd <span class="se">\</span>
                                                  &amp;company_novicap_id<span class="o">=</span>ES123456 <span class="se">\</span>
                                                  &amp;debtor_novicap_ids[]<span class="o">=</span>ES234567 <span class="se">\</span>

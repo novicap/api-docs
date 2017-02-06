@@ -1,5 +1,3 @@
-# Line quote
-
 ## Request a line quote
 
 ```shell
