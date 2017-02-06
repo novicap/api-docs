@@ -1,6 +1,6 @@
-# Search
+## Search
 
-## Search for a company by name or CIF
+### Search for a company by name or CIF
 
 ```shell
 curl "https://api.novicap.com/v1/search?api_key=abcd&query=PREPARTS+SL&country=ES"
@@ -20,13 +20,13 @@ curl "https://api.novicap.com/v1/search?api_key=abcd&query=PREPARTS+SL&country=E
 }
 ```
 
-Searches for a company in our database. Returns a unique NoviCap ID which is used to represent that company in all other requests.
+Searches for a company in our database. Returns a unique `novicap_id` which is used to represent that company in all other requests.
 
-### HTTP Request
+#### HTTP Request
 
 `GET http://api.novicap.com/v1/search`
 
-### Query Parameters
+#### Query Parameters
 
 Parameter          | Default | Required | Description
 -------------------|---------|----------|----------------------------------------------------
@@ -34,7 +34,7 @@ api_key            |         | ✓        | Your api key for authentication.
 query |         | ✓        | The search query. Can be a company name, e.g. "PREPARTS SL" or a CIF/VAT number, e.g. "B65354490"
 country | "ES"     |          | An ISO Alpha-2 country code. The company should be incorporated in this country.
 
-### Response
+#### Response
 
 A successful response is a JSON payload with these fields:
 
@@ -46,4 +46,4 @@ country      | String |  An ISO Alpha-2 country code matching the location.
 is_public_entity  | Boolean | Whether the company is listed as a public administration.
 registration_number   | String | A legal identifier of the company. In Spain, this is the CIF code.
 size      | String | The approximate size of the company (revenue). One of: very_large, large, medium, small, very_small, unknown.
-novicap_id      | String | The NoviCap ID of the company. This will not change and can be used in subsequent requests.
+novicap_id      | String | The `novicap_id` of the company. This will not change and can be used in subsequent requests.

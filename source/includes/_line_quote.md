@@ -26,11 +26,11 @@ Returns a quote ID that can be used to poll for the quote.
 
 ### Query Parameters
 
-Parameter          | Default | Required | Description
--------------------|---------|----------|----------------------------------------------------
-api_key            |         | ✓        | Your api key for authentication.
-company_novicap_id |         | ✓        | The NoviCap ID of the company you want a quote for.
-debtor_novicap_ids | []      |          | An array of NoviCap IDs of debtors you want quotes for.
+Parameter            | Default | Required | Description
+---------------------|---------|----------|--------------------------------------------------------
+api_key              |         | ✓        | Your api key for authentication.
+company_novicap_id   |         | ✓        | The `novicap_id` of the company you want a quote for.
+debtor_novicap_ids[] | []      |          | An array of `novicap_id`s of debtors you want quotes for.
 
 <aside class="notice">
 You must submit one company at a time, but you may submit as many debtors per company as you want.

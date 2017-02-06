@@ -1,6 +1,6 @@
-# Invoice quote
+## Invoice quote
 
-## Request an invoice quote
+### Request an invoice quote
 
 ```shell
 curl https://api.novicap.com/quote --header "Content-Type: application/json" --data <<EOF
@@ -40,11 +40,11 @@ EOF
 Submit a company and an optional list of invoices for an automatic price quote.
 Returns a quote ID that can be used to poll for the quote.
 
-### HTTP Request
+#### HTTP Request
 
 `POST http://api.novicap.com/v1/quote`
 
-### Query Parameters
+#### Query Parameters
 
 Parameter          | Default | Required | Example     | Description
 -------------------|---------|----------|-------------|------------------------------------------------
@@ -63,7 +63,7 @@ payment_method    | "bank_transfer" |          | "bank_transfer" | One of "bank_
 invoice_id        | ""              |          | "12345"         | An identifier for the invoice that can be matched to the corresponding quote later.
 currency          | "EUR"           |          | "EUR"           | The currency of the invoice.
 
-## Retrieve an invoice quote
+### Retrieve an invoice quote
 
 ```shell
 curl "https://api.novicap.com/quote?api_key=abcd&quote_id=wxyz"
@@ -100,18 +100,18 @@ review     | NoviCap could not provide an automatic price quote. The quote may b
 rejected   | NoviCap cannot provide a quote because the company does not pass financing requirements.
 taken      | The company already has an account with NoviCap, or a different partner is already associated with the company.
 
-### HTTP Request
+#### HTTP Request
 
 `GET http://api.novicap.com/v1/quote`
 
-### URL Parameters
+#### URL Parameters
 
 Parameter  | Default | Required | Description
 ---------  | ------- | -------- | -----------
 api_key    |         | ✓        | Your api key for authentication.
 quote_id   |         | ✓        | The quote ID retrieved from the previous step.
 
-### Response
+#### Response
 
 A successful response is a JSON payload with these fields:
 

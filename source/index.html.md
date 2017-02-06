@@ -8,9 +8,11 @@ toc_footers:
   - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
 
 includes:
+  - novicap_ids
+  - light_integration
+  - api
   - search
   - line_quote
-  - invoice_quote
   - errors
 
 search: true
