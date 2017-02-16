@@ -38,11 +38,11 @@ Returns an array with your associated companies.
 Parameter            | Default | Required | Description
 ---------------------|---------|----------|--------------------------------------------------------
 api_key              |         | ✓        | Your api key for authentication.
-status               |         |          | Filter companies by current status
+status               |         |          | Filter companies by current status. It maybe one of "rejected", "not_registered", "activated" or "onboarding"
 
 ### Response
 
-A successful response is a JSON conformed with this schema:
+> A successful response is a JSON compatible with this schema:
 
 ```json
 {
@@ -55,7 +55,7 @@ A successful response is a JSON conformed with this schema:
       "novicap_id": { "type": "string" },
       "status": {
         "type": "string",
-        "description": "One of 'registered', 'approved_for_trading' and 'rejected'"
+        "description": "One of 'not_registered', 'onboarding', 'activated' and 'rejected'"
       },
       "name": { "type": "string" },
       "line_limit": { "type": "number" },
@@ -69,7 +69,7 @@ A successful response is a JSON conformed with this schema:
             "novicap_id": { "type": "string" },
             "status": {
               "type": "string",
-              "description": "One of 'sage', 'draft', 'pending', 'approved', 'rejected', 'uncooperative'"
+              "description": "One of 'new', 'trading' and 'rejected'"
             },
             "name": { "type": "string" },
             "max_allowed_limit": { "type": "number,null"}
@@ -80,3 +80,24 @@ A successful response is a JSON conformed with this schema:
   }
 }
 ```
+
+A successful response is a JSON payload with these fields:
+
+Variable     | Type   | Unit | Description
+-------------|--------|------|-----------------------------------------------------------------------------------------
+novicap_id   | String |      | The `novicap_id` of the company.
+status       | String |      | One of 'not_registered', 'onboarding', 'activated' and 'rejected'.
+name         | String |      | The name of the company.
+line_limit   | Number | €    | The size of the credit line NoviCap can provide to the company.
+line_usage   | Number | €    | The amount currently used by the company.
+line_remaind | Number | €    | The amount currently available for the company.
+debtors      | Array  |      | The companies' debtors.
+
+Each debtor in `debtors` has these fields:
+
+Variable          | Type   | Unit | Description
+------------------|--------|------|------------------------------------------------------------------------------------------------
+novicap_id        | String |      | The `novicap_id` of the company.
+status            | String |      | One of "new", "trading", or "rejected".
+name              | String |      | The name of the debtor.
+max_allowed_limit | Number |  €   | The max allowed limit for this debtor.
