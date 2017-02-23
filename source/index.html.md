@@ -13,6 +13,7 @@ includes:
   - api
   - search
   - line_quote
+  - companies
   - errors
 
 search: true
