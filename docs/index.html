@@ -568,6 +568,194 @@ You must submit one company at a time, but you may submit as many debtors per co
 </tr>
 </tbody></table>
 
+          <h2 id="retrieve-companies">Retrieve companies</h2>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/companies?api_key=abcd"</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns the following JSON:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Company 937"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"novicap_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ESA32340135"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"approved_for_trading"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"line_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000000</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"line_usage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"line_remainder"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000000</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"debtors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"novicap_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ESA33218306"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Debtor 1744"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"max_allowed_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"draft"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>Returns an array with your associated companies.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://api.novicap.com/v1/companies?api_key=abcd&amp;status=pending</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>api_key</td>
+<td></td>
+<td>✓</td>
+<td>Your api key for authentication.</td>
+</tr>
+<tr>
+<td>status</td>
+<td></td>
+<td></td>
+<td>Filter companies by current status. It maybe one of &ldquo;rejected&rdquo;, &ldquo;not_registered&rdquo;, &ldquo;activated&rdquo; or &ldquo;onboarding&rdquo;</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<blockquote>
+<p>A successful response is a JSON compatible with this schema:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Companies endpoint json schema. It contains data about partner's companies and debtors"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"novicap_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"One of 'not_registered', 'onboarding', 'activated' and 'rejected'"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"line_limit"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"line_usage"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"line_remainder"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"debtors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"novicap_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"One of 'new', 'trading' and 'rejected'"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"max_allowed_limit"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number,null"</span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>A successful response is a JSON payload with these fields:</p>
+
+<table><thead>
+<tr>
+<th>Variable</th>
+<th>Type</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>novicap_id</td>
+<td>String</td>
+<td></td>
+<td>The <code class="prettyprint">novicap_id</code> of the company.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>String</td>
+<td></td>
+<td>One of &lsquo;not_registered&rsquo;, &#39;onboarding&rsquo;, &#39;activated&rsquo; and &#39;rejected&rsquo;.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td></td>
+<td>The name of the company.</td>
+</tr>
+<tr>
+<td>line_limit</td>
+<td>Number</td>
+<td>eurocents</td>
+<td>The size of the credit line NoviCap can provide to the company.</td>
+</tr>
+<tr>
+<td>line_usage</td>
+<td>Number</td>
+<td>eurocents</td>
+<td>The amount currently used by the company.</td>
+</tr>
+<tr>
+<td>line_remainder</td>
+<td>Number</td>
+<td>eurocents</td>
+<td>The amount currently available for the company.</td>
+</tr>
+<tr>
+<td>debtors</td>
+<td>Array</td>
+<td></td>
+<td>The companies&rsquo; debtors.</td>
+</tr>
+</tbody></table>
+
+<p>Each debtor in <code class="prettyprint">debtors</code> has these fields:</p>
+
+<table><thead>
+<tr>
+<th>Variable</th>
+<th>Type</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>novicap_id</td>
+<td>String</td>
+<td></td>
+<td>The <code class="prettyprint">novicap_id</code> of the company.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>String</td>
+<td></td>
+<td>One of &ldquo;new&rdquo;, &ldquo;trading&rdquo;, or &ldquo;rejected&rdquo;.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td></td>
+<td>The name of the debtor.</td>
+</tr>
+<tr>
+<td>max_allowed_limit</td>
+<td>Number</td>
+<td>eurocents</td>
+<td>The max allowed limit for this debtor.</td>
+</tr>
+</tbody></table>
+
           <h2 id="errors">Errors</h2>
 
 <table><thead>
