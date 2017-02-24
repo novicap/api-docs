@@ -19,7 +19,7 @@ curl "https://api.novicap.com/invoices?api_key=abcd"
     "grace_period_cost_per_day": 16.25,
     "grace_period_due_date":     "2017-03-25",
     "interest_rate":             650,
-    "investment_period":         "N/A",
+    "investment_period":         30,
     "invoice_amount":            100000,
     "overdue_cost_per_day":      30,
     "receive_on_due_date":       7713,
@@ -67,7 +67,7 @@ debtor_novicap_id  |         |          | Return only invoices related to the gi
       "grace_period_cost_per_day": { "type": "number" },
       "grace_period_due_date":     { "type": "string"},
       "interest_rate":             { "type": "number" },
-      "investment_period":         { "type": "string"},
+      "investment_period":         { "type": "integer"},
       "invoice_amount":            { "type": "integer" },
       "overdue_cost_per_day":      { "type": "number"},
       "receive_on_due_date":       { "type": "string,null"},
@@ -92,7 +92,7 @@ due_date                  | String  | ISO 8601 format | The invoice's due date
 grace_period_cost_per_day | Number  |                 |
 grace_period_due_date     | String  | Iso 8601 format |
 interest_rate             | Number  |                 |
-investment_period         | String  |                 |
+investment_period         | Integer |                 |
 invoice_amount            | Integer |                 |
 overdue_cost_per_day      | Number  |                 |
 receive_on_due_date       | String  | Iso 8601 format |
