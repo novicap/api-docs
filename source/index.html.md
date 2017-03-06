@@ -14,6 +14,7 @@ includes:
   - search
   - line_quote
   - companies
+  - invoices_index
   - errors
 
 search: true
