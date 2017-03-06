@@ -1,12 +1,13 @@
-## Retrieve one invoice
+## Retrieve a invoice
 
 ```shell
-curl "https://api.novicap.com/invoices/:transaction_number?api_key=abcd"
+curl "https://api.novicap.com/invoices?api_key=abcd"
 ```
 
 > The above command returns the following JSON:
 
 ```json
+
 {
   "advance_amount":            90000,
   "company_name":              "Company 73",
@@ -16,7 +17,7 @@ curl "https://api.novicap.com/invoices/:transaction_number?api_key=abcd"
   "debtor_novicap_id":         "ESA21532825",
   "due_date":                  "2017-03-20",
   "grace_period_cost_per_day": 16.25,
-  "grace_period_due_date":     "2017-03-25",
+  "grace_period_end_date":     "2017-03-25",
   "interest_rate":             650,
   "investment_period":         30,
   "invoice_amount":            100000,
@@ -25,10 +26,9 @@ curl "https://api.novicap.com/invoices/:transaction_number?api_key=abcd"
   "status":                    "accepted",
   "transaction_number":        "IG-001333"
 }
-
 ```
 
-Returns an invoice. Note that this invoice should belong to your company. Otherwise you'll get an error.
+Returns one invoice using the transaction_number. Note that this invoice should belong to your company, otherwise you'll get an error.
 
 ### HTTP Request
 
@@ -87,21 +87,21 @@ api_key            |         | ✓        | Your api key for authentication.
 }
 ```
 
-A successful response is a JSON payload with these fields:
+A successful response is a JSON payload with the following fields:
 
 Variable                      | Type    | Unit            | Description
 ------------------------------|---------|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 advance_amount                | Integer | eurocents       | The amount advanced to the company.
-advanced_date                 | String  | Iso 8601 format | The date when NoviCap advanced the invoice to the company.
-company_name                  | String  |                 | The invoice's company's name
-company_novicap_id            | String  |                 | The NoviCap ID of the invoice's company.
-cost                          | Integer | eurocents       | The invoice's cost.
-debtor_name                   | String  |                 | The invoice's debtor's name
+advanced_date                 | String  | Iso 8601 format | The date when NoviCap advanced the funds to the company.
+company_name                  | String  |                 | The name of the company
+company_novicap_id            | String  |                 | The NoviCap ID of the company.
+cost                          | Integer | eurocents       | The invoice amount.
+debtor_name                   | String  |                 | The name of the debtor.
 debtor_novicap_id             | String  |                 | The NoviCap ID of the invoice's debtor.
-due_date                      | String  | ISO 8601 format | The invoice's due date
+due_date                      | String  | ISO 8601 format | The invoice due date
 grace_period_cost_per_day     | Number  |                 | The cost for every day in the grace period.
-grace_period_due_date         | String  | Iso 8601 format | The due date for the grace period.
-initial_expected_payment_date | String  | Iso 8601 format | The date thecompany expects the debtor to pay.
+grace_period_end_date         | String  | Iso 8601 format | The due date for the grace period.
+initial_expected_payment_date | String  | Iso 8601 format | The date the company expects the debtor to pay.
 interest_rate                 | Number  |                 | The annual interest rate that the company has to pay on the advanced amount.
 invoice_amount                | Integer |                 | The face value of the invoice
 overdue_cost_per_day          | Number  |                 | The cost for every day overdue.
