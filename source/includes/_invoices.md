@@ -107,12 +107,12 @@ debtor_novicap_id             | String  |                 | The NoviCap ID of th
 due_date                      | String  | ISO 8601 format | The invoice's due date
 grace_period_cost_per_day     | Number  |                 | The cost for every day in the grace period.
 grace_period_due_date         | String  | Iso 8601 format | The due date for the grace period.
-initial_expected_payment_date | String  | Iso 8601 format | The date on which the debtor should pay the invoice to NoviCap.
-interest_rate                 | Number  |                 | The annual interest for the advanced amount.
-invoice_amount                | Integer |                 | The invoice's amount
-overdue_cost_per_day          | Number  |                 | The cost for every day in the overdue period.
+initial_expected_payment_date | String  | Iso 8601 format | The date thecompany expects the debtor to pay.
+interest_rate                 | Number  |                 | The annual interest rate that the company has to pay on the advanced amount.
+invoice_amount                | Integer |                 | The face value of the invoice
+overdue_cost_per_day          | Number  |                 | The cost for every day overdue.
 payment_date                  | String  | Iso 8601 format | The date in which the debtor paid to NoviCap.
-receive_on_due_date           | String  | eurocents       | Difference between what the debtor paid to NoviCap and what the company has to pay back to NoviCap. When the invoice is paid, NoviCap deducts what the company owes and gives the remaining amount back.
+receive_on_due_date           | String  | eurocents       | The difference between what the debtor paid to NoviCap and what the company has to pay back to NoviCap. When the invoice is paid, NoviCap deducts the owed amount and then gives any remaining amount back to the company.
 status                        | String  |                 | The status of the invoice. One of: "accepted", "defaulted", "financed", "paid", "rejected" ore "submitted".
 transaction_number            | String  |                 | The Novicap ID of the transaction.
 
@@ -220,11 +220,11 @@ debtor_novicap_id             | String  |                 | The NoviCap ID of th
 due_date                      | String  | ISO 8601 format | The invoice's due date
 grace_period_cost_per_day     | Number  |                 | The cost for every day in the grace period.
 grace_period_due_date         | String  | Iso 8601 format | The due date for the grace period.
-initial_expected_payment_date | String  | Iso 8601 format | The date on which the debtor should pay the invoice to NoviCap.
-interest_rate                 | Number  |                 | The annual interest for the advanced amount.
-invoice_amount                | Integer |                 | The invoice's amount
-overdue_cost_per_day          | Number  |                 | The cost for every day in the overdue period.
+initial_expected_payment_date | String  | Iso 8601 format | The date thecompany expects the debtor to pay.
+interest_rate                 | Number  |                 | The annual interest rate that the company has to pay on the advanced amount.
+invoice_amount                | Integer |                 | The face value of the invoice
+overdue_cost_per_day          | Number  |                 | The cost for every day overdue.
 payment_date                  | String  | Iso 8601 format | The date in which the debtor paid to NoviCap.
-receive_on_due_date           | String  | eurocents       | Difference between what the debtor paid to NoviCap and what the company has to pay back to NoviCap. When the invoice is paid, NoviCap deducts what the company owes and gives the remaining amount back.
+receive_on_due_date           | String  | eurocents       | The difference between what the debtor paid to NoviCap and what the company has to pay back to NoviCap. When the invoice is paid, NoviCap deducts the owed amount and then gives any remaining amount back to the company.
 status                        | String  |                 | The status of the invoice. One of: "accepted", "defaulted", "financed", "paid", "rejected" ore "submitted".
 transaction_number            | String  |                 | The Novicap ID of the transaction.
