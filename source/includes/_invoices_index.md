@@ -17,7 +17,7 @@ curl "https://api.novicap.com/invoices?api_key=abcd"
     "debtor_novicap_id":         "ESA21532825",
     "due_date":                  "2017-03-20",
     "grace_period_cost_per_day": 16.25,
-    "grace_period_due_date":     "2017-03-25",
+    "grace_period_end_date":     "2017-03-25",
     "interest_rate":             650,
     "investment_period":         30,
     "invoice_amount":            100000,
@@ -71,7 +71,7 @@ debtor_novicap_id  |         |          | Return only invoices related to the gi
         "description": "Formatted in iso 8601"
       },
       "grace_period_cost_per_day": { "type": "number" },
-      "grace_period_due_date":     {
+      "grace_period_end_date":     {
         "type": "string",
         "description": "Formatted in iso 8601"
       },
@@ -106,8 +106,8 @@ debtor_name                   | String  |                 | The name of the debt
 debtor_novicap_id             | String  |                 | The NoviCap ID of the invoice's debtor.
 due_date                      | String  | ISO 8601 format | The invoice due date
 grace_period_cost_per_day     | Number  |                 | The cost for every day in the grace period.
-grace_period_due_date         | String  | Iso 8601 format | The due date for the grace period.
-initial_expected_payment_date | String  | Iso 8601 format | The date thecompany expects the debtor to pay.
+grace_period_end_date         | String  | Iso 8601 format | The due date for the grace period.
+initial_expected_payment_date | String  | Iso 8601 format | The date the company expects the debtor to pay.
 interest_rate                 | Number  |                 | The annual interest rate that the company has to pay on the advanced amount.
 invoice_amount                | Integer |                 | The face value of the invoice
 overdue_cost_per_day          | Number  |                 | The cost for every day overdue.
