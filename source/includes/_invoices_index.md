@@ -40,7 +40,7 @@ Returns an array with your associated companies' invoices.
 Parameter          | Default | Required | Description
 -------------------|---------|----------|---------------------------------------------------------------------------------------------------------------------------
 api_key            |         | ✓        | Your api key for authentication.
-status             |         |          | Filter invoices by current status. It maybe one of "accepted", "defaulted", "financed", "paid", "rejected" ore "submitted".
+status             |         |          | Filter invoices by current status. It may be one of "accepted", "defaulted", "financed", "paid", "rejected" or "submitted".
 company_novicap_id |         |          | Return only invoices related to the given company.
 debtor_novicap_id  |         |          | Return only invoices related to the given debtor.
 
@@ -93,18 +93,18 @@ debtor_novicap_id  |         |          | Return only invoices related to the gi
   }
 }```
 
-A successful response is a JSON payload with these fields for each item:
+A successful response is a JSON payload with the following fields for each item:
 
 Variable                      | Type    | Unit            | Description
 ------------------------------|---------|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 advance_amount                | Integer | eurocents       | The amount advanced to the company.
-advanced_date                 | String  | Iso 8601 format | The date when NoviCap advanced the invoice to the company.
-company_name                  | String  |                 | The invoice's company's name
-company_novicap_id            | String  |                 | The NoviCap ID of the invoice's company.
-cost                          | Integer | eurocents       | The invoice's cost.
-debtor_name                   | String  |                 | The invoice's debtor's name
+advanced_date                 | String  | Iso 8601 format | The date when NoviCap advanced the funds to the company.
+company_name                  | String  |                 | The name of the company
+company_novicap_id            | String  |                 | The NoviCap ID of the company.
+cost                          | Integer | eurocents       | The invoice amount.
+debtor_name                   | String  |                 | The name of the debtor.
 debtor_novicap_id             | String  |                 | The NoviCap ID of the invoice's debtor.
-due_date                      | String  | ISO 8601 format | The invoice's due date
+due_date                      | String  | ISO 8601 format | The invoice due date
 grace_period_cost_per_day     | Number  |                 | The cost for every day in the grace period.
 grace_period_due_date         | String  | Iso 8601 format | The due date for the grace period.
 initial_expected_payment_date | String  | Iso 8601 format | The date thecompany expects the debtor to pay.
