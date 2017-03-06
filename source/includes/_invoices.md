@@ -24,7 +24,6 @@ curl "https://api.novicap.com/invoices?api_key=abcd"
     "overdue_cost_per_day":      30,
     "receive_on_due_date":       7713,
     "status":                    "accepted",
-    "summary":                   "Chair delivery",
     "transaction_number":        "IG-001333"
   }
 ]
@@ -58,21 +57,37 @@ debtor_novicap_id  |         |          | Return only invoices related to the gi
     "type": "object",
     "properties": {
       "advance_amount":            { "type": "integer" },
+      "advanced_date": {
+        "type": "string,null",
+        "description": "Formatted in iso 8601"
+      },
       "company_name":              { "type": "string" },
       "company_novicap_id":        { "type": "string" },
       "cost":                      { "type": "integer,null" },
       "debtor_name":               { "type": "string" },
       "debtor_novicap_id":         { "type": "string" },
-      "due_date":                  { "type": "string" },
+      "due_date":                  {
+        "type": "string",
+        "description": "Formatted in iso 8601"
+      },
       "grace_period_cost_per_day": { "type": "number" },
-      "grace_period_due_date":     { "type": "string"},
+      "grace_period_due_date":     {
+        "type": "string",
+        "description": "Formatted in iso 8601"
+      },
+      "initial_expected_payment_date": {
+        "type": "string",
+        "description": "Formatted in iso 8601"
+      },
       "interest_rate":             { "type": "number" },
-      "investment_period":         { "type": "integer"},
       "invoice_amount":            { "type": "integer" },
-      "overdue_cost_per_day":      { "type": "number"},
-      "receive_on_due_date":       { "type": "string,null"},
+      "overdue_cost_per_day":      { "type": "number" },
+      "payment_date": {
+        "type": "string,null",
+        "description": "Formatted in iso 8601"
+      },
+      "receive_on_due_date":       { "type": "string,null" },
       "status":                    { "type": "string" },
-      "summary":                   { "type": "string"},
       "transaction_number":        { "type": "string" }
     }
   }
@@ -80,22 +95,23 @@ debtor_novicap_id  |         |          | Return only invoices related to the gi
 
 A successful response is a JSON payload with these fields for each item:
 
-Variable                  | Type    | Unit            | Description
---------------------------|---------|-----------------|------------------------------------------------------------------------------------------------------------
-advance_amount            | Integer | eurocents       |
-company_name              | String  |                 | The invoice's company's name
-company_novicap_id        | String  |                 | The NoviCap ID of the invoice's company.
-cost                      | Integer | eurocents       |
-debtor_name               | String  |                 | The invoice's debtor's name
-debtor_novicap_id         | String  |                 | The NoviCap ID of the invoice's debtor.
-due_date                  | String  | ISO 8601 format | The invoice's due date
-grace_period_cost_per_day | Number  |                 |
-grace_period_due_date     | String  | Iso 8601 format |
-interest_rate             | Number  |                 |
-investment_period         | Integer |                 |
-invoice_amount            | Integer |                 |
-overdue_cost_per_day      | Number  |                 |
-receive_on_due_date       | String  | Iso 8601 format |
-status                    | String  |                 | The status of the invoice. One of: "accepted", "defaulted", "financed", "paid", "rejected" ore "submitted".
-summary                   | String  |                 |
-transaction_number        | String  |                 |
+Variable                      | Type    | Unit            | Description
+------------------------------|---------|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+advance_amount                | Integer | eurocents       | The amount advanced to the company.
+advanced_date                 | String  | Iso 8601 format | The date when NoviCap advanced the invoice to the company.
+company_name                  | String  |                 | The invoice's company's name
+company_novicap_id            | String  |                 | The NoviCap ID of the invoice's company.
+cost                          | Integer | eurocents       | The invoice's cost.
+debtor_name                   | String  |                 | The invoice's debtor's name
+debtor_novicap_id             | String  |                 | The NoviCap ID of the invoice's debtor.
+due_date                      | String  | ISO 8601 format | The invoice's due date
+grace_period_cost_per_day     | Number  |                 | The cost for every day in the grace period.
+grace_period_due_date         | String  | Iso 8601 format | The due date for the grace period.
+initial_expected_payment_date | String  | Iso 8601 format | The date on which the debtor should pay the invoice to NoviCap.
+interest_rate                 | Number  |                 | The annual interest for the advanced amount.
+invoice_amount                | Integer |                 | The invoice's amount
+overdue_cost_per_day          | Number  |                 | The cost for every day in the overdue period.
+payment_date                  | String  | Iso 8601 format | The date in which the debtor paid to NoviCap.
+receive_on_due_date           | String  | eurocents       | Difference between what the debtor paid to NoviCap and what the company has to pay back to NoviCap. When the invoice is paid, NoviCap deducts what the company owes and gives the remaining amount back.
+status                        | String  |                 | The status of the invoice. One of: "accepted", "defaulted", "financed", "paid", "rejected" ore "submitted".
+transaction_number            | String  |                 | The Novicap ID of the transaction.
