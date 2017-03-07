@@ -2,7 +2,7 @@
 
 This endoint allows you to create invoices automatically.
 
-Note that you should have at least one sold invoice in NoviCap before create new ones using this endoint.
+Note that you should have at least one sold invoice in NoviCap before create new ones using this endpoint.
 
 ```shell
 curl "https://api.novicap.com/v1/invoices" --data "key=abcd&invoice[amount]=10000\
@@ -42,7 +42,7 @@ Possible returned status codes:
 
 - 201 (created) if the invoice was created.
 - 409 (conflict) if you already have a similar invoice.
-- 403 (forbidden) if you are not allowed to create this invoice. It may be because you don't have sold invoices or because the api_key is not correct.
+- 403 (forbidden) if you are not allowed to create this invoice. It may be because you do not have any sold invoices or because the api_key is not correct.
 
 ### HTTP Request
 
@@ -55,9 +55,9 @@ Parameter                   | Unit                   | Description
 api_key                     |                        | Your api key for authentication.
 invoice[amount]             | eurocents              | The face value of the invoice
 invoice[company_novicap_id] |                        | The NoviCap ID of the company.
-invoice[debtor_novicap_id]  |                        | The NoviCap ID of the invoice's debtor.
+invoice[debtor_novicap_id]  |                        | The NoviCap ID of the debtor associated with the invoice.
 invoice[due_at]             | Date in iso3601 format | The invoice due date.
-invoice[issued_at]          | Date in iso3601 format | The invoice issued date.
+invoice[issued_at]          | Date in iso3601 format | The invoice issue date.
 invoice[reference]          |                        | The invoice reference.
 
 ### Response
@@ -113,19 +113,19 @@ Variable                      | Type    | Unit            | Description
 ------------------------------|---------|-----------------|---------------------------------------------------------------------------------------------------------------------------------
 advance_amount                | Integer | eurocents       | The amount advanced to the company.
 advanced_date                 | String  | Iso 8601 format | The date when NoviCap advanced the funds to the company.
-company_name                  | String  |                 | The name of the company
+company_name                  | String  |                 | The name of the company.
 company_novicap_id            | String  |                 | The NoviCap ID of the company.
 cost                          | Integer | eurocents       | The invoice amount.
 debtor_name                   | String  |                 | The name of the debtor.
-debtor_novicap_id             | String  |                 | The NoviCap ID of the invoice's debtor.
+debtor_novicap_id             | String  |                 | The NoviCap ID of the debtor associated with the invoice.
 due_date                      | String  | ISO 8601 format | The invoice due date
 grace_period_cost_per_day     | Number  |                 | The cost for every day in the grace period.
 grace_period_end_date         | String  | Iso 8601 format | The due date for the grace period.
-initial_expected_payment_date | String  | Iso 8601 format | The date the company expects the debtor to pay.
+initial_expected_payment_date | String  | Iso 8601 format | The date on which the company expects the debtor to pay.
 interest_rate                 | Number  |                 | The annual interest rate that the company has to pay on the advanced amount.
 invoice_amount                | Integer |                 | The face value of the invoice
 overdue_cost_per_day          | Number  |                 | The cost for every day overdue.
-payment_date                  | String  | Iso 8601 format | The date in which the debtor paid to NoviCap.
+payment_date                  | String  | Iso 8601 format | The date on which the invoice was paid in full by the debtor (to NoviCap).
 receive_on_due_date           | String  | eurocents       | The difference between what the debtor paid to NoviCap and what the company has to pay back to NoviCap. When the invoice is paid, NoviCap deducts the owed amount and then gives any remaining amount back to the company.
-status                        | String  |                 | The status of the invoice. One of: "accepted", "defaulted", "financed", "paid", "rejected" ore "submitted".
+status                        | String  |                 | The status of the invoice. May be one of: "accepted", "defaulted", "financed", "paid", "rejected" ore "submitted".
 transaction_number            | String  |                 | The Novicap ID of the transaction.
