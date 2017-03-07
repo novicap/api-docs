@@ -5,7 +5,7 @@
 bundle exec middleman build --clean
 mkdir -p docs
 cp -r build/* docs/
-rmdir build
+rm -r build
 git commit -am "Deploy script: adding docs"
 
 git push --quiet origin master
