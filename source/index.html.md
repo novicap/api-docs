@@ -17,6 +17,7 @@ includes:
   - invoices_create
   - invoices_index
   - invoices_show
+  - invoices_approved_by_debtor
   - errors
 
 search: true
