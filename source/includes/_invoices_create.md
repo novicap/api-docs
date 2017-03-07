@@ -1,5 +1,9 @@
 ## Create an invoice
 
+This endoint allows you to create invoices automatically.
+
+Note that you should have at least one sold invoice in NoviCap before create new ones using this endoint.
+
 ```shell
 curl "https://api.novicap.com/v1/invoices" --data "key=abcd&invoice[amount]=10000\
 &invoice[company_novicap_id]=ESX7895123H \
@@ -34,7 +38,7 @@ curl "https://api.novicap.com/v1/invoices" --data "key=abcd&invoice[amount]=1000
 
 ```
 
-Possible status codes:
+Possible returned status codes:
 
 - 201 (created) if the invoice was created.
 - 409 (conflict) if you already have a similar invoice.
