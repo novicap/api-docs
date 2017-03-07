@@ -100,7 +100,7 @@ debtor_name                   | String  |                 | The name of the debt
 debtor_novicap_id             | String  |                 | The NoviCap ID of the debtor associated with the invoice.
 due_date                      | String  | ISO 8601 format | The invoice due date
 grace_period_cost_per_day     | Number  |                 | The cost for every day in the grace period.
-grace_period_end_date         | String  | Iso 8601 format | The due date for the grace period.
+grace_period_end_date         | String  | Iso 8601 format | The date at which the grace period ends and the penalty period begins.
 initial_expected_payment_date | String  | Iso 8601 format | The date on which the company expects the debtor to pay.
 interest_rate                 | Number  |                 | The annual interest rate that the company has to pay on the advanced amount.
 invoice_amount                | Integer |                 | The face value of the invoice
