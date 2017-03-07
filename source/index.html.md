@@ -16,6 +16,7 @@ includes:
   - companies
   - invoices_create
   - invoices_index
+  - invoices_show
   - errors
 
 search: true
