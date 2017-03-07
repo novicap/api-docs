@@ -14,6 +14,7 @@ includes:
   - search
   - line_quote
   - companies
+  - invoices_create
   - invoices_index
   - invoices_show
   - errors

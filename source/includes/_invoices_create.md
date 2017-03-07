@@ -1,53 +1,73 @@
-## Retrieve a invoice
+## Create an invoice
+
+This endoint allows you to create invoices automatically.
+
+Note that you should have at least one sold invoice in NoviCap before create new ones using this endpoint.
 
 ```shell
-curl "https://api.novicap.com/invoices?api_key=abcd"
+curl "https://api.novicap.com/v1/invoices" --data "key=abcd&invoice[amount]=10000\
+&invoice[company_novicap_id]=ESX7895123H \
+&invoice[debtor_novicap_id]=ESX8445123H \
+&invoice[due_at]=2017-04-15 \
+&invoice[issued_at]=2017-03-15 \
+&invoice[reference]=201702"
 ```
 
-> The above command returns the following JSON:
+> The above command returns the following response:
 
 ```json
 
 {
-  "advance_amount":            90000,
+  "advance_amount":            0,
   "company_name":              "Company 73",
-  "company_novicap_id":        "ESA62511076",
-  "cost":                      2287,
-  "debtor_name":               "Debtor 87",
-  "debtor_novicap_id":         "ESA21532825",
-  "due_date":                  "2017-03-20",
+  "company_novicap_id":        "ESX7895123H",
+  "cost":                      100,
+  "debtor_name":               "Debtor Inc.",
+  "debtor_novicap_id":         "ESX8445123H",
+  "due_date":                  "2017-04-15",
   "grace_period_cost_per_day": 16.25,
-  "grace_period_end_date":     "2017-03-25",
+  "grace_period_end_date":     "2017-03-15",
   "interest_rate":             650,
   "investment_period":         30,
-  "invoice_amount":            100000,
+  "invoice_amount":            10000,
   "overdue_cost_per_day":      30,
   "receive_on_due_date":       7713,
-  "status":                    "accepted",
+  "status":                    "approved",
   "transaction_number":        "IG-001333"
 }
+
 ```
 
-Returns one invoice using the transaction_number. Note that this invoice should belong to your company, otherwise you'll get an error.
+Possible returned status codes:
+
+- 201 (created) if the invoice was created.
+- 409 (conflict) if you already have a similar invoice.
+- 403 (forbidden) if you are not allowed to create this invoice. It may be because you do not have any sold invoices or because the api_key is not correct.
 
 ### HTTP Request
 
-`GET https://api.novicap.com/v1/invoices/:transaction_number?api_key=abcd`
+`POST https://api.novicap.com/v1/invoices`
 
-### URL Parameters
+### Data
 
-Parameter          | Default | Required | Description
--------------------|---------|----------|---------------------------------------------------------------------------------------------------------------------------
-api_key            |         | ✓        | Your api key for authentication.
+Parameter                   | Unit                   | Description
+----------------------------|------------------------|----------------------------------------
+api_key                     |                        | Your api key for authentication.
+invoice[amount]             | eurocents              | The face value of the invoice
+invoice[company_novicap_id] |                        | The NoviCap ID of the company.
+invoice[debtor_novicap_id]  |                        | The NoviCap ID of the debtor associated with the invoice.
+invoice[due_at]             | Date in iso3601 format | The invoice due date.
+invoice[issued_at]          | Date in iso3601 format | The invoice issue date.
+invoice[reference]          |                        | The invoice reference.
 
 ### Response
 
-> A successful response is a JSON compatible with this schema:
+> A successful response is a JSON compatible with the following schema:
 
 ```json
 {
   "$schema": "http://json-schema.org/draft-04/schema",
-  "description": "Auctions (invoices in routes.rb) endpoint json schema",
+  "description": "Invoices endpoint json schema",
   "type": "object",
   "properties": {
     "advance_amount":            { "type": "integer" },
@@ -65,7 +85,7 @@ api_key            |         | ✓        | Your api key for authentication.
       "description": "Formatted in iso 8601"
     },
     "grace_period_cost_per_day": { "type": "number" },
-    "grace_period_due_date":     {
+    "grace_period_end_date":     {
       "type": "string",
       "description": "Formatted in iso 8601"
     },
@@ -90,7 +110,7 @@ api_key            |         | ✓        | Your api key for authentication.
 A successful response is a JSON payload with the following fields:
 
 Variable                      | Type    | Unit            | Description
-------------------------------|---------|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------|---------|-----------------|---------------------------------------------------------------------------------------------------------------------------------
 advance_amount                | Integer | eurocents       | The amount advanced to the company.
 advanced_date                 | String  | Iso 8601 format | The date when NoviCap advanced the funds to the company.
 company_name                  | String  |                 | The name of the company.
