@@ -91,7 +91,8 @@ debtor_novicap_id  |         |          | Return only invoices related to the gi
       "transaction_number":        { "type": "string" }
     }
   }
-}```
+}
+```
 
 A successful response is a JSON payload with the following fields for each item:
 
