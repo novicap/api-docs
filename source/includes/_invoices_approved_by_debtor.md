@@ -2,7 +2,7 @@
 
 This endpoint allows you to mark an existing invoice as approved by debtor.
 
-Note that you should have at least one sold invoice in NoviCap before use this endpoint.
+Note that you can only approve invoices for trade relationships that already have at least one invoice sold.
 
 ```shell
 curl "https://api.novicap.com/v1/invoices/:transaction_number/approved_by_debtor" --data "api_key=abcd"
