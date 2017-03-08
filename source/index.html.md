@@ -17,9 +17,10 @@ includes:
   - invoices_create
   - invoices_index
   - invoices_show
+  - invoices_acceptance_create
+  - invoices_paid_by_debtor
   - invoice_comments_create
   - invoice_comments_index
-  - invoices_acceptance_create
   - errors
 
 search: true
