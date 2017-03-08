@@ -1,4 +1,4 @@
-## retrieve a single invoice
+## Retrieve a single invoice
 
 ```shell
 curl "https://api.novicap.com/invoices?api_key=abcd"
