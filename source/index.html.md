@@ -18,6 +18,7 @@ includes:
   - invoices_index
   - invoices_show
   - invoices_acceptance_create
+  - invoices_approved_by_debtor
   - invoices_paid_by_debtor
   - invoice_comments_create
   - invoice_comments_index
