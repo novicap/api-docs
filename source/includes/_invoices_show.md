@@ -47,7 +47,7 @@ api_key            |         | ✓        | Your api key for authentication.
 ```json
 {
   "$schema": "http://json-schema.org/draft-04/schema",
-  "description": "Auctions (invoices in routes.rb) endpoint json schema",
+  "description": "Invoice representation in json schema",
   "type": "object",
   "properties": {
     "advance_amount":            { "type": "integer" },
