@@ -2,7 +2,7 @@
 
 This endpoint allows you to accept an existing invoice.
 
-Note that you should have at least one sold invoice in NoviCap before use this endpoint.
+Note that you can only accept invoices for trade relationships that already have at least one invoice sold.
 
 ```shell
 curl "https://api.novicap.com/v1/invoices/:transaction_number/acceptance" --data "api_key=abcd"
