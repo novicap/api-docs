@@ -35,18 +35,16 @@ In the simplest case, they will be asked to input their information manually bef
                                      &language=en"
 
 ```
-
-Parameter          | Default         | Required | Description
--------------------|-----------------|----------|------------------------------------------------------------------------------------------
-api_key            |                 | ✓        | Your api key for authentication.
-company_novicap_id |                 |          | The `novicap_id` of the company that should be quoted (see [NoviCap IDs](#novicap-ids))
-debtor_novicap_ids | []              |          | An array of `novicap_id`s of the debtors that should be quoted.
-first_name         |                 |          | The first name(s) of the user.
-last_name          |                 |          | The surname(s) of the user.
-email              |                 |          | The email address of the user.
-phone              |                 |          | The phone number of the user.
-language           | Browser default |          | An ISO 639-1 code (e.g. 'en') of the language the free quote page should be displayed in.
-
+Parameter            | Default         | Required | Description
+---------------------|-----------------|----------|------------------------------------------------------------------------------------------
+api_key              |                 | ✓        | Your api key for authentication.
+company_novicap_id   |                 |          | The `novicap_id` of the company that should be quoted (see [NoviCap IDs](#novicap-ids))
+debtor_novicap_ids[] | []              |          | An array of `novicap_id`s of the debtors that should be quoted.
+first_name           |                 |          | The first name(s) of the user.
+last_name            |                 |          | The surname(s) of the user.
+email                |                 |          | The email address of the user.
+phone                |                 |          | The phone number of the user.
+language             | Browser default |          | An ISO 639-1 code (e.g. 'en') of the language the free quote page should be displayed in.
 <aside class="notice">
   You may submit as many debtors as you want. The user will see an instant quote for the first debtor in the list, and see quotes for the remaining debtors after first name, last name, email and phone have been submitted.
 </aside>

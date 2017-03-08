@@ -198,7 +198,7 @@
 <td>The <code class="prettyprint">novicap_id</code> of the company that should be quoted (see <a href="#novicap-ids">NoviCap IDs</a>)</td>
 </tr>
 <tr>
-<td>debtor_novicap_ids</td>
+<td>debtor_novicap_ids[]</td>
 <td>[]</td>
 <td></td>
 <td>An array of <code class="prettyprint">novicap_id</code>s of the debtors that should be quoted.</td>
@@ -756,7 +756,270 @@ You must submit one company at a time, but you may submit as many debtors per co
 </tr>
 </tbody></table>
 
-          <h2 id="retrieve-invoices">Retrieve invoices</h2>
+          <h2 id="create-an-invoice">Create an invoice</h2>
+
+<p>This endoint allows you to create invoices automatically.</p>
+
+<p>Note that you should have at least one sold invoice in NoviCap before create new ones using this endpoint.</p>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/v1/invoices"</span> --data <span class="s2">"key=abcd&amp;invoice[amount]=10000</span><span class="se">\</span><span class="s2">
+&amp;invoice[company_novicap_id]=ESX7895123H </span><span class="se">\</span><span class="s2">
+&amp;invoice[debtor_novicap_id]=ESX8445123H </span><span class="se">\</span><span class="s2">
+&amp;invoice[due_at]=2017-04-15 </span><span class="se">\</span><span class="s2">
+&amp;invoice[issued_at]=2017-03-15 </span><span class="se">\</span><span class="s2">
+&amp;invoice[reference]=201702"</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns the following response:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nt">"advance_amount"</span><span class="p">:</span><span class="w">            </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"company_name"</span><span class="p">:</span><span class="w">              </span><span class="s2">"Company 73"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"company_novicap_id"</span><span class="p">:</span><span class="w">        </span><span class="s2">"ESX7895123H"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"cost"</span><span class="p">:</span><span class="w">                      </span><span class="mi">100</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"debtor_name"</span><span class="p">:</span><span class="w">               </span><span class="s2">"Debtor Inc."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"debtor_novicap_id"</span><span class="p">:</span><span class="w">         </span><span class="s2">"ESX8445123H"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"due_date"</span><span class="p">:</span><span class="w">                  </span><span class="s2">"2017-04-15"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"grace_period_cost_per_day"</span><span class="p">:</span><span class="w"> </span><span class="mf">16.25</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"grace_period_end_date"</span><span class="p">:</span><span class="w">     </span><span class="s2">"2017-03-15"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"interest_rate"</span><span class="p">:</span><span class="w">             </span><span class="mi">650</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"investment_period"</span><span class="p">:</span><span class="w">         </span><span class="mi">30</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"invoice_amount"</span><span class="p">:</span><span class="w">            </span><span class="mi">10000</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"overdue_cost_per_day"</span><span class="p">:</span><span class="w">      </span><span class="mi">30</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"receive_on_due_date"</span><span class="p">:</span><span class="w">       </span><span class="mi">7713</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w">                    </span><span class="s2">"approved"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"transaction_number"</span><span class="p">:</span><span class="w">        </span><span class="s2">"IG-001333"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<p>Possible returned status codes:</p>
+
+<ul>
+<li>201 (created) if the invoice was created.</li>
+<li>409 (conflict) if you already have a similar invoice.</li>
+<li>403 (forbidden) if you are not allowed to create this invoice. It may be because you do not have any sold invoices or because the api_key is not correct.</li>
+</ul>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://api.novicap.com/v1/invoices</code></p>
+
+<h3 id="data">Data</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>api_key</td>
+<td></td>
+<td>Your api key for authentication.</td>
+</tr>
+<tr>
+<td>invoice[amount]</td>
+<td>eurocents</td>
+<td>The face value of the invoice</td>
+</tr>
+<tr>
+<td>invoice[company_novicap_id]</td>
+<td></td>
+<td>The NoviCap ID of the company.</td>
+</tr>
+<tr>
+<td>invoice[debtor_novicap_id]</td>
+<td></td>
+<td>The NoviCap ID of the debtor associated with the invoice.</td>
+</tr>
+<tr>
+<td>invoice[due_at]</td>
+<td>Date in iso3601 format</td>
+<td>The invoice due date.</td>
+</tr>
+<tr>
+<td>invoice[issued_at]</td>
+<td>Date in iso3601 format</td>
+<td>The invoice issue date.</td>
+</tr>
+<tr>
+<td>invoice[reference]</td>
+<td></td>
+<td>The invoice reference.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<blockquote>
+<p>A successful response is a JSON compatible with the following schema:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invoices endpoint json schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"advance_amount"</span><span class="p">:</span><span class="w">            </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"integer"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"advanced_date"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string,null"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Formatted in iso 8601"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"company_name"</span><span class="p">:</span><span class="w">              </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"company_novicap_id"</span><span class="p">:</span><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"cost"</span><span class="p">:</span><span class="w">                      </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"integer,null"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"debtor_name"</span><span class="p">:</span><span class="w">               </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"debtor_novicap_id"</span><span class="p">:</span><span class="w">         </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"due_date"</span><span class="p">:</span><span class="w">                  </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Formatted in iso 8601"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"grace_period_cost_per_day"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"grace_period_end_date"</span><span class="p">:</span><span class="w">     </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Formatted in iso 8601"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"initial_expected_payment_date"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Formatted in iso 8601"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"interest_rate"</span><span class="p">:</span><span class="w">             </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"invoice_amount"</span><span class="p">:</span><span class="w">            </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"integer"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"overdue_cost_per_day"</span><span class="p">:</span><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"payment_date"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string,null"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Formatted in iso 8601"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"receive_on_due_date"</span><span class="p">:</span><span class="w">       </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string,null"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w">                    </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"transaction_number"</span><span class="p">:</span><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>A successful response is a JSON payload with the following fields:</p>
+
+<table><thead>
+<tr>
+<th>Variable</th>
+<th>Type</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>advance_amount</td>
+<td>Integer</td>
+<td>eurocents</td>
+<td>The amount advanced to the company.</td>
+</tr>
+<tr>
+<td>advanced_date</td>
+<td>String</td>
+<td>Iso 8601 format</td>
+<td>The date when NoviCap advanced the funds to the company.</td>
+</tr>
+<tr>
+<td>company_name</td>
+<td>String</td>
+<td></td>
+<td>The name of the company.</td>
+</tr>
+<tr>
+<td>company_novicap_id</td>
+<td>String</td>
+<td></td>
+<td>The NoviCap ID of the company.</td>
+</tr>
+<tr>
+<td>cost</td>
+<td>Integer</td>
+<td>eurocents</td>
+<td>The invoice amount.</td>
+</tr>
+<tr>
+<td>debtor_name</td>
+<td>String</td>
+<td></td>
+<td>The name of the debtor.</td>
+</tr>
+<tr>
+<td>debtor_novicap_id</td>
+<td>String</td>
+<td></td>
+<td>The NoviCap ID of the debtor associated with the invoice.</td>
+</tr>
+<tr>
+<td>due_date</td>
+<td>String</td>
+<td>ISO 8601 format</td>
+<td>The invoice due date</td>
+</tr>
+<tr>
+<td>grace_period_cost_per_day</td>
+<td>Number</td>
+<td></td>
+<td>The cost for every day in the grace period.</td>
+</tr>
+<tr>
+<td>grace_period_end_date</td>
+<td>String</td>
+<td>Iso 8601 format</td>
+<td>The date at which the grace period ends and the penalty period begins.</td>
+</tr>
+<tr>
+<td>initial_expected_payment_date</td>
+<td>String</td>
+<td>Iso 8601 format</td>
+<td>The date on which the company expects the debtor to pay.</td>
+</tr>
+<tr>
+<td>interest_rate</td>
+<td>Number</td>
+<td></td>
+<td>The annual interest rate that the company has to pay on the advanced amount.</td>
+</tr>
+<tr>
+<td>invoice_amount</td>
+<td>Integer</td>
+<td></td>
+<td>The face value of the invoice</td>
+</tr>
+<tr>
+<td>overdue_cost_per_day</td>
+<td>Number</td>
+<td></td>
+<td>The cost for every day overdue.</td>
+</tr>
+<tr>
+<td>payment_date</td>
+<td>String</td>
+<td>Iso 8601 format</td>
+<td>The date on which the invoice was paid in full by the debtor (to NoviCap).</td>
+</tr>
+<tr>
+<td>receive_on_due_date</td>
+<td>String</td>
+<td>eurocents</td>
+<td>The difference between what the debtor paid to NoviCap and what the company has to pay back to NoviCap. When the invoice is paid, NoviCap deducts the owed amount and then gives any remaining amount back to the company.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>String</td>
+<td></td>
+<td>The status of the invoice. May be one of: &ldquo;accepted&rdquo;, &ldquo;defaulted&rdquo;, &ldquo;financed&rdquo;, &ldquo;paid&rdquo;, &ldquo;rejected&rdquo; ore &ldquo;submitted&rdquo;.</td>
+</tr>
+<tr>
+<td>transaction_number</td>
+<td>String</td>
+<td></td>
+<td>The Novicap ID of the transaction.</td>
+</tr>
+</tbody></table>
+
+          <h2 id="retrieve-all-invoices">Retrieve all invoices</h2>
 <pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/invoices?api_key=abcd"</span>
 </code></pre>
 
@@ -874,33 +1137,130 @@ You must submit one company at a time, but you may submit as many debtors per co
       </span><span class="nt">"transaction_number"</span><span class="p">:</span><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="err">```</span><span class="w">
-
-</span><span class="err">A</span><span class="w"> </span><span class="err">successful</span><span class="w"> </span><span class="err">response</span><span class="w"> </span><span class="err">is</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">JSON</span><span class="w"> </span><span class="err">payload</span><span class="w"> </span><span class="err">with</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">following</span><span class="w"> </span><span class="err">fields</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">each</span><span class="w"> </span><span class="err">item:</span><span class="w">
-
-</span><span class="err">Variable</span><span class="w">                      </span><span class="err">|</span><span class="w"> </span><span class="err">Type</span><span class="w">    </span><span class="err">|</span><span class="w"> </span><span class="err">Unit</span><span class="w">            </span><span class="err">|</span><span class="w"> </span><span class="err">Description</span><span class="w">
-</span><span class="err">------------------------------|---------|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span><span class="w">
-</span><span class="err">advance_amount</span><span class="w">                </span><span class="err">|</span><span class="w"> </span><span class="err">Integer</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">eurocents</span><span class="w">       </span><span class="err">|</span><span class="w"> </span><span class="err">The</span><span class="w"> </span><span class="err">amount</span><span class="w"> </span><span class="err">advanced</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">company.</span><span class="w">
-</span><span class="err">advanced_date</span><span class="w">                 </span><span class="err">|</span><span class="w"> </span><span class="err">String</span><span class="w">  </span><span class="err">|</span><span class="w"> </span><span class="err">Iso</span><span class="w"> </span><span class="mi">8601</span><span class="w"> </span><span class="err">format</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">The</span><span class="w"> </span><span class="err">date</span><span class="w"> </span><span class="err">when</span><span class="w"> </span><span class="err">NoviCap</span><span class="w"> </span><span class="err">advanced</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">funds</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">company.</span><span class="w">
-</span><span class="err">company_name</span><span class="w">                  </span><span class="err">|</span><span class="w"> </span><span class="err">String</span><span class="w">  </span><span class="err">|</span><span class="w">                 </span><span class="err">|</span><span class="w"> </span><span class="err">The</span><span class="w"> </span><span class="err">name</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">company</span><span class="w">
-</span><span class="err">company_novicap_id</span><span class="w">            </span><span class="err">|</span><span class="w"> </span><span class="err">String</span><span class="w">  </span><span class="err">|</span><span class="w">                 </span><span class="err">|</span><span class="w"> </span><span class="err">The</span><span class="w"> </span><span class="err">NoviCap</span><span class="w"> </span><span class="err">ID</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">company.</span><span class="w">
-</span><span class="err">cost</span><span class="w">                          </span><span class="err">|</span><span class="w"> </span><span class="err">Integer</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">eurocents</span><span class="w">       </span><span class="err">|</span><span class="w"> </span><span class="err">The</span><span class="w"> </span><span class="err">invoice</span><span class="w"> </span><span class="err">amount.</span><span class="w">
-</span><span class="err">debtor_name</span><span class="w">                   </span><span class="err">|</span><span class="w"> </span><span class="err">String</span><span class="w">  </span><span class="err">|</span><span class="w">                 </span><span class="err">|</span><span class="w"> </span><span class="err">The</span><span class="w"> </span><span class="err">name</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">debtor.</span><span class="w">
-</span><span class="err">debtor_novicap_id</span><span class="w">             </span><span class="err">|</span><span class="w"> </span><span class="err">String</span><span class="w">  </span><span class="err">|</span><span class="w">                 </span><span class="err">|</span><span class="w"> </span><span class="err">The</span><span class="w"> </span><span class="err">NoviCap</span><span class="w"> </span><span class="err">ID</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">invoice's</span><span class="w"> </span><span class="err">debtor.</span><span class="w">
-</span><span class="err">due_date</span><span class="w">                      </span><span class="err">|</span><span class="w"> </span><span class="err">String</span><span class="w">  </span><span class="err">|</span><span class="w"> </span><span class="err">ISO</span><span class="w"> </span><span class="mi">8601</span><span class="w"> </span><span class="err">format</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">The</span><span class="w"> </span><span class="err">invoice</span><span class="w"> </span><span class="err">due</span><span class="w"> </span><span class="err">date</span><span class="w">
-</span><span class="err">grace_period_cost_per_day</span><span class="w">     </span><span class="err">|</span><span class="w"> </span><span class="err">Number</span><span class="w">  </span><span class="err">|</span><span class="w">                 </span><span class="err">|</span><span class="w"> </span><span class="err">The</span><span class="w"> </span><span class="err">cost</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">every</span><span class="w"> </span><span class="err">day</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">grace</span><span class="w"> </span><span class="err">period.</span><span class="w">
-</span><span class="err">grace_period_end_date</span><span class="w">         </span><span class="err">|</span><span class="w"> </span><span class="err">String</span><span class="w">  </span><span class="err">|</span><span class="w"> </span><span class="err">Iso</span><span class="w"> </span><span class="mi">8601</span><span class="w"> </span><span class="err">format</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">The</span><span class="w"> </span><span class="err">date</span><span class="w"> </span><span class="err">when</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">grace</span><span class="w"> </span><span class="err">period</span><span class="w"> </span><span class="err">finishes.</span><span class="w">
-</span><span class="err">initial_expected_payment_date</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">String</span><span class="w">  </span><span class="err">|</span><span class="w"> </span><span class="err">Iso</span><span class="w"> </span><span class="mi">8601</span><span class="w"> </span><span class="err">format</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">The</span><span class="w"> </span><span class="err">date</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">company</span><span class="w"> </span><span class="err">expects</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">debtor</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">pay.</span><span class="w">
-</span><span class="err">interest_rate</span><span class="w">                 </span><span class="err">|</span><span class="w"> </span><span class="err">Number</span><span class="w">  </span><span class="err">|</span><span class="w">                 </span><span class="err">|</span><span class="w"> </span><span class="err">The</span><span class="w"> </span><span class="err">annual</span><span class="w"> </span><span class="err">interest</span><span class="w"> </span><span class="err">rate</span><span class="w"> </span><span class="err">that</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">company</span><span class="w"> </span><span class="err">has</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">pay</span><span class="w"> </span><span class="err">on</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">advanced</span><span class="w"> </span><span class="err">amount.</span><span class="w">
-</span><span class="err">invoice_amount</span><span class="w">                </span><span class="err">|</span><span class="w"> </span><span class="err">Integer</span><span class="w"> </span><span class="err">|</span><span class="w">                 </span><span class="err">|</span><span class="w"> </span><span class="err">The</span><span class="w"> </span><span class="err">face</span><span class="w"> </span><span class="err">value</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">invoice</span><span class="w">
-</span><span class="err">overdue_cost_per_day</span><span class="w">          </span><span class="err">|</span><span class="w"> </span><span class="err">Number</span><span class="w">  </span><span class="err">|</span><span class="w">                 </span><span class="err">|</span><span class="w"> </span><span class="err">The</span><span class="w"> </span><span class="err">cost</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">every</span><span class="w"> </span><span class="err">day</span><span class="w"> </span><span class="err">overdue.</span><span class="w">
-</span><span class="err">payment_date</span><span class="w">                  </span><span class="err">|</span><span class="w"> </span><span class="err">String</span><span class="w">  </span><span class="err">|</span><span class="w"> </span><span class="err">Iso</span><span class="w"> </span><span class="mi">8601</span><span class="w"> </span><span class="err">format</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">The</span><span class="w"> </span><span class="err">date</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">which</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">debtor</span><span class="w"> </span><span class="err">paid</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">NoviCap.</span><span class="w">
-</span><span class="err">receive_on_due_date</span><span class="w">           </span><span class="err">|</span><span class="w"> </span><span class="err">String</span><span class="w">  </span><span class="err">|</span><span class="w"> </span><span class="err">eurocents</span><span class="w">       </span><span class="err">|</span><span class="w"> </span><span class="err">The</span><span class="w"> </span><span class="err">difference</span><span class="w"> </span><span class="err">between</span><span class="w"> </span><span class="err">what</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">debtor</span><span class="w"> </span><span class="err">paid</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">NoviCap</span><span class="w"> </span><span class="err">and</span><span class="w"> </span><span class="err">what</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">company</span><span class="w"> </span><span class="err">has</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">pay</span><span class="w"> </span><span class="err">back</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">NoviCap.</span><span class="w"> </span><span class="err">When</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">invoice</span><span class="w"> </span><span class="err">is</span><span class="w"> </span><span class="err">paid,</span><span class="w"> </span><span class="err">NoviCap</span><span class="w"> </span><span class="err">deducts</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">owed</span><span class="w"> </span><span class="err">amount</span><span class="w"> </span><span class="err">and</span><span class="w"> </span><span class="err">then</span><span class="w"> </span><span class="err">gives</span><span class="w"> </span><span class="err">any</span><span class="w"> </span><span class="err">remaining</span><span class="w"> </span><span class="err">amount</span><span class="w"> </span><span class="err">back</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">company.</span><span class="w">
-</span><span class="err">status</span><span class="w">                        </span><span class="err">|</span><span class="w"> </span><span class="err">String</span><span class="w">  </span><span class="err">|</span><span class="w">                 </span><span class="err">|</span><span class="w"> </span><span class="err">The</span><span class="w"> </span><span class="err">status</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">invoice.</span><span class="w"> </span><span class="err">One</span><span class="w"> </span><span class="err">of:</span><span class="w"> </span><span class="s2">"accepted"</span><span class="err">,</span><span class="w"> </span><span class="s2">"defaulted"</span><span class="err">,</span><span class="w"> </span><span class="s2">"financed"</span><span class="err">,</span><span class="w"> </span><span class="s2">"paid"</span><span class="err">,</span><span class="w"> </span><span class="s2">"rejected"</span><span class="w"> </span><span class="err">ore</span><span class="w"> </span><span class="s2">"submitted"</span><span class="err">.</span><span class="w">
-</span><span class="err">transaction_number</span><span class="w">            </span><span class="err">|</span><span class="w"> </span><span class="err">String</span><span class="w">  </span><span class="err">|</span><span class="w">                 </span><span class="err">|</span><span class="w"> </span><span class="err">The</span><span class="w"> </span><span class="err">Novicap</span><span class="w"> </span><span class="err">ID</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">transaction.</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-          <h2 id="retrieve-a-invoice">Retrieve a invoice</h2>
+<p>A successful response is a JSON payload with the following fields for each item:</p>
+
+<table><thead>
+<tr>
+<th>Variable</th>
+<th>Type</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>advance_amount</td>
+<td>Integer</td>
+<td>eurocents</td>
+<td>The amount advanced to the company.</td>
+</tr>
+<tr>
+<td>advanced_date</td>
+<td>String</td>
+<td>Iso 8601 format</td>
+<td>The date when NoviCap advanced the funds to the company.</td>
+</tr>
+<tr>
+<td>company_name</td>
+<td>String</td>
+<td></td>
+<td>The name of the company.</td>
+</tr>
+<tr>
+<td>company_novicap_id</td>
+<td>String</td>
+<td></td>
+<td>The NoviCap ID of the company.</td>
+</tr>
+<tr>
+<td>cost</td>
+<td>Integer</td>
+<td>eurocents</td>
+<td>The invoice amount.</td>
+</tr>
+<tr>
+<td>debtor_name</td>
+<td>String</td>
+<td></td>
+<td>The name of the debtor.</td>
+</tr>
+<tr>
+<td>debtor_novicap_id</td>
+<td>String</td>
+<td></td>
+<td>The NoviCap ID of the debtor associated with the invoice.</td>
+</tr>
+<tr>
+<td>due_date</td>
+<td>String</td>
+<td>ISO 8601 format</td>
+<td>The invoice due date</td>
+</tr>
+<tr>
+<td>grace_period_cost_per_day</td>
+<td>Number</td>
+<td></td>
+<td>The cost for every day in the grace period.</td>
+</tr>
+<tr>
+<td>grace_period_end_date</td>
+<td>String</td>
+<td>Iso 8601 format</td>
+<td>The date at which the grace period ends and the penalty period begins.</td>
+</tr>
+<tr>
+<td>initial_expected_payment_date</td>
+<td>String</td>
+<td>Iso 8601 format</td>
+<td>The date on which the company expects the debtor to pay.</td>
+</tr>
+<tr>
+<td>interest_rate</td>
+<td>Number</td>
+<td></td>
+<td>The annual interest rate that the company has to pay on the advanced amount.</td>
+</tr>
+<tr>
+<td>invoice_amount</td>
+<td>Integer</td>
+<td></td>
+<td>The face value of the invoice</td>
+</tr>
+<tr>
+<td>overdue_cost_per_day</td>
+<td>Number</td>
+<td></td>
+<td>The cost for every day overdue.</td>
+</tr>
+<tr>
+<td>payment_date</td>
+<td>String</td>
+<td>Iso 8601 format</td>
+<td>The date on which the invoice was paid in full by the debtor (to NoviCap).</td>
+</tr>
+<tr>
+<td>receive_on_due_date</td>
+<td>String</td>
+<td>eurocents</td>
+<td>The difference between what the debtor paid to NoviCap and what the company has to pay back to NoviCap. When the invoice is paid, NoviCap deducts the owed amount and then gives any remaining amount back to the company.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>String</td>
+<td></td>
+<td>The status of the invoice. May be one of: &ldquo;accepted&rdquo;, &ldquo;defaulted&rdquo;, &ldquo;financed&rdquo;, &ldquo;paid&rdquo;, &ldquo;rejected&rdquo; ore &ldquo;submitted&rdquo;.</td>
+</tr>
+<tr>
+<td>transaction_number</td>
+<td>String</td>
+<td></td>
+<td>The Novicap ID of the transaction.</td>
+</tr>
+</tbody></table>
+
+          <h2 id="retrieve-a-single-invoice">retrieve a single invoice</h2>
 <pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/invoices?api_key=abcd"</span>
 </code></pre>
 
@@ -1067,7 +1427,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 <td>grace_period_end_date</td>
 <td>String</td>
 <td>Iso 8601 format</td>
-<td>The due date for the grace period.</td>
+<td>The date at which the grace period ends and the penalty period begins.</td>
 </tr>
 <tr>
 <td>initial_expected_payment_date</td>
@@ -1118,6 +1478,201 @@ You must submit one company at a time, but you may submit as many debtors per co
 <td>The Novicap ID of the transaction.</td>
 </tr>
 </tbody></table>
+
+          <h2 id="add-a-comment-to-an-invoice">Add a comment to an invoice</h2>
+
+<p>This endpoint allows you to attach a comment to an existing invoice.
+This comment will be reviewed by our operations team and is free text.</p>
+
+<p>Example uses would be notifications of delays in payment, reduction of the invoice amount, status changes in the debtor ERP, &hellip;</p>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/v1/invoices/:transaction_number/comments"</span> --data <span class="s2">"api_key=abcd&amp;comment=Your comment"</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns a empty JSON with the 201 CREATE status.</p>
+</blockquote>
+
+<p>Possible returned status codes:</p>
+
+<ul>
+<li>201 (created) if comment was created.</li>
+<li>422 (unprocessable entity) if you miss the comment parameter or the invoice is not valid.</li>
+</ul>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://api.novicap.com/v1/invoices/:transaction_number/comments</code></p>
+
+<h3 id="data">Data</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>api_key</td>
+<td>String</td>
+<td>Your api key for authentication.</td>
+</tr>
+<tr>
+<td>comment</td>
+<td>String</td>
+<td>The body of the comment.</td>
+</tr>
+<tr>
+<td>transaction_number</td>
+<td>String</td>
+<td>The Novicap ID of the transaction</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<p>A successful response is an empty JSON with a proper HTTP status code.</p>
+
+          <h2 id="retrieve-invoice-comments">Retrieve invoice comments</h2>
+
+<p>This endpoint allows you to retrieve your comments for a specific invoice.</p>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/v1/invoices/:transaction_number/comments?api_key=your_api_key"</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns a JSON with a list of comments:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"An invoice comment"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-06T00:00:00Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"author_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Author Name"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://api.novicap.com/v1/invoices/:transaction_number/comments</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>api_key</td>
+<td>String</td>
+<td>Your api key for authentication.</td>
+</tr>
+<tr>
+<td>transaction_number</td>
+<td>String</td>
+<td>The Novicap ID of the transaction</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<blockquote>
+<p>A successful response is a JSON compatible with this schema:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Companies endpoint json schema. It contains data about partner's companies and debtors"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"author_name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"comment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>A successful response is a JSON payload with the following fields for each item:</p>
+
+<table><thead>
+<tr>
+<th>Variable</th>
+<th>Type</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>author_name</td>
+<td>String</td>
+<td></td>
+<td>The name of the author.</td>
+</tr>
+<tr>
+<td>comment</td>
+<td>String</td>
+<td>The body of the comment.</td>
+<td></td>
+</tr>
+<tr>
+<td>create_at</td>
+<td>String</td>
+<td>Iso 8601 format</td>
+<td>A timestamp with the comment creation time.</td>
+</tr>
+</tbody></table>
+
+          <h2 id="accept-an-invoice">Accept an invoice</h2>
+
+<p>This endpoint allows you to accept an existing invoice.</p>
+
+<p>Note that you can only accept invoices for trade relationships that already have at least one invoice sold.</p>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/v1/invoices/:transaction_number/acceptance"</span> --data <span class="s2">"api_key=abcd"</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns a empty JSON with the 201 CREATE status.</p>
+</blockquote>
+
+<p>Possible returned status codes:</p>
+
+<ul>
+<li>201 (created) if the invoice has been accepted.</li>
+<li>422 (unprocessable entity) if the invoice could not been accepted.</li>
+</ul>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://api.novicap.com/v1/invoices/:transaction_number/acceptance</code></p>
+
+<h3 id="data">Data</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>api_key</td>
+<td>String</td>
+<td>Your api key for authentication.</td>
+</tr>
+<tr>
+<td>transaction_number</td>
+<td>String</td>
+<td>The Novicap ID of the transaction</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<p>A successful response is an empty JSON with a proper HTTP status code.</p>
 
           <h2 id="errors">Errors</h2>
 
