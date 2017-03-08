@@ -19,6 +19,7 @@ includes:
   - invoices_show
   - invoice_comments_create
   - invoice_comments_index
+  - invoices_acceptance_create
   - errors
 
 search: true
