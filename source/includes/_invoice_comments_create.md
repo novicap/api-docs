@@ -1,6 +1,9 @@
 ## Add a comment to an invoice
 
-This endpoint allows you to append a comment to an existing invoice.
+This endpoint allows you to attach a comment to an existing invoice.
+This comment will be reviewed by our operations team and is free text.
+
+Example uses would be notifications of delays in payment, reduction of the invoice amount, status changes in the debtor ERP, ...
 
 ```shell
 curl "https://api.novicap.com/v1/invoices/:transaction_number/comments" --data "api_key=abcd&comment=Your comment"
