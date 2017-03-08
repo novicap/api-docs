@@ -1482,6 +1482,150 @@ You must submit one company at a time, but you may submit as many debtors per co
 </tr>
 </tbody></table>
 
+          <h2 id="accept-an-invoice">Accept an invoice</h2>
+
+<p>This endpoint allows you to accept an existing invoice.</p>
+
+<p>Note that you can only accept invoices for trade relationships that already have at least one invoice sold.</p>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/v1/invoices/:transaction_number/acceptance"</span> --data <span class="s2">"api_key=abcd"</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns a empty JSON with the 201 CREATE status.</p>
+</blockquote>
+
+<p>Possible returned status codes:</p>
+
+<ul>
+<li>201 (created) if the invoice has been accepted.</li>
+<li>422 (unprocessable entity) if the invoice could not been accepted.</li>
+</ul>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://api.novicap.com/v1/invoices/:transaction_number/acceptance</code></p>
+
+<h3 id="data">Data</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>api_key</td>
+<td>String</td>
+<td>Your api key for authentication.</td>
+</tr>
+<tr>
+<td>transaction_number</td>
+<td>String</td>
+<td>The Novicap ID of the transaction</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<p>A successful response is an empty JSON with a proper HTTP status code.</p>
+
+          <h2 id="mark-an-invoice-as-approved-by-debtor">Mark an invoice as approved by debtor</h2>
+
+<p>This endpoint allows you to mark an existing invoice as approved by debtor.</p>
+
+<p>Note that you can only approve invoices for trade relationships that already have at least one invoice sold.</p>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/v1/invoices/:transaction_number/approved_by_debtor"</span> --data <span class="s2">"api_key=abcd"</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns a empty JSON with the 201 CREATE status.</p>
+</blockquote>
+
+<p>Possible returned status codes:</p>
+
+<ul>
+<li>201 (created) if the invoice has been marked as approved by debtor.</li>
+<li>422 (unprocessable entity) if the invoice could not been modified.</li>
+</ul>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://api.novicap.com/v1/invoices/:transaction_number/approved_by_debtor</code></p>
+
+<h3 id="data">Data</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>api_key</td>
+<td>String</td>
+<td>Your api key for authentication.</td>
+</tr>
+<tr>
+<td>transaction_number</td>
+<td>String</td>
+<td>The Novicap ID of the transaction</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<p>A successful response is an empty JSON with a proper HTTP status code.</p>
+
+          <h2 id="mark-an-invoice-as-paid-by-debtor">Mark an invoice as paid by debtor</h2>
+
+<p>This endpoint allows you to mark an existing invoice as paid by debtor.</p>
+
+<p>Note that you can only update invoices for trade relationships that already have at least one invoice sold.</p>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/v1/invoices/:transaction_number/paid_by_debtor"</span> --data <span class="s2">"api_key=abcd"</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns a empty JSON with the 201 CREATE status.</p>
+</blockquote>
+
+<p>Possible returned status codes:</p>
+
+<ul>
+<li>201 (created) if the invoice has been marked as paid by debtor.</li>
+<li>422 (unprocessable entity) if the invoice could not been modified.</li>
+</ul>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://api.novicap.com/v1/invoices/:transaction_number/paid_by_debtor</code></p>
+
+<h3 id="data">Data</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>api_key</td>
+<td>String</td>
+<td>Your api key for authentication.</td>
+</tr>
+<tr>
+<td>transaction_number</td>
+<td>String</td>
+<td>The Novicap ID of the transaction</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<p>A successful response is an empty JSON with a proper HTTP status code.</p>
+
           <h2 id="add-a-comment-to-an-invoice">Add a comment to an invoice</h2>
 
 <p>This endpoint allows you to attach a comment to an existing invoice.
@@ -1628,54 +1772,6 @@ This comment will be reviewed by our operations team and is free text.</p>
 <td>A timestamp with the comment creation time.</td>
 </tr>
 </tbody></table>
-
-          <h2 id="accept-an-invoice">Accept an invoice</h2>
-
-<p>This endpoint allows you to accept an existing invoice.</p>
-
-<p>Note that you can only accept invoices for trade relationships that already have at least one invoice sold.</p>
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/v1/invoices/:transaction_number/acceptance"</span> --data <span class="s2">"api_key=abcd"</span>
-</code></pre>
-
-<blockquote>
-<p>The above command returns a empty JSON with the 201 CREATE status.</p>
-</blockquote>
-
-<p>Possible returned status codes:</p>
-
-<ul>
-<li>201 (created) if the invoice has been accepted.</li>
-<li>422 (unprocessable entity) if the invoice could not been accepted.</li>
-</ul>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">POST https://api.novicap.com/v1/invoices/:transaction_number/acceptance</code></p>
-
-<h3 id="data">Data</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>api_key</td>
-<td>String</td>
-<td>Your api key for authentication.</td>
-</tr>
-<tr>
-<td>transaction_number</td>
-<td>String</td>
-<td>The Novicap ID of the transaction</td>
-</tr>
-</tbody></table>
-
-<h3 id="response">Response</h3>
-
-<p>A successful response is an empty JSON with a proper HTTP status code.</p>
 
           <h2 id="errors">Errors</h2>
 
