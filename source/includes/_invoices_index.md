@@ -103,6 +103,7 @@ advanced_date                 | String  | Iso 8601 format | The date when NoviCa
 company_name                  | String  |                 | The name of the company.
 company_novicap_id            | String  |                 | The NoviCap ID of the company.
 cost                          | Integer | cents           | The invoice amount.
+currency                      | String  |                 | The currency of invoice. It may be "EUR" or "GBP".
 debtor_name                   | String  |                 | The name of the debtor.
 debtor_novicap_id             | String  |                 | The NoviCap ID of the debtor associated with the invoice.
 due_date                      | String  | ISO 8601 format | The invoice due date

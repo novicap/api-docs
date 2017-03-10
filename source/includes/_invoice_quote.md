@@ -55,7 +55,8 @@ invoices           | []      |          |             | An array of invoices you
 Each invoice may have these parameters:
 
 Parameter         | Default         | Required | Example         | Description
-------------------|-----------------|----------|-----------------|-----------------------------------------------------------------------------------------------------
+------------------|-----------------|----------|-----------------|----------------------------------------------------------------------degaulados
+-------------------------------
 debtor_novicap_id |                 | ✓        | "ES1234567"     | The NoviCap ID of the company you want a quote for.
 amount            |                 | ✓        | 20000.0         | The currency amount of the invoice. This example is €20,000.00.
 days_remaining    |                 | ✓        | 50              | The number of days before the invoice is paid. This example is 50 days.
