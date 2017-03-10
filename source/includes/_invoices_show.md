@@ -1,7 +1,7 @@
 ## Retrieve a single invoice
 
 ```shell
-curl "https://api.novicap.com/invoices?api_key=abcd"
+curl "https://api.novicap.com/invoices/:transaction_number?api_key=abcd"
 ```
 
 > The above command returns the following JSON:
@@ -36,9 +36,9 @@ Returns one invoice using the transaction_number. Note that this invoice should 
 
 ### URL Parameters
 
-Parameter          | Default | Required | Description
--------------------|---------|----------|---------------------------------------------------------------------------------------------------------------------------
-api_key            |         | ✓        | Your api key for authentication.
+Parameter | Default | Required | Description
+----------|---------|----------|---------------------------------
+api_key   |         | ✓        | Your api key for authentication.
 
 ### Response
 
