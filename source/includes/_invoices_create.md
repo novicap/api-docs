@@ -5,12 +5,18 @@ This endoint allows you to create invoices automatically.
 Note that you should have at least one sold invoice in NoviCap before create new ones using this endpoint.
 
 ```shell
-curl "https://api.novicap.com/v1/invoices" --data "key=abcd&invoice[amount]=10000\
-&invoice[company_novicap_id]=ESX7895123H \
-&invoice[debtor_novicap_id]=ESX8445123H \
-&invoice[due_at]=2017-04-15 \
-&invoice[issued_at]=2017-03-15 \
-&invoice[reference]=201702"
+curl -H "Content-Type: application/json" \
+-X POST -d '{
+  "api_key": ":your_api_key",
+  "invoice": {
+    "company_novicap_id": "ESX7895123H",
+    "debtor_novicap_id": "ESX7895123H",
+    "due_at": "2017-04-15",
+    "issued_at": "2017-03-15",
+    "reference": "201702"
+  }
+}' \
+"https://api.novicap.com/v1/invoices"
 ```
 
 > The above command returns the following response:
