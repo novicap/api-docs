@@ -51,7 +51,7 @@ debtor_novicap_id  |         |          | Return only invoices related to the gi
 ```json
 {
   "$schema": "http://json-schema.org/draft-04/schema",
-  "description": "Invoices endpoint json schema",
+  "description": "Array of invoices representation in json schema",
   "type": "array",
   "items": {
     "type": "object",

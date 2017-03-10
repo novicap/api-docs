@@ -36,7 +36,7 @@ transaction_number | String | The Novicap ID of the transaction
 ```json
 {
   "$schema": "http://json-schema.org/draft-04/schema",
-  "description": "Companies endpoint json schema. It contains data about partner's companies and debtors",
+  "description": "Comment representation in json schema",
   "type": "array",
   "items": {
     "type": "object",
