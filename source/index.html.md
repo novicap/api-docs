@@ -44,3 +44,9 @@ curl "https://api.novicap.com/line_quote" --data api_key=abcd
 We use API keys to authenticate. You can generate a new API key by logging into your partner account at [novicap.com](https://www.novicap.com)
 
 The API key should be included in all requests to the server as an HTTP request parameter named `api_key`.
+
+# Permissions
+
+We really take care about data protection, so we use individual permissions for every endpoint.
+
+To be able to use an endpoint, you must have access to it. Normally we provide you with the permissions you need, but if you get an error trying to access to a specific endpoint, please, don't hesitate to contact api@novicap.com.
