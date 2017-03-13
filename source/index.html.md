@@ -47,6 +47,5 @@ The API key should be included in all requests to the server as an HTTP request 
 
 # Permissions
 
-We really take care about data protection, so we use individual permissions for every endpoint.
-
-To be able to use an endpoint, you must have access to it. Normally we provide you with the permissions you need, but if you get an error trying to access to a specific endpoint, please, don't hesitate to contact api@novicap.com.
+Not all API endpoints are available and you must have specific permission to use an endpoint.
+If you get receive an error while trying to access a specific endpoint, do not hesitate to contact our API team at api@novicap.com to request access.
