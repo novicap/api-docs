@@ -54,17 +54,44 @@ Possible returned status codes:
 
 `POST https://api.novicap.com/v1/invoices`
 
+> The params for this endpoint should match this json schema:
+
+```json
+{
+  "type": "object",
+  "properties": {
+    "invoice": {
+      "type": "object",
+      "properties": {
+        "amount": { "type": "integer" },
+        "reference": { "type": "string,number" },
+        "due_at": { "type": "string" },
+        "issued_at": { "type": "string" },
+        "debtor_novicap_id": { "type": "string" },
+        "company_novicap_id": { "type": "string" },
+      }
+    }
+  }
+}
+```
+
 ### Data
 
-Parameter                   | Unit                   | Description
-----------------------------|------------------------|----------------------------------------
-api_key                     |                        | Your api key for authentication.
-invoice[amount]             | cents                  | The face value of the invoice
-invoice[company_novicap_id] |                        | The NoviCap ID of the company.
-invoice[debtor_novicap_id]  |                        | The NoviCap ID of the debtor associated with the invoice.
-invoice[due_at]             | Date in iso3601 format | The invoice due date.
-invoice[issued_at]          | Date in iso3601 format | The invoice issue date.
-invoice[reference]          |                        | The invoice reference.
+Parameter | Unit | Description
+----------|------|-------------------------------------------------------------------------------
+api_key   |      | Your api key for authentication.
+invoice   |      | The invoice you want to create, in json format (see the following table)
+
+The invoice object should have the following fields:
+
+Parameter          | Unit                   | Description
+-------------------|------------------------|----------------------------------------------------------
+amount             | cents                  | The face value of the invoice
+company_novicap_id |                        | The NoviCap ID of the company.
+debtor_novicap_id  |                        | The NoviCap ID of the debtor associated with the invoice.
+due_at             | Date in iso3601 format | The invoice due date.
+issued_at          | Date in iso3601 format | The invoice issue date.
+reference          |                        | The invoice reference.
 
 ### Response
 
