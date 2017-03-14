@@ -93,4 +93,4 @@ Variable             | Type   | Unit | Description
 status               | String |      | One of "ok", "review", or "rejected".
 interest_rate        | Number | %    | The annual interest rate NoviCap will charge as a percentage of the amount advanced.
 invoice_handling_fee | Number | %    | The fee NoviCap will charge as a percentage of the amount advanced.
-advanced             | Number | %    | The percentage of the total value of the invoice NoviCap will advance.
+advance_rate         | Number | %    | The percentage of the total value of the invoice NoviCap will advance.
