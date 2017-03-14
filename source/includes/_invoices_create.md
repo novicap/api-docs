@@ -68,7 +68,7 @@ Possible returned status codes:
         "due_at": { "type": "string" },
         "issued_at": { "type": "string" },
         "debtor_novicap_id": { "type": "string" },
-        "company_novicap_id": { "type": "string" },
+        "company_novicap_id": { "type": "string" }
       }
     }
   }
