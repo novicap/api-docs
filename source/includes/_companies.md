@@ -83,16 +83,16 @@ status               |         |          | Filter companies by current status. 
 
 A successful response is a JSON payload with these fields:
 
-Variable       | Type   | Unit      | Description
----------------|--------|-----------|-------------------------------------------------------------------
-novicap_id     | String |           | The `novicap_id` of the company.
-status         | String |           | One of 'not_registered', 'onboarding', 'activated' and 'rejected'.
-name           | String |           | The name of the company.
-line_limit     | Number | eurocents | The size of the credit line NoviCap can provide to the company.
-line_usage     | Number | eurocents | The amount currently used by the company.
-line_remainder | Number | eurocents | The amount currently available for the company.
-debtors        | Array  |           | The companies' debtors.
-
+Variable       | Type   | Unit  | Description
+---------------|--------|-------|-------------------------------------------------------------------
+currency       | String |       | The currency of the credit line. It may be "EUR" or "GBP".
+debtors        | Array  |       | The companies' debtors.
+line_limit     | Number | cents | The size of the credit line NoviCap can provide to the company.
+line_remainder | Number | cents | The amount currently available for the company.
+line_usage     | Number | cents | The amount currently used by the company.
+name           | String |       | The name of the company.
+novicap_id     | String |       | The `novicap_id` of the company.
+status         | String |       | One of 'not_registered', 'onboarding', 'activated' and 'rejected'.
 Each debtor in `debtors` has these fields:
 
 Variable          | Type   | Unit         | Description
@@ -100,4 +100,4 @@ Variable          | Type   | Unit         | Description
 novicap_id        | String |              | The `novicap_id` of the company.
 status            | String |              | One of "new", "trading", or "rejected".
 name              | String |              | The name of the debtor.
-max_allowed_limit | Number |  eurocents   | The max allowed limit for this debtor.
+max_allowed_limit | Number |  cents       | The max allowed limit for this debtor.

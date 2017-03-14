@@ -98,11 +98,12 @@ A successful response is a JSON payload with the following fields for each item:
 
 Variable                      | Type    | Unit            | Description
 ------------------------------|---------|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-advance_amount                | Integer | eurocents       | The amount advanced to the company.
+advance_amount                | Integer | cents           | The amount advanced to the company.
 advanced_date                 | String  | Iso 8601 format | The date when NoviCap advanced the funds to the company.
 company_name                  | String  |                 | The name of the company.
 company_novicap_id            | String  |                 | The NoviCap ID of the company.
-cost                          | Integer | eurocents       | The invoice amount.
+cost                          | Integer | cents           | The invoice amount.
+currency                      | String  |                 | The currency of invoice. It may be "EUR" or "GBP".
 debtor_name                   | String  |                 | The name of the debtor.
 debtor_novicap_id             | String  |                 | The NoviCap ID of the debtor associated with the invoice.
 due_date                      | String  | ISO 8601 format | The invoice due date
@@ -113,6 +114,6 @@ interest_rate                 | Number  |                 | The annual interest 
 invoice_amount                | Integer |                 | The face value of the invoice
 overdue_cost_per_day          | Number  |                 | The cost for every day overdue.
 payment_date                  | String  | Iso 8601 format | The date on which the invoice was paid in full by the debtor (to NoviCap).
-receive_on_due_date           | String  | eurocents       | The difference between what the debtor paid to NoviCap and what the company has to pay back to NoviCap. When the invoice is paid, NoviCap deducts the owed amount and then gives any remaining amount back to the company.
+receive_on_due_date           | String  | cents           | The difference between what the debtor paid to NoviCap and what the company has to pay back to NoviCap. When the invoice is paid, NoviCap deducts the owed amount and then gives any remaining amount back to the company.
 status                        | String  |                 | The status of the invoice. May be one of: "accepted", "defaulted", "financed", "paid", "rejected" ore "submitted".
 transaction_number            | String  |                 | The Novicap ID of the transaction.
