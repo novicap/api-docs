@@ -76,6 +76,36 @@ quote_id   |         | ✓        | The quote ID retrieved from the previous ste
 
 ### Response
 
+> A successful response is a JSON compatible with this schema:
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "description": "This is the definition for a line_quote",
+  "type": "object",
+  "properties": {
+    "commissions": { "type": "number" },
+    "credit_limit": { "type": "number" },
+    "debtors": {
+      "type": "array,null",
+      "items": {
+        "type": "object",
+        "required": ["debtor_novicap_id", "status"],
+        "properties": {
+          "advance_rate": { "type": "number" },
+          "debtor_novicap_id": { "type": "string" },
+          "interest_rate": { "type": "number" },
+          "invoice_handling_fee": { "type": "number" },
+          "status": { "type": "string" }
+        }
+      }
+    },
+    "opening_fee": { "type": "number" }
+  }
+}
+```
+
+
 A successful response is a JSON payload with these fields:
 
 Variable     | Type   | Unit | Description
@@ -90,7 +120,7 @@ Each debtor in `debtors` has these fields:
 
 Variable             | Type   | Unit | Description
 ---------------------|--------|------|-------------------------------------------------------------------------------------
-status               | String |      | One of "ok", "review", or "rejected".
+advance_rate         | Number | %    | The percentage of the total value of the invoice NoviCap will advance.
 interest_rate        | Number | %    | The annual interest rate NoviCap will charge as a percentage of the amount advanced.
 invoice_handling_fee | Number | %    | The fee NoviCap will charge as a percentage of the amount advanced.
-advanced             | Number | %    | The percentage of the total value of the invoice NoviCap will advance.
+status               | String |      | One of "ok", "review", or "rejected".
