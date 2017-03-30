@@ -515,6 +515,35 @@ You must submit one company at a time, but you may submit as many debtors per co
 
 <h3 id="response">Response</h3>
 
+<blockquote>
+<p>A successful response is a JSON compatible with this schema:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is the definition for a line_quote"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"commissions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"credit_limit"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"debtors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array,null"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"debtor_novicap_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"status"</span><span class="p">],</span><span class="w">
+        </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"advance_rate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"debtor_novicap_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"interest_rate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"invoice_handling_fee"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"opening_fee"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
 <p>A successful response is a JSON payload with these fields:</p>
 
 <table><thead>
@@ -568,10 +597,10 @@ You must submit one company at a time, but you may submit as many debtors per co
 </tr>
 </thead><tbody>
 <tr>
-<td>status</td>
-<td>String</td>
-<td></td>
-<td>One of &ldquo;ok&rdquo;, &ldquo;review&rdquo;, or &ldquo;rejected&rdquo;.</td>
+<td>advance_rate</td>
+<td>Number</td>
+<td>%</td>
+<td>The percentage of the total value of the invoice NoviCap will advance.</td>
 </tr>
 <tr>
 <td>interest_rate</td>
@@ -586,10 +615,10 @@ You must submit one company at a time, but you may submit as many debtors per co
 <td>The fee NoviCap will charge as a percentage of the amount advanced.</td>
 </tr>
 <tr>
-<td>advanced</td>
-<td>Number</td>
-<td>%</td>
-<td>The percentage of the total value of the invoice NoviCap will advance.</td>
+<td>status</td>
+<td>String</td>
+<td></td>
+<td>One of &ldquo;ok&rdquo;, &ldquo;review&rdquo;, or &ldquo;rejected&rdquo;.</td>
 </tr>
 </tbody></table>
 
