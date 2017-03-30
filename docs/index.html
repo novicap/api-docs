@@ -149,6 +149,11 @@ You can use our API to receive automated quotes for invoices, synchronize invoic
 
 <p>The API key should be included in all requests to the server as an HTTP request parameter named <code class="prettyprint">api_key</code>.</p>
 
+<h1 id="permissions">Permissions</h1>
+
+<p>Not all API endpoints are available and you must have specific permission to use an endpoint.
+If you get receive an error while trying to access a specific endpoint, do not hesitate to contact our API team at api@novicap.com to request access.</p>
+
           <h1 id="novicap-ids">NoviCap IDs</h1>
 
 <p>Our system has a unique ID for each legal entity (company or debtor) which will be referred to as the <code class="prettyprint">novicap_id</code>. It is required to find financial information that we use for quotes.</p>
@@ -312,6 +317,25 @@ You can use our API to receive automated quotes for invoices, synchronize invoic
 
 <h4 id="response">Response</h4>
 
+<blockquote>
+<p>A successful response is a JSON compatible with this schema:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Search result representation in json schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"is_public_entity"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boolean"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"novicap_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"registration_number"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"size"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
 <p>A successful response is a JSON payload with these fields:</p>
 
 <table><thead>
@@ -321,16 +345,6 @@ You can use our API to receive automated quotes for invoices, synchronize invoic
 <th>Description</th>
 </tr>
 </thead><tbody>
-<tr>
-<td>name</td>
-<td>String</td>
-<td></td>
-</tr>
-<tr>
-<td>location</td>
-<td>String</td>
-<td>The location of incorporation of the company.</td>
-</tr>
 <tr>
 <td>country</td>
 <td>String</td>
@@ -342,6 +356,21 @@ You can use our API to receive automated quotes for invoices, synchronize invoic
 <td>Whether the company is listed as a public administration.</td>
 </tr>
 <tr>
+<td>location</td>
+<td>String</td>
+<td>The location of incorporation of the company.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>The official name of the company.</td>
+</tr>
+<tr>
+<td>novicap_id</td>
+<td>String</td>
+<td>The <code class="prettyprint">novicap_id</code> of the company. This will not change and can be used in subsequent requests.</td>
+</tr>
+<tr>
 <td>registration_number</td>
 <td>String</td>
 <td>A legal identifier of the company. In Spain, this is the CIF code.</td>
@@ -350,11 +379,6 @@ You can use our API to receive automated quotes for invoices, synchronize invoic
 <td>size</td>
 <td>String</td>
 <td>The approximate size of the company (revenue). One of: very_large, large, medium, small, very_small, unknown.</td>
-</tr>
-<tr>
-<td>novicap_id</td>
-<td>String</td>
-<td>The <code class="prettyprint">novicap_id</code> of the company. This will not change and can be used in subsequent requests.</td>
 </tr>
 </tbody></table>
 
@@ -550,25 +574,13 @@ You must submit one company at a time, but you may submit as many debtors per co
 <td>One of &ldquo;ok&rdquo;, &ldquo;review&rdquo;, or &ldquo;rejected&rdquo;.</td>
 </tr>
 <tr>
-<td>apr_on_invoice</td>
-<td>Number</td>
-<td>%</td>
-<td>The annual interest rate NoviCap will charge as a percentage of the total value of the invoice.</td>
-</tr>
-<tr>
-<td>apr_on_advanced</td>
+<td>interest_rate</td>
 <td>Number</td>
 <td>%</td>
 <td>The annual interest rate NoviCap will charge as a percentage of the amount advanced.</td>
 </tr>
 <tr>
-<td>fixed_fee_on_invoice</td>
-<td>Number</td>
-<td>%</td>
-<td>The fee NoviCap will charge as a percentage of the total value of the invoice.</td>
-</tr>
-<tr>
-<td>fixed_fee_on_advanced</td>
+<td>invoice_handling_fee</td>
 <td>Number</td>
 <td>%</td>
 <td>The fee NoviCap will charge as a percentage of the amount advanced.</td>
@@ -690,6 +702,42 @@ You must submit one company at a time, but you may submit as many debtors per co
 </tr>
 </thead><tbody>
 <tr>
+<td>currency</td>
+<td>String</td>
+<td></td>
+<td>The currency of the credit line. It may be &ldquo;EUR&rdquo; or &ldquo;GBP&rdquo;.</td>
+</tr>
+<tr>
+<td>debtors</td>
+<td>Array</td>
+<td></td>
+<td>The companies&rsquo; debtors.</td>
+</tr>
+<tr>
+<td>line_limit</td>
+<td>Number</td>
+<td>cents</td>
+<td>The size of the credit line NoviCap can provide to the company.</td>
+</tr>
+<tr>
+<td>line_remainder</td>
+<td>Number</td>
+<td>cents</td>
+<td>The amount currently available for the company.</td>
+</tr>
+<tr>
+<td>line_usage</td>
+<td>Number</td>
+<td>cents</td>
+<td>The amount currently used by the company.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td></td>
+<td>The name of the company.</td>
+</tr>
+<tr>
 <td>novicap_id</td>
 <td>String</td>
 <td></td>
@@ -700,36 +748,6 @@ You must submit one company at a time, but you may submit as many debtors per co
 <td>String</td>
 <td></td>
 <td>One of &lsquo;not_registered&rsquo;, &#39;onboarding&rsquo;, &#39;activated&rsquo; and &#39;rejected&rsquo;.</td>
-</tr>
-<tr>
-<td>name</td>
-<td>String</td>
-<td></td>
-<td>The name of the company.</td>
-</tr>
-<tr>
-<td>line_limit</td>
-<td>Number</td>
-<td>eurocents</td>
-<td>The size of the credit line NoviCap can provide to the company.</td>
-</tr>
-<tr>
-<td>line_usage</td>
-<td>Number</td>
-<td>eurocents</td>
-<td>The amount currently used by the company.</td>
-</tr>
-<tr>
-<td>line_remainder</td>
-<td>Number</td>
-<td>eurocents</td>
-<td>The amount currently available for the company.</td>
-</tr>
-<tr>
-<td>debtors</td>
-<td>Array</td>
-<td></td>
-<td>The companies&rsquo; debtors.</td>
 </tr>
 </tbody></table>
 
@@ -764,7 +782,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 <tr>
 <td>max_allowed_limit</td>
 <td>Number</td>
-<td>eurocents</td>
+<td>cents</td>
 <td>The max allowed limit for this debtor.</td>
 </tr>
 </tbody></table>
@@ -774,12 +792,18 @@ You must submit one company at a time, but you may submit as many debtors per co
 <p>This endoint allows you to create invoices automatically.</p>
 
 <p>Note that you should have at least one sold invoice in NoviCap before create new ones using this endpoint.</p>
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/v1/invoices"</span> --data <span class="s2">"key=abcd&amp;invoice[amount]=10000</span><span class="se">\</span><span class="s2">
-&amp;invoice[company_novicap_id]=ESX7895123H </span><span class="se">\</span><span class="s2">
-&amp;invoice[debtor_novicap_id]=ESX8445123H </span><span class="se">\</span><span class="s2">
-&amp;invoice[due_at]=2017-04-15 </span><span class="se">\</span><span class="s2">
-&amp;invoice[issued_at]=2017-03-15 </span><span class="se">\</span><span class="s2">
-&amp;invoice[reference]=201702"</span>
+<pre class="highlight shell"><code>curl -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-X POST -d <span class="s1">'{
+  "api_key": ":your_api_key",
+  "invoice": {
+    "company_novicap_id": "ESX7895123H",
+    "debtor_novicap_id": "ESX7895123H",
+    "due_at": "2017-04-15",
+    "issued_at": "2017-03-15",
+    "reference": "201702"
+  }
+}'</span> <span class="se">\</span>
+<span class="s2">"https://api.novicap.com/v1/invoices"</span>
 </code></pre>
 
 <blockquote>
@@ -819,6 +843,27 @@ You must submit one company at a time, but you may submit as many debtors per co
 
 <p><code class="prettyprint">POST https://api.novicap.com/v1/invoices</code></p>
 
+<blockquote>
+<p>The params for this endpoint should match this json schema:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"invoice"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"integer"</span><span class="w"> </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string,number"</span><span class="w"> </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"due_at"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"issued_at"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"debtor_novicap_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"company_novicap_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
 <h3 id="data">Data</h3>
 
 <table><thead>
@@ -834,32 +879,48 @@ You must submit one company at a time, but you may submit as many debtors per co
 <td>Your api key for authentication.</td>
 </tr>
 <tr>
-<td>invoice[amount]</td>
-<td>eurocents</td>
+<td>invoice</td>
+<td></td>
+<td>The invoice you want to create, in json format (see the following table)</td>
+</tr>
+</tbody></table>
+
+<p>The invoice object should have the following fields:</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>amount</td>
+<td>cents</td>
 <td>The face value of the invoice</td>
 </tr>
 <tr>
-<td>invoice[company_novicap_id]</td>
+<td>company_novicap_id</td>
 <td></td>
 <td>The NoviCap ID of the company.</td>
 </tr>
 <tr>
-<td>invoice[debtor_novicap_id]</td>
+<td>debtor_novicap_id</td>
 <td></td>
 <td>The NoviCap ID of the debtor associated with the invoice.</td>
 </tr>
 <tr>
-<td>invoice[due_at]</td>
+<td>due_at</td>
 <td>Date in iso3601 format</td>
 <td>The invoice due date.</td>
 </tr>
 <tr>
-<td>invoice[issued_at]</td>
+<td>issued_at</td>
 <td>Date in iso3601 format</td>
 <td>The invoice issue date.</td>
 </tr>
 <tr>
-<td>invoice[reference]</td>
+<td>reference</td>
 <td></td>
 <td>The invoice reference.</td>
 </tr>
@@ -872,7 +933,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invoices endpoint json schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invoice representation in json schema"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"advance_amount"</span><span class="p">:</span><span class="w">            </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"integer"</span><span class="w"> </span><span class="p">},</span><span class="w">
@@ -925,7 +986,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 <tr>
 <td>advance_amount</td>
 <td>Integer</td>
-<td>eurocents</td>
+<td>cents</td>
 <td>The amount advanced to the company.</td>
 </tr>
 <tr>
@@ -949,8 +1010,14 @@ You must submit one company at a time, but you may submit as many debtors per co
 <tr>
 <td>cost</td>
 <td>Integer</td>
-<td>eurocents</td>
+<td>cents</td>
 <td>The invoice amount.</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td></td>
+<td>The currency of invoice. It may be &ldquo;EUR&rdquo; or &ldquo;GBP&rdquo;.</td>
 </tr>
 <tr>
 <td>debtor_name</td>
@@ -1015,7 +1082,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 <tr>
 <td>receive_on_due_date</td>
 <td>String</td>
-<td>eurocents</td>
+<td>cents</td>
 <td>The difference between what the debtor paid to NoviCap and what the company has to pay back to NoviCap. When the invoice is paid, NoviCap deducts the owed amount and then gives any remaining amount back to the company.</td>
 </tr>
 <tr>
@@ -1110,7 +1177,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invoices endpoint json schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Array of invoices representation in json schema"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
@@ -1166,7 +1233,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 <tr>
 <td>advance_amount</td>
 <td>Integer</td>
-<td>eurocents</td>
+<td>cents</td>
 <td>The amount advanced to the company.</td>
 </tr>
 <tr>
@@ -1190,8 +1257,14 @@ You must submit one company at a time, but you may submit as many debtors per co
 <tr>
 <td>cost</td>
 <td>Integer</td>
-<td>eurocents</td>
+<td>cents</td>
 <td>The invoice amount.</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td></td>
+<td>The currency of invoice. It may be &ldquo;EUR&rdquo; or &ldquo;GBP&rdquo;.</td>
 </tr>
 <tr>
 <td>debtor_name</td>
@@ -1256,7 +1329,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 <tr>
 <td>receive_on_due_date</td>
 <td>String</td>
-<td>eurocents</td>
+<td>cents</td>
 <td>The difference between what the debtor paid to NoviCap and what the company has to pay back to NoviCap. When the invoice is paid, NoviCap deducts the owed amount and then gives any remaining amount back to the company.</td>
 </tr>
 <tr>
@@ -1274,7 +1347,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 </tbody></table>
 
           <h2 id="retrieve-a-single-invoice">Retrieve a single invoice</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/invoices?api_key=abcd"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/invoices/:transaction_number?api_key=abcd"</span>
 </code></pre>
 
 <blockquote>
@@ -1332,7 +1405,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Auctions (invoices in routes.rb) endpoint json schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invoice representation in json schema"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"advance_amount"</span><span class="p">:</span><span class="w">            </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"integer"</span><span class="w"> </span><span class="p">},</span><span class="w">
@@ -1385,7 +1458,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 <tr>
 <td>advance_amount</td>
 <td>Integer</td>
-<td>eurocents</td>
+<td>cents</td>
 <td>The amount advanced to the company.</td>
 </tr>
 <tr>
@@ -1409,8 +1482,14 @@ You must submit one company at a time, but you may submit as many debtors per co
 <tr>
 <td>cost</td>
 <td>Integer</td>
-<td>eurocents</td>
+<td>cents</td>
 <td>The invoice amount.</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>String</td>
+<td></td>
+<td>The currency of invoice. It may be &ldquo;EUR&rdquo; or &ldquo;GBP&rdquo;.</td>
 </tr>
 <tr>
 <td>debtor_name</td>
@@ -1475,7 +1554,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 <tr>
 <td>receive_on_due_date</td>
 <td>String</td>
-<td>eurocents</td>
+<td>cents</td>
 <td>The difference between what the debtor paid to NoviCap and what the company has to pay back to NoviCap. When the invoice is paid, NoviCap deducts the owed amount and then gives any remaining amount back to the company.</td>
 </tr>
 <tr>
@@ -1642,7 +1721,9 @@ You must submit one company at a time, but you may submit as many debtors per co
 This comment will be reviewed by our operations team and is free text.</p>
 
 <p>Example uses would be notifications of delays in payment, reduction of the invoice amount, status changes in the debtor ERP, &hellip;</p>
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/v1/invoices/:transaction_number/comments"</span> --data <span class="s2">"api_key=abcd&amp;comment=Your comment"</span>
+<pre class="highlight shell"><code>curl -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-X POST -d <span class="s1">'{"api_key":":api_key", "comment": "Test comment"}'</span> <span class="se">\</span>
+<span class="s2">"https://api.novicap.com/v1/invoices/:transaction_number/comments"</span>
 </code></pre>
 
 <blockquote>
@@ -1740,7 +1821,7 @@ This comment will be reviewed by our operations team and is free text.</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Companies endpoint json schema. It contains data about partner's companies and debtors"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comment representation in json schema"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
