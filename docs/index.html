@@ -176,7 +176,25 @@ If you get receive an error while trying to access a specific endpoint, do not h
 
 <p>Users should be redirected to the given URL.</p>
 
-<p>In the simplest case, they will be asked to input their information manually before receiving a quote. You can provide the following information as additional parameters in the URL to skip these steps. If you provide all the information below, the user will see a quote without any manual input.</p>
+<p>In the simplest case, they will be asked to input their information manually before receiving a quote. You can provide the following information as additional parameters in the URL to skip these steps. If you provide all the information below, the user will see a quote without any manual input. If you also set the &ldquo;direct_integration&rdquo; param to &ldquo;true&rdquo;, the user will be automatically logged in and redirected to their account page.</p>
+
+<blockquote>
+<p>If you are uncomfortable sharing the contact information in plaintext then you can base64 encode the contact details:</p>
+</blockquote>
+<pre class="highlight shell"><code>https://ncp-372814.novicap.com/quote?api_key<span class="o">=</span>9dedd03c7e43072f52dd99439e04430a&amp;company_novicap_id<span class="o">=</span>ESB50460609&amp;debtor_novicap_id<span class="o">=</span>ESA08002883&amp;details<span class="o">=</span>eyJmaXJzdF9uYW1lIjoiTWFyYyIsImxhc3RfbmFtZSI6IkFudG9uaSBNYWNp<span class="se">\n</span>YSIsInBob25lIjoiNzIyNzA4MDUzIiwiZW1haWwiOiJtYXJjQG5vdmljYXAu<span class="se">\n</span><span class="nv">Y29tIn0</span><span class="o">=</span>
+
+json <span class="nb">hash</span>:
+<span class="o">{</span>
+  <span class="s2">"first_name"</span>:<span class="s2">"John"</span>,
+  <span class="s2">"last_name"</span>:<span class="s2">"Snow"</span>,
+  <span class="s2">"phone"</span>:<span class="s2">"724565898"</span>,
+  <span class="s2">"email"</span>:<span class="s2">"snow@novicap.com"</span>
+<span class="o">}</span>
+
+json <span class="nb">hash </span>encoded <span class="k">in </span>base64:
+
+eyJmaXJzdF9uYW1lIjoiTWFyYyIsImxhc3RfbmFtZSI6IkFudG9uaSBNYWNp<span class="se">\n</span>YSIsInBob25lIjoiNzIyNzA4MDUzIiwiZW1haWwiOiJtYXJjQG5vdmljYXAu<span class="se">\n</span><span class="nv">Y29tIn0</span><span class="o">=</span>
+</code></pre>
 
 <h2 id="parameters">Parameters</h2>
 
@@ -204,12 +222,6 @@ If you get receive an error while trying to access a specific endpoint, do not h
 </tr>
 </thead><tbody>
 <tr>
-<td>quote_key</td>
-<td></td>
-<td>✓</td>
-<td>Your quote key for authentication. You can find it in your settings page.</td>
-</tr>
-<tr>
 <td>company_novicap_id</td>
 <td></td>
 <td></td>
@@ -222,16 +234,16 @@ If you get receive an error while trying to access a specific endpoint, do not h
 <td>An array of <code class="prettyprint">novicap_id</code>s of the debtors that should be quoted.</td>
 </tr>
 <tr>
-<td>first_name</td>
+<td>details</td>
 <td></td>
 <td></td>
-<td>The first name(s) of the user.</td>
+<td>Base64 encoded details. If you are uncomfortable sharing the contact information in plaintext then you can use this param to pass the base64 encoded version of the params hash.</td>
 </tr>
 <tr>
-<td>last_name</td>
+<td>direct_integration</td>
+<td>no</td>
 <td></td>
-<td></td>
-<td>The surname(s) of the user.</td>
+<td>If you provide all the requested parameters (novicap ids, email, first_name, last_name and phone), set this one to &ldquo;yes&rdquo; to log the user in automatically and redirect them to the application page.</td>
 </tr>
 <tr>
 <td>email</td>
@@ -240,16 +252,34 @@ If you get receive an error while trying to access a specific endpoint, do not h
 <td>The email address of the user.</td>
 </tr>
 <tr>
+<td>first_name</td>
+<td></td>
+<td></td>
+<td>The first name(s) of the user.</td>
+</tr>
+<tr>
+<td>language</td>
+<td>Browser default</td>
+<td></td>
+<td>An ISO 639-1 code (e.g. &lsquo;en&rsquo;) of the quote page display language.</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td></td>
+<td></td>
+<td>The surname(s) of the user.</td>
+</tr>
+<tr>
 <td>phone</td>
 <td></td>
 <td></td>
 <td>The phone number of the user.</td>
 </tr>
 <tr>
-<td>language</td>
-<td>Browser default</td>
+<td>quote_key</td>
 <td></td>
-<td>An ISO 639-1 code (e.g. &lsquo;en&rsquo;) of the language the free quote page should be displayed in.</td>
+<td>✓</td>
+<td>Your quote key for authentication. You can find it in your settings page.</td>
 </tr>
 </tbody></table>
 
