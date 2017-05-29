@@ -17,7 +17,7 @@ We offer a lightweight integration for partners in the form of a customizable fr
 
 Users should be redirected to the given URL.
 
-In the simplest case, they will be asked to input their information manually before receiving a quote. You can provide the following information as additional parameters in the URL to skip these steps. If you provide all the information below, the user will see a quote without any manual input. If you also set the "direct_integration" param to "true", the user will be automatically logged in and redirected to her application page.
+In the simplest case, they will be asked to input their information manually before receiving a quote. You can provide the following information as additional parameters in the URL to skip these steps. If you provide all the information below, the user will see a quote without any manual input. If you also set the "direct_integration" param to "true", the user will be automatically logged in and redirected to their account page.
 
 
 > If you are uncomfortable sharing the contact information in plaintext then you can base64 encode the contact details:
@@ -27,10 +27,10 @@ https://ncp-372814.novicap.com/quote?api_key=9dedd03c7e43072f52dd99439e04430a&co
 
 json hash:
 {
-  "first_name":"Marc",
-  "last_name":"Antoni Macia",
-  "phone":"722708053",
-  "email":"marc@novicap.com"
+  "first_name":"John",
+  "last_name":"Snow",
+  "phone":"724565898",
+  "email":"snow@novicap.com"
 }
 
 json hash encoded in base64:
@@ -60,10 +60,10 @@ Parameter            | Default         | Required | Description
 company_novicap_id   |                 |          | The `novicap_id` of the company that should be quoted (see [NoviCap IDs](#novicap-ids))
 debtor_novicap_ids[] | []              |          | An array of `novicap_id`s of the debtors that should be quoted.
 details              |                 |          | Base64 encoded details. If you are uncomfortable sharing the contact information in plaintext then you can use this param to pass the base64 encoded version of the params hash.
-direct_integration   | no              |          | If you provide all the desirable parameters (novicap ids, email, first_name, last_name and phone), set this one to "yes" to log the user in and redirect her to the application page.
+direct_integration   | no              |          | If you provide all the requested parameters (novicap ids, email, first_name, last_name and phone), set this one to "yes" to log the user in automatically and redirect them to the application page.
 email                |                 |          | The email address of the user.
 first_name           |                 |          | The first name(s) of the user.
-language             | Browser default |          | An ISO 639-1 code (e.g. 'en') of the language the free quote page should be displayed in.
+language             | Browser default |          | An ISO 639-1 code (e.g. 'en') of the quote page display language.
 last_name            |                 |          | The surname(s) of the user.
 phone                |                 |          | The phone number of the user.
 quote_key            |                 | ✓        | Your quote key for authentication. You can find it in your settings page.
