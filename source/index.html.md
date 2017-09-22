@@ -22,6 +22,7 @@ includes:
   - invoices_paid_by_debtor
   - invoice_comments_create
   - invoice_comments_index
+  - users_create
   - errors
 
 search: true
