@@ -1,7 +1,7 @@
 ## Request a line quote
 
 ```shell
-curl "https://api.novicap.com/line_quote" --data api_key=abcd \
+curl "https:// api.novicap.com/v1/line_quote" --data api_key=abcd \
                                                  &company_novicap_id=ES123456 \
                                                  &debtor_novicap_ids[]=ES234567 \
                                                  &debtor_novicap_ids[]=ES345678
@@ -20,7 +20,7 @@ Returns a quote ID that can be used to poll for the quote.
 
 ### HTTP Request
 
-`POST http://api.novicap.com/v1/line_quote`
+`POST http://  api.novicap.com/v1/line_quote`
 
 ### Query Parameters
 
@@ -37,7 +37,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 ## Retrieve a line quote
 
 ```shell
-curl "https://api.novicap.com/line_quote?api_key=abcd&quote_id=wxyz"
+curl "https:// api.novicap.com/v1/line_quote?api_key=abcd&quote_id=wxyz"
 ```
 
 > The above command returns JSON structured like this:
@@ -65,7 +65,7 @@ taken      | The company already has an account with NoviCap, or a different par
 
 ### HTTP Request
 
-`GET http://api.novicap.com/v1/line_quote`
+`GET http://  api.novicap.com/v1/line_quote`
 
 ### URL Parameters
 

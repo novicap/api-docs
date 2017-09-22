@@ -16,7 +16,7 @@ curl -H "Content-Type: application/json" \
     "reference": "201702"
   }
 }' \
-"https://api.novicap.com/v1/invoices"
+"https://  api.novicap.com/v1/invoices"
 ```
 
 > The above command returns the following response:
@@ -52,7 +52,7 @@ Possible returned status codes:
 
 ### HTTP Request
 
-`POST https://api.novicap.com/v1/invoices`
+`POST https://  api.novicap.com/v1/invoices`
 
 > The params for this endpoint should match this json schema:
 

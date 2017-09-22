@@ -43,7 +43,7 @@ If you do not have access to the API yet, please [sign up here](https://app.novi
 > To authorize while using the endpoint `line_quote`:
 
 ```shell
-curl "https://api.novicap.com/line_quote" --data api_key=abcd
+curl "https:// api.novicap.com/v1/line_quote" --data api_key=abcd
 ```
 
 > where `abcd` should be replaced with your API key.

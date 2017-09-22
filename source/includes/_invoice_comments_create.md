@@ -8,7 +8,7 @@ Example uses would be notifications of delays in payment, reduction of the invoi
 ```shell
 curl -H "Content-Type: application/json" \
 -X POST -d '{"api_key":":api_key", "comment": "Test comment"}' \
-"https://api.novicap.com/v1/invoices/:transaction_number/comments"
+"https://  api.novicap.com/v1/invoices/:transaction_number/comments"
 ```
 
 > The above command returns a empty JSON with the 201 CREATE status.
@@ -20,7 +20,7 @@ Possible returned status codes:
 
 ### HTTP Request
 
-`POST https://api.novicap.com/v1/invoices/:transaction_number/comments`
+`POST https://  api.novicap.com/v1/invoices/:transaction_number/comments`
 
 ### Data
 

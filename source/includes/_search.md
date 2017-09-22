@@ -3,7 +3,7 @@
 ### Search for a company by name or CIF
 
 ```shell
-curl "https://api.novicap.com/v1/search?api_key=abcd&query=PREPARTS+SL&country=ES"
+curl "https://  api.novicap.com/v1/search?api_key=abcd&query=PREPARTS+SL&country=ES"
 ```
 
 > The above command returns JSON structured like this:
@@ -24,7 +24,7 @@ Searches for a company in our database. Returns a unique `novicap_id` which is u
 
 #### HTTP Request
 
-`GET http://api.novicap.com/v1/search`
+`GET http://  api.novicap.com/v1/search`
 
 #### Query Parameters
 
