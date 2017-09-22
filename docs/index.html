@@ -138,7 +138,7 @@ You can use our API to receive automated quotes for invoices, synchronize invoic
 <blockquote>
 <p>To authorize while using the endpoint <code class="prettyprint">line_quote</code>:</p>
 </blockquote>
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/line_quote"</span> --data <span class="nv">api_key</span><span class="o">=</span>abcd
+<pre class="highlight shell"><code>curl <span class="s2">"https:// api.novicap.com/v1/line_quote"</span> --data <span class="nv">api_key</span><span class="o">=</span>abcd
 </code></pre>
 
 <blockquote>
@@ -292,7 +292,7 @@ eyJmaXJzdF9uYW1lIjoiSm9obiIsImxhc3RfbmFtZSI6IlNub3ciLCJwaG9uZSI6IjcyNDU2NTg5OCIs
           <h2 id="search">Search</h2>
 
 <h3 id="search-for-a-company-by-name-or-cif">Search for a company by name or CIF</h3>
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/v1/search?api_key=abcd&amp;query=PREPARTS+SL&amp;country=ES"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://  api.novicap.com/v1/search?api_key=abcd&amp;query=PREPARTS+SL&amp;country=ES"</span>
 </code></pre>
 
 <blockquote>
@@ -313,7 +313,7 @@ eyJmaXJzdF9uYW1lIjoiSm9obiIsImxhc3RfbmFtZSI6IlNub3ciLCJwaG9uZSI6IjcyNDU2NTg5OCIs
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">GET http://api.novicap.com/v1/search</code></p>
+<p><code class="prettyprint">GET http://  api.novicap.com/v1/search</code></p>
 
 <h4 id="query-parameters">Query Parameters</h4>
 
@@ -413,7 +413,7 @@ eyJmaXJzdF9uYW1lIjoiSm9obiIsImxhc3RfbmFtZSI6IlNub3ciLCJwaG9uZSI6IjcyNDU2NTg5OCIs
 </tbody></table>
 
           <h2 id="request-a-line-quote">Request a line quote</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/line_quote"</span> --data <span class="nv">api_key</span><span class="o">=</span>abcd <span class="se">\</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https:// api.novicap.com/v1/line_quote"</span> --data <span class="nv">api_key</span><span class="o">=</span>abcd <span class="se">\</span>
                                                  &amp;company_novicap_id<span class="o">=</span>ES123456 <span class="se">\</span>
                                                  &amp;debtor_novicap_ids[]<span class="o">=</span>ES234567 <span class="se">\</span>
                                                  &amp;debtor_novicap_ids[]<span class="o">=</span>ES345678
@@ -432,7 +432,7 @@ Returns a quote ID that can be used to poll for the quote.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST http://api.novicap.com/v1/line_quote</code></p>
+<p><code class="prettyprint">POST http://  api.novicap.com/v1/line_quote</code></p>
 
 <h3 id="query-parameters">Query Parameters</h3>
 
@@ -469,7 +469,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 </aside>
 
 <h2 id="retrieve-a-line-quote">Retrieve a line quote</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/line_quote?api_key=abcd&amp;quote_id=wxyz"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https:// api.novicap.com/v1/line_quote?api_key=abcd&amp;quote_id=wxyz"</span>
 </code></pre>
 
 <blockquote>
@@ -517,7 +517,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET http://api.novicap.com/v1/line_quote</code></p>
+<p><code class="prettyprint">GET http://  api.novicap.com/v1/line_quote</code></p>
 
 <h3 id="url-parameters">URL Parameters</h3>
 
@@ -653,7 +653,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 </tbody></table>
 
           <h2 id="retrieve-companies">Retrieve companies</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/companies?api_key=abcd"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https:// api.novicap.com/v1/companies?api_key=abcd"</span>
 </code></pre>
 
 <blockquote>
@@ -683,7 +683,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET http://api.novicap.com/v1/companies?api_key=abcd&amp;status=pending</code></p>
+<p><code class="prettyprint">GET http://  api.novicap.com/v1/companies?api_key=abcd&amp;status=pending</code></p>
 
 <h3 id="url-parameters">URL Parameters</h3>
 
@@ -862,7 +862,7 @@ You must submit one company at a time, but you may submit as many debtors per co
     "reference": "201702"
   }
 }'</span> <span class="se">\</span>
-<span class="s2">"https://api.novicap.com/v1/invoices"</span>
+<span class="s2">"https://  api.novicap.com/v1/invoices"</span>
 </code></pre>
 
 <blockquote>
@@ -900,7 +900,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST https://api.novicap.com/v1/invoices</code></p>
+<p><code class="prettyprint">POST https://  api.novicap.com/v1/invoices</code></p>
 
 <blockquote>
 <p>The params for this endpoint should match this json schema:</p>
@@ -1159,7 +1159,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 </tbody></table>
 
           <h2 id="retrieve-all-invoices">Retrieve all invoices</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/invoices?api_key=abcd"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https:// api.novicap.com/v1/invoices?api_key=abcd"</span>
 </code></pre>
 
 <blockquote>
@@ -1191,7 +1191,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://api.novicap.com/v1/invoices?api_key=abcd</code></p>
+<p><code class="prettyprint">GET https://  api.novicap.com/v1/invoices?api_key=abcd</code></p>
 
 <h3 id="url-parameters">URL Parameters</h3>
 
@@ -1406,7 +1406,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 </tbody></table>
 
           <h2 id="retrieve-a-single-invoice">Retrieve a single invoice</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/invoices/:transaction_number?api_key=abcd"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https:// api.novicap.com/v1/invoices/:transaction_number?api_key=abcd"</span>
 </code></pre>
 
 <blockquote>
@@ -1437,7 +1437,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://api.novicap.com/v1/invoices/:transaction_number?api_key=abcd</code></p>
+<p><code class="prettyprint">GET https://  api.novicap.com/v1/invoices/:transaction_number?api_key=abcd</code></p>
 
 <h3 id="url-parameters">URL Parameters</h3>
 
@@ -1635,7 +1635,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 <p>This endpoint allows you to accept an existing invoice.</p>
 
 <p>Note that you can only accept invoices for trade relationships that already have at least one invoice sold.</p>
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/v1/invoices/:transaction_number/acceptance"</span> --data <span class="s2">"api_key=abcd"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://  api.novicap.com/v1/invoices/:transaction_number/acceptance"</span> --data <span class="s2">"api_key=abcd"</span>
 </code></pre>
 
 <blockquote>
@@ -1651,7 +1651,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST https://api.novicap.com/v1/invoices/:transaction_number/acceptance</code></p>
+<p><code class="prettyprint">POST https://  api.novicap.com/v1/invoices/:transaction_number/acceptance</code></p>
 
 <h3 id="data">Data</h3>
 
@@ -1683,7 +1683,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 <p>This endpoint allows you to mark an existing invoice as approved by debtor.</p>
 
 <p>Note that you can only approve invoices for trade relationships that already have at least one invoice sold.</p>
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/v1/invoices/:transaction_number/approved_by_debtor"</span> --data <span class="s2">"api_key=abcd"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://  api.novicap.com/v1/invoices/:transaction_number/approved_by_debtor"</span> --data <span class="s2">"api_key=abcd"</span>
 </code></pre>
 
 <blockquote>
@@ -1699,7 +1699,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST https://api.novicap.com/v1/invoices/:transaction_number/approved_by_debtor</code></p>
+<p><code class="prettyprint">POST https://  api.novicap.com/v1/invoices/:transaction_number/approved_by_debtor</code></p>
 
 <h3 id="data">Data</h3>
 
@@ -1731,7 +1731,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 <p>This endpoint allows you to mark an existing invoice as paid by debtor.</p>
 
 <p>Note that you can only update invoices for trade relationships that already have at least one invoice sold.</p>
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/v1/invoices/:transaction_number/paid_by_debtor"</span> --data <span class="s2">"api_key=abcd"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://  api.novicap.com/v1/invoices/:transaction_number/paid_by_debtor"</span> --data <span class="s2">"api_key=abcd"</span>
 </code></pre>
 
 <blockquote>
@@ -1747,7 +1747,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST https://api.novicap.com/v1/invoices/:transaction_number/paid_by_debtor</code></p>
+<p><code class="prettyprint">POST https://  api.novicap.com/v1/invoices/:transaction_number/paid_by_debtor</code></p>
 
 <h3 id="data">Data</h3>
 
@@ -1782,7 +1782,7 @@ This comment will be reviewed by our operations team and is free text.</p>
 <p>Example uses would be notifications of delays in payment, reduction of the invoice amount, status changes in the debtor ERP, &hellip;</p>
 <pre class="highlight shell"><code>curl -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X POST -d <span class="s1">'{"api_key":":api_key", "comment": "Test comment"}'</span> <span class="se">\</span>
-<span class="s2">"https://api.novicap.com/v1/invoices/:transaction_number/comments"</span>
+<span class="s2">"https://  api.novicap.com/v1/invoices/:transaction_number/comments"</span>
 </code></pre>
 
 <blockquote>
@@ -1798,7 +1798,7 @@ This comment will be reviewed by our operations team and is free text.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST https://api.novicap.com/v1/invoices/:transaction_number/comments</code></p>
+<p><code class="prettyprint">POST https://  api.novicap.com/v1/invoices/:transaction_number/comments</code></p>
 
 <h3 id="data">Data</h3>
 
@@ -1833,7 +1833,7 @@ This comment will be reviewed by our operations team and is free text.</p>
           <h2 id="retrieve-invoice-comments">Retrieve invoice comments</h2>
 
 <p>This endpoint allows you to retrieve your comments for a specific invoice.</p>
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/v1/invoices/:transaction_number/comments?api_key=your_api_key"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://  api.novicap.com/v1/invoices/:transaction_number/comments?api_key=your_api_key"</span>
 </code></pre>
 
 <blockquote>
@@ -1850,7 +1850,7 @@ This comment will be reviewed by our operations team and is free text.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://api.novicap.com/v1/invoices/:transaction_number/comments</code></p>
+<p><code class="prettyprint">GET https://  api.novicap.com/v1/invoices/:transaction_number/comments</code></p>
 
 <h3 id="url-parameters">URL Parameters</h3>
 
