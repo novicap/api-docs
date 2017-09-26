@@ -1923,6 +1923,129 @@ This comment will be reviewed by our operations team and is free text.</p>
 </tr>
 </tbody></table>
 
+          <h2 id="create-a-user">Create a user</h2>
+
+<p>This endpoint allows you to create a user in a company that has no users associated.</p>
+<pre class="highlight shell"><code>curl -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-X POST -d <span class="s1">'{
+  "api_key": "your_api_key",
+  "company_novicap_id": "ESX7895123H",
+  "user": {
+    "first_name": "John",
+    "last_name": "Snow",
+    "email": "snow@novicap.com",
+    "phone": "724565898",
+    "language": "es"
+  }
+}'</span> <span class="se">\</span>
+<span class="s2">"https://api.novicap.com/v1/users"</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns a empty JSON with the 201 CREATED status.</p>
+</blockquote>
+
+<p>Possible returned status codes:</p>
+
+<ul>
+<li>  201 (created) if the user has been created.</li>
+<li>  409 (conflict) the company is already associated with another user.</li>
+<li>  422 (unprocessable entity) the user has not been created because of errors.</li>
+</ul>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://api.novicap.com/v1/users</code></p>
+
+<blockquote>
+<p>The params for this endpoint should match this json schema:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"company_novicap_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"user"</span><span class="p">],</span><span class="w">
+  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"company_novicap_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"first_name"</span><span class="p">,</span><span class="w"> </span><span class="s2">"last_name"</span><span class="p">,</span><span class="w"> </span><span class="s2">"email"</span><span class="p">],</span><span class="w">
+      </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"null"</span><span class="p">,</span><span class="w"> </span><span class="s2">"string"</span><span class="p">]</span><span class="w"> </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"language"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"null"</span><span class="p">,</span><span class="w"> </span><span class="s2">"string"</span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="data">Data</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>api_key</td>
+<td>✓</td>
+<td>Your api key for authentication.</td>
+</tr>
+<tr>
+<td>company_novicap_id</td>
+<td>✓</td>
+<td>The NoviCap ID of the company.</td>
+</tr>
+<tr>
+<td>user</td>
+<td>✓</td>
+<td>The user you want to create, in json format (see the following table)</td>
+</tr>
+</tbody></table>
+
+<p>The user object should have the following fields:</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>first_name</td>
+<td>✓</td>
+<td>The user&rsquo;s first name</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td>✓</td>
+<td>The user&rsquo;s last name</td>
+</tr>
+<tr>
+<td>email</td>
+<td>✓</td>
+<td>The user&rsquo;s last name</td>
+</tr>
+<tr>
+<td>phone</td>
+<td></td>
+<td>The user&rsquo;s phone</td>
+</tr>
+<tr>
+<td>language</td>
+<td></td>
+<td>An ISO 639-1 code (e.g. ‘en’) for the user&rsquo;s language</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<p>A successful response is an empty JSON with a 201 created HTTP status code.</p>
+
           <h2 id="errors">Errors</h2>
 
 <table><thead>
