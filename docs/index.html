@@ -129,7 +129,7 @@ You can use our API to receive automated quotes for invoices, synchronize invoic
 
 <p>There are two steps for integrating with us, the first is to use the light integration to enable customers to onboard and open a factoring facility with us (sign legal, upload docs,&hellip;).</p>
 
-<p>After the initial onboarding is complete and a company is activated, you can trade invoices automatically through the API and there is no more need for the customer to login to novicap.</p>
+<p>After the initial onboarding is complete and a company is activated, you can trade invoices automatically through the API and there is no more need for the customer to login to NoviCap.</p>
 
 <p>If you do not have access to the API yet, please <a href="https://app.novicap.com/partner_registration">sign up here</a> and reach out to api@novicap.com to enable API access for your partner account.</p>
 
@@ -138,7 +138,7 @@ You can use our API to receive automated quotes for invoices, synchronize invoic
 <blockquote>
 <p>To authorize while using the endpoint <code class="prettyprint">line_quote</code>:</p>
 </blockquote>
-<pre class="highlight shell"><code>curl <span class="s2">"https:// api.novicap.com/v1/line_quote"</span> --data <span class="nv">api_key</span><span class="o">=</span>abcd
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/v1/line_quote"</span> --data <span class="nv">api_key</span><span class="o">=</span>abcd
 </code></pre>
 
 <blockquote>
@@ -181,7 +181,7 @@ If you get receive an error while trying to access a specific endpoint, do not h
 <blockquote>
 <p>If you are uncomfortable sharing the contact information in plaintext then you can base64 encode the contact details:</p>
 </blockquote>
-<pre class="highlight shell"><code>https://ncp-372814.novicap.com/quote?api_key<span class="o">=</span>9dedd03c7e43072f52dd99439e04430a&amp;company_novicap_id<span class="o">=</span>ESB50460609&amp;debtor_novicap_id<span class="o">=</span>ESA08002883&amp;details<span class="o">=</span>eyJmaXJzdF9uYW1lIjoiSm9obiIsImxhc3RfbmFtZSI6IlNub3ciLCJwaG9uZSI6IjcyNDU2NTg5OCIsImVtYWlsIjoic25vd0Bub3ZpY2FwLmNvbSJ9
+<pre class="highlight shell"><code>https://ncp-372814.novicap.com/quote?api_key<span class="o">=</span>abcd&amp;company_novicap_id<span class="o">=</span>ESB50460609&amp;debtor_novicap_id<span class="o">=</span>ESA08002883&amp;details<span class="o">=</span>eyJmaXJzdF9uYW1lIjoiSm9obiIsImxhc3RfbmFtZSI6IlNub3ciLCJwaG9uZSI6IjcyNDU2NTg5OCIsImVtYWlsIjoic25vd0Bub3ZpY2FwLmNvbSJ9
 
 json <span class="nb">hash</span>:
 <span class="o">{</span>
@@ -243,7 +243,7 @@ eyJmaXJzdF9uYW1lIjoiSm9obiIsImxhc3RfbmFtZSI6IlNub3ciLCJwaG9uZSI6IjcyNDU2NTg5OCIs
 <td>direct_integration</td>
 <td>no</td>
 <td></td>
-<td>If you provide all the requested parameters (novicap ids, email, first_name, last_name and phone), set this one to &ldquo;yes&rdquo; to log the user in automatically and redirect them to the application page.</td>
+<td>If you provide all the requested parameters (NoviCap ids, email, first_name, last_name and phone), set this one to &ldquo;yes&rdquo; to log the user in automatically and redirect them to the application page.</td>
 </tr>
 <tr>
 <td>email</td>
@@ -292,7 +292,7 @@ eyJmaXJzdF9uYW1lIjoiSm9obiIsImxhc3RfbmFtZSI6IlNub3ciLCJwaG9uZSI6IjcyNDU2NTg5OCIs
           <h2 id="search">Search</h2>
 
 <h3 id="search-for-a-company-by-name-or-cif">Search for a company by name or CIF</h3>
-<pre class="highlight shell"><code>curl <span class="s2">"https://  api.novicap.com/v1/search?api_key=abcd&amp;query=PREPARTS+SL&amp;country=ES"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/v1/search?api_key=abcd&amp;query=PREPARTS+SL&amp;country=ES"</span>
 </code></pre>
 
 <blockquote>
@@ -313,7 +313,7 @@ eyJmaXJzdF9uYW1lIjoiSm9obiIsImxhc3RfbmFtZSI6IlNub3ciLCJwaG9uZSI6IjcyNDU2NTg5OCIs
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">GET http://  api.novicap.com/v1/search</code></p>
+<p><code class="prettyprint">GET https://api.novicap.com/v1/search</code></p>
 
 <h4 id="query-parameters">Query Parameters</h4>
 
@@ -329,7 +329,7 @@ eyJmaXJzdF9uYW1lIjoiSm9obiIsImxhc3RfbmFtZSI6IlNub3ciLCJwaG9uZSI6IjcyNDU2NTg5OCIs
 <td>api_key</td>
 <td></td>
 <td>✓</td>
-<td>Your api key for authentication.</td>
+<td>Your API key for authentication.</td>
 </tr>
 <tr>
 <td>query</td>
@@ -413,54 +413,86 @@ eyJmaXJzdF9uYW1lIjoiSm9obiIsImxhc3RfbmFtZSI6IlNub3ciLCJwaG9uZSI6IjcyNDU2NTg5OCIs
 </tbody></table>
 
           <h2 id="request-a-line-quote">Request a line quote</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"https:// api.novicap.com/v1/line_quote"</span> --data <span class="nv">api_key</span><span class="o">=</span>abcd <span class="se">\</span>
-                                                 &amp;company_novicap_id<span class="o">=</span>ES123456 <span class="se">\</span>
-                                                 &amp;debtor_novicap_ids[]<span class="o">=</span>ES234567 <span class="se">\</span>
-                                                 &amp;debtor_novicap_ids[]<span class="o">=</span>ES345678
+<pre class="highlight shell"><code>curl -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+-X POST -d <span class="s1">'{
+  "api_key": "abcd",
+  "company_novicap_id": "ESA12345678",
+  "debtor_novicap_ids": ["ESB12345678", "ESC12345678"]
+}'</span> <span class="se">\</span>
+<span class="s2">"https://api.novicap.com/v1/line_quotes"</span>
 </code></pre>
 
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>The above command returns the following response:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"quote_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wxyz"</span><span class="w">
+  </span><span class="nt">"quote_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wxyz"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"company_novicap_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ESA12345678"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"debtor_novicap_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"ESB12345678"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ESC12345678"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Submit a company and an optional list of debtors for an automatic price quote.
-Returns a quote ID that can be used to poll for the quote.</p>
+<p>This endpoint allows you to request a line quote for a company.</p>
+
+<p>Submit a company and an optional list of debtors for an automatic price quote.</p>
+
+<p>It returns a quote ID that can be used to poll for the quote.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST http://  api.novicap.com/v1/line_quote</code></p>
+<p><code class="prettyprint">POST https://api.novicap.com/v1/line_quotes</code></p>
 
-<h3 id="query-parameters">Query Parameters</h3>
+<h3 id="parameters">Parameters</h3>
+
+<blockquote>
+<p>The params for this endpoint should match this JSON schema:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"api_key"</span><span class="p">,</span><span class="w"> </span><span class="s2">"company_novicap_id"</span><span class="p">],</span><span class="w">
+  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"company_novicap_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"debtor_novicap_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Default</th>
+<th>Type</th>
 <th>Required</th>
+<th>Default</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>api_key</td>
-<td></td>
+<td>String</td>
 <td>✓</td>
-<td>Your api key for authentication.</td>
+<td></td>
+<td>Your API key for authentication</td>
 </tr>
 <tr>
 <td>company_novicap_id</td>
-<td></td>
+<td>String</td>
 <td>✓</td>
-<td>The <code class="prettyprint">novicap_id</code> of the company you want a quote for.</td>
+<td></td>
+<td>The <code class="prettyprint">novicap_id</code> of the company you want a quote for</td>
 </tr>
 <tr>
-<td>debtor_novicap_ids[]</td>
-<td>[]</td>
+<td>debtor_novicap_ids</td>
+<td>Array</td>
 <td></td>
-<td>An array of <code class="prettyprint">novicap_id</code>s of debtors you want quotes for.</td>
+<td>[]</td>
+<td>An array of <code class="prettyprint">novicap_id</code>s of debtors you want quotes for</td>
 </tr>
 </tbody></table>
 
@@ -468,22 +500,248 @@ Returns a quote ID that can be used to poll for the quote.</p>
 You must submit one company at a time, but you may submit as many debtors per company as you want.
 </aside>
 
-<h2 id="retrieve-a-line-quote">Retrieve a line quote</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"https:// api.novicap.com/v1/line_quote?api_key=abcd&amp;quote_id=wxyz"</span>
-</code></pre>
+<h3 id="response">Response</h3>
 
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>A successful response is a JSON compatible with the following schema:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"credit_limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">200000</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"opening_fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.25</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"commission"</span><span class="p">:</span><span class="w"> </span><span class="mi">900</span><span class="w">
+  </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"quote_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"company_novicap_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"debtor_novicap_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Exchange a quote ID for a quote.</p>
+<p>A successful response is a JSON payload with the following fields:</p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>quote_id</td>
+<td>String</td>
+<td>The ID that can be used to poll for the quote</td>
+</tr>
+<tr>
+<td>company_novicap_id</td>
+<td>String</td>
+<td>The <code class="prettyprint">novicap_id</code> of the company you asked for the quote</td>
+</tr>
+<tr>
+<td>debtor_novicap_ids</td>
+<td>Array</td>
+<td>The array of <code class="prettyprint">novicap_id</code>s of debtors you asked for the quote</td>
+</tr>
+</tbody></table>
+
+<h3 id="status-codes">Status Codes</h3>
+
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Meaning</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>202</td>
+<td>Accepted</td>
+<td>The line quote request has been received and our system is processing it</td>
+</tr>
+<tr>
+<td>422</td>
+<td>Unprocessable Entity</td>
+<td>The company NoviCap ID is not present</td>
+</tr>
+</tbody></table>
+
+          <h2 id="retrieve-a-line-quote">Retrieve a line quote</h2>
+<pre class="highlight shell"><code>curl -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+<span class="s2">"https://api.novicap.com/v1/line_quotes/wxyz?api_key=abcd"</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns the following response:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"credit_limit"</span><span class="p">:</span><span class="w"> </span><span class="mf">70000.0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"debtors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"debtor_novicap_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ESB12345678"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"interest_rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">4.8</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"invoice_handling_fee"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"advance_rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">70.0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"debtor_novicap_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ESC12345678"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rejected"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint allows you to retrieve the data for a quote using an existing quote ID.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://api.novicap.com/v1/line_quotes/:quote_id</code></p>
+
+<h3 id="parameters">Parameters</h3>
+
+<blockquote>
+<p>The params for this endpoint should match this JSON schema:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"api_key"</span><span class="p">,</span><span class="w"> </span><span class="s2">"quote_id"</span><span class="p">],</span><span class="w">
+  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"quote_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>api_key</td>
+<td>String</td>
+<td>✓</td>
+<td>Your API key for authentication</td>
+</tr>
+<tr>
+<td>quote_id</td>
+<td>String</td>
+<td>✓</td>
+<td>The quote ID retrieved from the previous step</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<blockquote>
+<p>A successful response is a JSON compatible with the following schema:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"credit_limit"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"debtors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"debtor_novicap_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"advance_rate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"null"</span><span class="p">,</span><span class="w"> </span><span class="s2">"number"</span><span class="p">]</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"interest_rate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"null"</span><span class="p">,</span><span class="w"> </span><span class="s2">"number"</span><span class="p">]</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"invoice_handling_fee"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"null"</span><span class="p">,</span><span class="w"> </span><span class="s2">"number"</span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>A successful response is a JSON payload with the following fields:</p>
+
+<p>A successful response is a JSON payload with these fields:</p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status</td>
+<td>String</td>
+<td></td>
+<td>One of &ldquo;ok&rdquo;, &ldquo;processing&rdquo;, or &ldquo;review&rdquo;.</td>
+</tr>
+<tr>
+<td>credit_limit</td>
+<td>Number</td>
+<td>€</td>
+<td>The size of the credit line NoviCap can provide to the company</td>
+</tr>
+<tr>
+<td>debtors</td>
+<td>Array</td>
+<td></td>
+<td>A list of debtors that were priced as part of the quote</td>
+</tr>
+</tbody></table>
+
+<p>Each debtor in <code class="prettyprint">debtors</code> has these fields:</p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Unit</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>advance_rate</td>
+<td>Number</td>
+<td>%</td>
+<td>The percentage of the total value of the invoice NoviCap will advance</td>
+</tr>
+<tr>
+<td>debtor_novicap_id</td>
+<td>String</td>
+<td></td>
+<td>The NoviCap ID of the debtor company</td>
+</tr>
+<tr>
+<td>interest_rate</td>
+<td>Number</td>
+<td>%</td>
+<td>The annual interest rate NoviCap will charge as a percentage of the amount advanced</td>
+</tr>
+<tr>
+<td>invoice_handling_fee</td>
+<td>Number</td>
+<td>%</td>
+<td>The fee NoviCap will charge as a percentage of the amount advanced</td>
+</tr>
+<tr>
+<td>status</td>
+<td>String</td>
+<td></td>
+<td>One of &ldquo;ok&rdquo;, &ldquo;rejected&rdquo;, or &ldquo;review&rdquo;</td>
+</tr>
+</tbody></table>
+
+<h3 id="status">Status</h3>
 
 <p>The response has a <code class="prettyprint">status</code> parameter. If this is <code class="prettyprint">ok</code>, the quote is ready to use. Any other status means that the quote is not available or may be incomplete:</p>
 
@@ -495,165 +753,50 @@ You must submit one company at a time, but you may submit as many debtors per co
 </thead><tbody>
 <tr>
 <td>ok</td>
-<td>Quote successful, included in the response.</td>
+<td>Quote successful, included in the response</td>
 </tr>
 <tr>
 <td>processing</td>
-<td>The quote is still processing. Try again in a few seconds.</td>
+<td>The quote is still processing. Try again in a few seconds</td>
 </tr>
 <tr>
 <td>review</td>
-<td>NoviCap could not provide an automatic price quote. The quote may be provided at a later date, or the team may be in contact.</td>
+<td>NoviCap could not provide an automatic price quote. The quote may be provided at a later date, or the team may be in contact</td>
 </tr>
 <tr>
 <td>rejected</td>
-<td>NoviCap cannot provide a quote because the company does not pass financing requirements.</td>
-</tr>
-<tr>
-<td>taken</td>
-<td>The company already has an account with NoviCap, or a different partner is already associated with the company.</td>
+<td>NoviCap cannot provide a quote because the company does not pass financing requirements</td>
 </tr>
 </tbody></table>
 
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">GET http://  api.novicap.com/v1/line_quote</code></p>
-
-<h3 id="url-parameters">URL Parameters</h3>
+<h3 id="status-codes">Status Codes</h3>
 
 <table><thead>
 <tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Required</th>
+<th>Code</th>
+<th>Meaning</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>api_key</td>
-<td></td>
-<td>✓</td>
-<td>Your api key for authentication.</td>
+<td>200</td>
+<td>Success</td>
+<td>The line quote request has been correctly processed</td>
 </tr>
 <tr>
-<td>quote_id</td>
-<td></td>
-<td>✓</td>
-<td>The quote ID retrieved from the previous step.</td>
-</tr>
-</tbody></table>
-
-<h3 id="response">Response</h3>
-
-<blockquote>
-<p>A successful response is a JSON compatible with this schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is the definition for a line_quote"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"commissions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"credit_limit"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"debtors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array,null"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"debtor_novicap_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"status"</span><span class="p">],</span><span class="w">
-        </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"advance_rate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">},</span><span class="w">
-          </span><span class="nt">"debtor_novicap_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
-          </span><span class="nt">"interest_rate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">},</span><span class="w">
-          </span><span class="nt">"invoice_handling_fee"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">},</span><span class="w">
-          </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">}</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"opening_fee"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<p>A successful response is a JSON payload with these fields:</p>
-
-<table><thead>
-<tr>
-<th>Variable</th>
-<th>Type</th>
-<th>Unit</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>status</td>
-<td>String</td>
-<td></td>
-<td>One of &ldquo;ok&rdquo;, &ldquo;review&rdquo;, or &ldquo;rejected&rdquo;.</td>
+<td>202</td>
+<td>Accepted</td>
+<td>The line quote request is still processing</td>
 </tr>
 <tr>
-<td>credit_limit</td>
-<td>Number</td>
-<td>€</td>
-<td>The size of the credit line NoviCap can provide to the company.</td>
-</tr>
-<tr>
-<td>opening_fee</td>
-<td>Number</td>
-<td>%</td>
-<td>The fee NoviCap will charge to open the credit line as a percentage of the credit limit.</td>
-</tr>
-<tr>
-<td>commission</td>
-<td>Number</td>
-<td>€</td>
-<td>The commission the partner will make if the company opens the line.</td>
-</tr>
-<tr>
-<td>debtors</td>
-<td>Array</td>
-<td></td>
-<td>A list of debtors that were priced as part of the quote.</td>
-</tr>
-</tbody></table>
-
-<p>Each debtor in <code class="prettyprint">debtors</code> has these fields:</p>
-
-<table><thead>
-<tr>
-<th>Variable</th>
-<th>Type</th>
-<th>Unit</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>advance_rate</td>
-<td>Number</td>
-<td>%</td>
-<td>The percentage of the total value of the invoice NoviCap will advance.</td>
-</tr>
-<tr>
-<td>interest_rate</td>
-<td>Number</td>
-<td>%</td>
-<td>The annual interest rate NoviCap will charge as a percentage of the amount advanced.</td>
-</tr>
-<tr>
-<td>invoice_handling_fee</td>
-<td>Number</td>
-<td>%</td>
-<td>The fee NoviCap will charge as a percentage of the amount advanced.</td>
-</tr>
-<tr>
-<td>status</td>
-<td>String</td>
-<td></td>
-<td>One of &ldquo;ok&rdquo;, &ldquo;review&rdquo;, or &ldquo;rejected&rdquo;.</td>
+<td>422</td>
+<td>Unprocessable Entity</td>
+<td>The quote ID is invalid</td>
 </tr>
 </tbody></table>
 
           <h2 id="retrieve-companies">Retrieve companies</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"https:// api.novicap.com/v1/companies?api_key=abcd"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/v1/companies?api_key=abcd"</span>
 </code></pre>
 
 <blockquote>
@@ -683,7 +826,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET http://  api.novicap.com/v1/companies?api_key=abcd&amp;status=pending</code></p>
+<p><code class="prettyprint">GET https://api.novicap.com/v1/companies?api_key=abcd&amp;status=pending</code></p>
 
 <h3 id="url-parameters">URL Parameters</h3>
 
@@ -699,7 +842,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 <td>api_key</td>
 <td></td>
 <td>✓</td>
-<td>Your api key for authentication.</td>
+<td>Your API key for authentication.</td>
 </tr>
 <tr>
 <td>status</td>
@@ -853,7 +996,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 <p>Note that you should have at least one sold invoice in NoviCap before create new ones using this endpoint.</p>
 <pre class="highlight shell"><code>curl -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X POST -d <span class="s1">'{
-  "api_key": ":your_api_key",
+  "api_key": "abcd",
   "invoice": {
     "company_novicap_id": "ESX7895123H",
     "debtor_novicap_id": "ESX7895123H",
@@ -862,7 +1005,7 @@ You must submit one company at a time, but you may submit as many debtors per co
     "reference": "201702"
   }
 }'</span> <span class="se">\</span>
-<span class="s2">"https://  api.novicap.com/v1/invoices"</span>
+<span class="s2">"https://api.novicap.com/v1/invoices"</span>
 </code></pre>
 
 <blockquote>
@@ -900,7 +1043,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST https://  api.novicap.com/v1/invoices</code></p>
+<p><code class="prettyprint">POST https://api.novicap.com/v1/invoices</code></p>
 
 <blockquote>
 <p>The params for this endpoint should match this json schema:</p>
@@ -935,7 +1078,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 <tr>
 <td>api_key</td>
 <td></td>
-<td>Your api key for authentication.</td>
+<td>Your API key for authentication.</td>
 </tr>
 <tr>
 <td>invoice</td>
@@ -1159,7 +1302,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 </tbody></table>
 
           <h2 id="retrieve-all-invoices">Retrieve all invoices</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"https:// api.novicap.com/v1/invoices?api_key=abcd"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/v1/invoices?api_key=abcd"</span>
 </code></pre>
 
 <blockquote>
@@ -1191,7 +1334,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://  api.novicap.com/v1/invoices?api_key=abcd</code></p>
+<p><code class="prettyprint">GET https://api.novicap.com/v1/invoices?api_key=abcd</code></p>
 
 <h3 id="url-parameters">URL Parameters</h3>
 
@@ -1207,7 +1350,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 <td>api_key</td>
 <td></td>
 <td>✓</td>
-<td>Your api key for authentication.</td>
+<td>Your API key for authentication.</td>
 </tr>
 <tr>
 <td>status</td>
@@ -1406,7 +1549,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 </tbody></table>
 
           <h2 id="retrieve-a-single-invoice">Retrieve a single invoice</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"https:// api.novicap.com/v1/invoices/:transaction_number?api_key=abcd"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/v1/invoices/:transaction_number?api_key=abcd"</span>
 </code></pre>
 
 <blockquote>
@@ -1437,7 +1580,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://  api.novicap.com/v1/invoices/:transaction_number?api_key=abcd</code></p>
+<p><code class="prettyprint">GET https://api.novicap.com/v1/invoices/:transaction_number?api_key=abcd</code></p>
 
 <h3 id="url-parameters">URL Parameters</h3>
 
@@ -1453,7 +1596,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 <td>api_key</td>
 <td></td>
 <td>✓</td>
-<td>Your api key for authentication.</td>
+<td>Your API key for authentication.</td>
 </tr>
 </tbody></table>
 
@@ -1635,7 +1778,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 <p>This endpoint allows you to accept an existing invoice.</p>
 
 <p>Note that you can only accept invoices for trade relationships that already have at least one invoice sold.</p>
-<pre class="highlight shell"><code>curl <span class="s2">"https://  api.novicap.com/v1/invoices/:transaction_number/acceptance"</span> --data <span class="s2">"api_key=abcd"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/v1/invoices/:transaction_number/acceptance"</span> --data <span class="s2">"api_key=abcd"</span>
 </code></pre>
 
 <blockquote>
@@ -1651,7 +1794,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST https://  api.novicap.com/v1/invoices/:transaction_number/acceptance</code></p>
+<p><code class="prettyprint">POST https://api.novicap.com/v1/invoices/:transaction_number/acceptance</code></p>
 
 <h3 id="data">Data</h3>
 
@@ -1665,7 +1808,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 <tr>
 <td>api_key</td>
 <td>String</td>
-<td>Your api key for authentication.</td>
+<td>Your API key for authentication.</td>
 </tr>
 <tr>
 <td>transaction_number</td>
@@ -1683,7 +1826,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 <p>This endpoint allows you to mark an existing invoice as approved by debtor.</p>
 
 <p>Note that you can only approve invoices for trade relationships that already have at least one invoice sold.</p>
-<pre class="highlight shell"><code>curl <span class="s2">"https://  api.novicap.com/v1/invoices/:transaction_number/approved_by_debtor"</span> --data <span class="s2">"api_key=abcd"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/v1/invoices/:transaction_number/approved_by_debtor"</span> --data <span class="s2">"api_key=abcd"</span>
 </code></pre>
 
 <blockquote>
@@ -1699,7 +1842,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST https://  api.novicap.com/v1/invoices/:transaction_number/approved_by_debtor</code></p>
+<p><code class="prettyprint">POST https://api.novicap.com/v1/invoices/:transaction_number/approved_by_debtor</code></p>
 
 <h3 id="data">Data</h3>
 
@@ -1713,7 +1856,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 <tr>
 <td>api_key</td>
 <td>String</td>
-<td>Your api key for authentication.</td>
+<td>Your API key for authentication.</td>
 </tr>
 <tr>
 <td>transaction_number</td>
@@ -1731,7 +1874,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 <p>This endpoint allows you to mark an existing invoice as paid by debtor.</p>
 
 <p>Note that you can only update invoices for trade relationships that already have at least one invoice sold.</p>
-<pre class="highlight shell"><code>curl <span class="s2">"https://  api.novicap.com/v1/invoices/:transaction_number/paid_by_debtor"</span> --data <span class="s2">"api_key=abcd"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/v1/invoices/:transaction_number/paid_by_debtor"</span> --data <span class="s2">"api_key=abcd"</span>
 </code></pre>
 
 <blockquote>
@@ -1747,7 +1890,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST https://  api.novicap.com/v1/invoices/:transaction_number/paid_by_debtor</code></p>
+<p><code class="prettyprint">POST https://api.novicap.com/v1/invoices/:transaction_number/paid_by_debtor</code></p>
 
 <h3 id="data">Data</h3>
 
@@ -1761,7 +1904,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 <tr>
 <td>api_key</td>
 <td>String</td>
-<td>Your api key for authentication.</td>
+<td>Your API key for authentication.</td>
 </tr>
 <tr>
 <td>transaction_number</td>
@@ -1781,8 +1924,8 @@ This comment will be reviewed by our operations team and is free text.</p>
 
 <p>Example uses would be notifications of delays in payment, reduction of the invoice amount, status changes in the debtor ERP, &hellip;</p>
 <pre class="highlight shell"><code>curl -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--X POST -d <span class="s1">'{"api_key":":api_key", "comment": "Test comment"}'</span> <span class="se">\</span>
-<span class="s2">"https://  api.novicap.com/v1/invoices/:transaction_number/comments"</span>
+-X POST -d <span class="s1">'{"api_key":"abcd", "comment": "Test comment"}'</span> <span class="se">\</span>
+<span class="s2">"https://api.novicap.com/v1/invoices/:transaction_number/comments"</span>
 </code></pre>
 
 <blockquote>
@@ -1798,7 +1941,7 @@ This comment will be reviewed by our operations team and is free text.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST https://  api.novicap.com/v1/invoices/:transaction_number/comments</code></p>
+<p><code class="prettyprint">POST https://api.novicap.com/v1/invoices/:transaction_number/comments</code></p>
 
 <h3 id="data">Data</h3>
 
@@ -1812,7 +1955,7 @@ This comment will be reviewed by our operations team and is free text.</p>
 <tr>
 <td>api_key</td>
 <td>String</td>
-<td>Your api key for authentication.</td>
+<td>Your API key for authentication.</td>
 </tr>
 <tr>
 <td>comment</td>
@@ -1833,7 +1976,7 @@ This comment will be reviewed by our operations team and is free text.</p>
           <h2 id="retrieve-invoice-comments">Retrieve invoice comments</h2>
 
 <p>This endpoint allows you to retrieve your comments for a specific invoice.</p>
-<pre class="highlight shell"><code>curl <span class="s2">"https://  api.novicap.com/v1/invoices/:transaction_number/comments?api_key=your_api_key"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/v1/invoices/:transaction_number/comments?api_key=abcd"</span>
 </code></pre>
 
 <blockquote>
@@ -1850,7 +1993,7 @@ This comment will be reviewed by our operations team and is free text.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://  api.novicap.com/v1/invoices/:transaction_number/comments</code></p>
+<p><code class="prettyprint">GET https://api.novicap.com/v1/invoices/:transaction_number/comments</code></p>
 
 <h3 id="url-parameters">URL Parameters</h3>
 
@@ -1864,7 +2007,7 @@ This comment will be reviewed by our operations team and is free text.</p>
 <tr>
 <td>api_key</td>
 <td>String</td>
-<td>Your api key for authentication.</td>
+<td>Your API key for authentication.</td>
 </tr>
 <tr>
 <td>transaction_number</td>
@@ -1924,11 +2067,9 @@ This comment will be reviewed by our operations team and is free text.</p>
 </tbody></table>
 
           <h2 id="create-a-user">Create a user</h2>
-
-<p>This endpoint allows you to create a user in a company that has no users associated.</p>
 <pre class="highlight shell"><code>curl -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
 -X POST -d <span class="s1">'{
-  "api_key": "your_api_key",
+  "api_key": "abcd",
   "company_novicap_id": "ESX7895123H",
   "user": {
     "first_name": "John",
@@ -1945,25 +2086,23 @@ This comment will be reviewed by our operations team and is free text.</p>
 <p>The above command returns a empty JSON with the 201 CREATED status.</p>
 </blockquote>
 
-<p>Possible returned status codes:</p>
-
-<ul>
-<li>  201 (created) if the user has been created.</li>
-<li>  409 (conflict) the company is already associated with another user.</li>
-<li>  422 (unprocessable entity) the user has not been created because of errors.</li>
-</ul>
+<p>This endpoint allows you to create a user in a company that has no users associated.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">POST https://api.novicap.com/v1/users</code></p>
 
+<h3 id="parameters">Parameters</h3>
+
 <blockquote>
-<p>The params for this endpoint should match this json schema:</p>
+<p>The params for this endpoint should match this JSON schema:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"company_novicap_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"user"</span><span class="p">],</span><span class="w">
+  </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"api_key"</span><span class="p">,</span><span class="w"> </span><span class="s2">"company_novicap_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"user"</span><span class="p">],</span><span class="w">
   </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
     </span><span class="nt">"company_novicap_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
     </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
@@ -1980,29 +2119,31 @@ This comment will be reviewed by our operations team and is free text.</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h3 id="data">Data</h3>
-
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Type</th>
 <th>Required</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>api_key</td>
+<td>String</td>
 <td>✓</td>
-<td>Your api key for authentication.</td>
+<td>Your API key for authentication</td>
 </tr>
 <tr>
 <td>company_novicap_id</td>
+<td>String</td>
 <td>✓</td>
-<td>The NoviCap ID of the company.</td>
+<td>The <code class="prettyprint">novicap_id</code> of the company you want to add the user to</td>
 </tr>
 <tr>
 <td>user</td>
+<td>Object</td>
 <td>✓</td>
-<td>The user you want to create, in json format (see the following table)</td>
+<td>The user you want to create, in JSON format (see the following table)</td>
 </tr>
 </tbody></table>
 
@@ -2011,40 +2152,78 @@ This comment will be reviewed by our operations team and is free text.</p>
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Type</th>
 <th>Required</th>
+<th>Format</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>first_name</td>
+<td>String</td>
 <td>✓</td>
+<td></td>
 <td>The user&rsquo;s first name</td>
 </tr>
 <tr>
 <td>last_name</td>
+<td>String</td>
 <td>✓</td>
+<td></td>
 <td>The user&rsquo;s last name</td>
 </tr>
 <tr>
 <td>email</td>
+<td>String</td>
 <td>✓</td>
-<td>The user&rsquo;s last name</td>
+<td></td>
+<td>The user&rsquo;s email</td>
 </tr>
 <tr>
 <td>phone</td>
+<td>String</td>
+<td></td>
 <td></td>
 <td>The user&rsquo;s phone</td>
 </tr>
 <tr>
 <td>language</td>
+<td>String</td>
 <td></td>
-<td>An ISO 639-1 code (e.g. ‘en’) for the user&rsquo;s language</td>
+<td>ISO 639-1</td>
+<td>The user&rsquo;s language</td>
 </tr>
 </tbody></table>
 
 <h3 id="response">Response</h3>
 
-<p>A successful response is an empty JSON with a 201 created HTTP status code.</p>
+<p>A successful response is an empty JSON with a 201 Created HTTP status code.</p>
+
+<h3 id="status-codes">Status Codes</h3>
+
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Meaning</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>201</td>
+<td>Created</td>
+<td>The user has been created</td>
+</tr>
+<tr>
+<td>409</td>
+<td>Conflict</td>
+<td>The company is already associated with another user</td>
+</tr>
+<tr>
+<td>422</td>
+<td>Unprocessable Entity</td>
+<td>The user has not been created because of errors</td>
+</tr>
+</tbody></table>
 
           <h2 id="errors">Errors</h2>
 
