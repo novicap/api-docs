@@ -1,7 +1,7 @@
 ## Retrieve companies
 
 ```shell
-curl "https:// api.novicap.com/v1/companies?api_key=abcd"
+curl "https://api.novicap.com/v1/companies?api_key=abcd"
 ```
 
 > The above command returns the following JSON:
@@ -31,7 +31,7 @@ Returns an array with your associated companies.
 
 ### HTTP Request
 
-`GET http://  api.novicap.com/v1/companies?api_key=abcd&status=pending`
+`GET https://api.novicap.com/v1/companies?api_key=abcd&status=pending`
 
 ### URL Parameters
 

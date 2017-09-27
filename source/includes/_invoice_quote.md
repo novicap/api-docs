@@ -3,7 +3,7 @@
 ### Request an invoice quote
 
 ```shell
-curl https:// api.novicap.com/v1/quote --header "Content-Type: application/json" --data <<EOF
+curl https://api.novicap.com/v1/quote --header "Content-Type: application/json" --data <<EOF
   {
     "api_key": abcd,
     "company_novicap_id": "ESB94021474",
@@ -42,7 +42,7 @@ Returns a quote ID that can be used to poll for the quote.
 
 #### HTTP Request
 
-`POST http://  api.novicap.com/v1/quote`
+`POST https://api.novicap.com/v1/quote`
 
 #### Query Parameters
 
@@ -67,7 +67,7 @@ currency          | "EUR"           |          | "EUR"           | The currency 
 ### Retrieve an invoice quote
 
 ```shell
-curl "https:// api.novicap.com/v1/quote?api_key=abcd&quote_id=wxyz"
+curl "https://api.novicap.com/v1/quote?api_key=abcd&quote_id=wxyz"
 ```
 
 > The above command returns JSON structured like this:
@@ -103,7 +103,7 @@ taken      | The company already has an account with NoviCap, or a different par
 
 #### HTTP Request
 
-`GET http://  api.novicap.com/v1/quote`
+`GET https://api.novicap.com/v1/quote`
 
 #### URL Parameters
 

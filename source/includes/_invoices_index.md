@@ -1,7 +1,7 @@
 ## Retrieve all invoices
 
 ```shell
-curl "https:// api.novicap.com/v1/invoices?api_key=abcd"
+curl "https://api.novicap.com/v1/invoices?api_key=abcd"
 ```
 
 > The above command returns the following JSON:
@@ -33,7 +33,7 @@ Returns an array with your associated companies' invoices.
 
 ### HTTP Request
 
-`GET https://  api.novicap.com/v1/invoices?api_key=abcd`
+`GET https://api.novicap.com/v1/invoices?api_key=abcd`
 
 ### URL Parameters
 

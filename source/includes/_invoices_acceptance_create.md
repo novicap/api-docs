@@ -5,7 +5,7 @@ This endpoint allows you to accept an existing invoice.
 Note that you can only accept invoices for trade relationships that already have at least one invoice sold.
 
 ```shell
-curl "https://  api.novicap.com/v1/invoices/:transaction_number/acceptance" --data "api_key=abcd"
+curl "https://api.novicap.com/v1/invoices/:transaction_number/acceptance" --data "api_key=abcd"
 ```
 
 > The above command returns a empty JSON with the 201 CREATE status.
@@ -17,7 +17,7 @@ Possible returned status codes:
 
 ### HTTP Request
 
-`POST https://  api.novicap.com/v1/invoices/:transaction_number/acceptance`
+`POST https://api.novicap.com/v1/invoices/:transaction_number/acceptance`
 
 ### Data
 
