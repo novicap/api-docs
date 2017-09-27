@@ -23,7 +23,7 @@ In the simplest case, they will be asked to input their information manually bef
 > If you are uncomfortable sharing the contact information in plaintext then you can base64 encode the contact details:
 
 ```shell
-https://ncp-372814.novicap.com/quote?api_key=9dedd03c7e43072f52dd99439e04430a&company_novicap_id=ESB50460609&debtor_novicap_id=ESA08002883&details=eyJmaXJzdF9uYW1lIjoiSm9obiIsImxhc3RfbmFtZSI6IlNub3ciLCJwaG9uZSI6IjcyNDU2NTg5OCIsImVtYWlsIjoic25vd0Bub3ZpY2FwLmNvbSJ9
+https://ncp-372814.novicap.com/quote?api_key=abcd&company_novicap_id=ESB50460609&debtor_novicap_id=ESA08002883&details=eyJmaXJzdF9uYW1lIjoiSm9obiIsImxhc3RfbmFtZSI6IlNub3ciLCJwaG9uZSI6IjcyNDU2NTg5OCIsImVtYWlsIjoic25vd0Bub3ZpY2FwLmNvbSJ9
 
 json hash:
 {

@@ -5,7 +5,7 @@ This endpoint allows you to create a user in a company that has no users associa
 ```shell
 curl -H "Content-Type: application/json" \
 -X POST -d '{
-  "api_key": "your_api_key",
+  "api_key": "abcd",
   "company_novicap_id": "ESX7895123H",
   "user": {
     "first_name": "John",

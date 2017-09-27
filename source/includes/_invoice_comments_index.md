@@ -3,7 +3,7 @@
 This endpoint allows you to retrieve your comments for a specific invoice.
 
 ```shell
-curl "https://api.novicap.com/v1/invoices/:transaction_number/comments?api_key=your_api_key"
+curl "https://api.novicap.com/v1/invoices/:transaction_number/comments?api_key=abcd"
 ```
 
 > The above command returns a JSON with a list of comments:

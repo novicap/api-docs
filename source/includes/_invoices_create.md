@@ -7,7 +7,7 @@ Note that you should have at least one sold invoice in NoviCap before create new
 ```shell
 curl -H "Content-Type: application/json" \
 -X POST -d '{
-  "api_key": ":your_api_key",
+  "api_key": "abcd",
   "invoice": {
     "company_novicap_id": "ESX7895123H",
     "debtor_novicap_id": "ESX7895123H",

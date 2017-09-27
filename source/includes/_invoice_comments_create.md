@@ -7,7 +7,7 @@ Example uses would be notifications of delays in payment, reduction of the invoi
 
 ```shell
 curl -H "Content-Type: application/json" \
--X POST -d '{"api_key":":api_key", "comment": "Test comment"}' \
+-X POST -d '{"api_key":"abcd", "comment": "Test comment"}' \
 "https://api.novicap.com/v1/invoices/:transaction_number/comments"
 ```
 
