@@ -23,7 +23,7 @@ Possible returned status codes:
 
 Parameter          | Type   | Description
 -------------------|--------|----------------------------------
-api_key            | String | Your api key for authentication.
+api_key            | String | Your API key for authentication.
 transaction_number | String | The Novicap ID of the transaction
 
 ### Response

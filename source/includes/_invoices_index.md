@@ -39,7 +39,7 @@ Returns an array with your associated companies' invoices.
 
 Parameter          | Default | Required | Description
 -------------------|---------|----------|---------------------------------------------------------------------------------------------------------------------------
-api_key            |         | ✓        | Your api key for authentication.
+api_key            |         | ✓        | Your API key for authentication.
 status             |         |          | Filter invoices by current status. It may be one of "accepted", "defaulted", "financed", "paid", "rejected" or "submitted".
 company_novicap_id |         |          | Return only invoices related to the given company.
 debtor_novicap_id  |         |          | Return only invoices related to the given debtor.

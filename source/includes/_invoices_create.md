@@ -79,7 +79,7 @@ Possible returned status codes:
 
 Parameter | Unit | Description
 ----------|------|-------------------------------------------------------------------------------
-api_key   |      | Your api key for authentication.
+api_key   |      | Your API key for authentication.
 invoice   |      | The invoice you want to create, in json format (see the following table)
 
 The invoice object should have the following fields:

@@ -60,7 +60,7 @@ Parameter            | Default         | Required | Description
 company_novicap_id   |                 |          | The `novicap_id` of the company that should be quoted (see [NoviCap IDs](#novicap-ids))
 debtor_novicap_ids[] | []              |          | An array of `novicap_id`s of the debtors that should be quoted.
 details              |                 |          | Base64 encoded details. If you are uncomfortable sharing the contact information in plaintext then you can use this param to pass the base64 encoded version of the params hash.
-direct_integration   | no              |          | If you provide all the requested parameters (novicap ids, email, first_name, last_name and phone), set this one to "yes" to log the user in automatically and redirect them to the application page.
+direct_integration   | no              |          | If you provide all the requested parameters (NoviCap ids, email, first_name, last_name and phone), set this one to "yes" to log the user in automatically and redirect them to the application page.
 email                |                 |          | The email address of the user.
 first_name           |                 |          | The first name(s) of the user.
 language             | Browser default |          | An ISO 639-1 code (e.g. 'en') of the quote page display language.

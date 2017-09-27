@@ -38,7 +38,7 @@ Returns one invoice using the transaction_number. Note that this invoice should 
 
 Parameter | Default | Required | Description
 ----------|---------|----------|---------------------------------
-api_key   |         | ✓        | Your api key for authentication.
+api_key   |         | ✓        | Your API key for authentication.
 
 ### Response
 

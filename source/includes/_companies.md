@@ -37,7 +37,7 @@ Returns an array with your associated companies.
 
 Parameter            | Default | Required | Description
 ---------------------|---------|----------|--------------------------------------------------------
-api_key              |         | ✓        | Your api key for authentication.
+api_key              |         | ✓        | Your API key for authentication.
 status               |         |          | Filter companies by current status. It maybe one of "rejected", "not_registered", "activated" or "onboarding"
 
 ### Response

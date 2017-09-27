@@ -48,7 +48,7 @@ Returns a quote ID that can be used to poll for the quote.
 
 Parameter          | Default | Required | Example     | Description
 -------------------|---------|----------|-------------|------------------------------------------------
-api_key            |         | ✓        | "abcd"      | Your api key for authentication.
+api_key            |         | ✓        | "abcd"      | Your API key for authentication.
 company_novicap_id |         | ✓        | "ES1234567" | The NoviCap ID of the company you want a quote for.
 invoices           | []      |          |             | An array of invoices you want quotes for.
 
@@ -109,7 +109,7 @@ taken      | The company already has an account with NoviCap, or a different par
 
 Parameter  | Default | Required | Description
 ---------  | ------- | -------- | -----------
-api_key    |         | ✓        | Your api key for authentication.
+api_key    |         | ✓        | Your API key for authentication.
 quote_id   |         | ✓        | The quote ID retrieved from the previous step.
 
 #### Response

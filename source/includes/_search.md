@@ -30,7 +30,7 @@ Searches for a company in our database. Returns a unique `novicap_id` which is u
 
 Parameter | Default | Required | Description
 ----------|---------|----------|--------------------------------------------------------------------------------------------------
-api_key   |         | ✓        | Your api key for authentication.
+api_key   |         | ✓        | Your API key for authentication.
 query     |         | ✓        | The search query. Can be a company name, e.g. "PREPARTS SL" or a CIF/VAT number, e.g. "B65354490"
 country   | "ES"    |          | An ISO Alpha-2 country code. The company should be incorporated in this country.
 
