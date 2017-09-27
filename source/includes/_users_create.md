@@ -1,7 +1,5 @@
 ## Create a user
 
-This endpoint allows you to create a user in a company that has no users associated.
-
 ```shell
 curl -H "Content-Type: application/json" \
 -X POST -d '{
@@ -20,23 +18,23 @@ curl -H "Content-Type: application/json" \
 
 > The above command returns a empty JSON with the 201 CREATED status.
 
-Possible returned status codes:
-
--   201 (created) if the user has been created.
--   409 (conflict) the company is already associated with another user.
--   422 (unprocessable entity) the user has not been created because of errors.
+This endpoint allows you to create a user in a company that has no users associated.
 
 ### HTTP Request
 
 `POST https://api.novicap.com/v1/users`
 
-> The params for this endpoint should match this json schema:
+### Parameters
+
+> The params for this endpoint should match this JSON schema:
 
 ```json
 {
+  "$schema": "http://json-schema.org/draft-04/schema",
   "type": "object",
-  "required": ["company_novicap_id", "user"],
+  "required": ["api_key", "company_novicap_id", "user"],
   "properties": {
+    "api_key": { "type": "string" },
     "company_novicap_id": { "type": "string" },
     "user": {
       "type": "object",
@@ -53,24 +51,30 @@ Possible returned status codes:
 }
 ```
 
-### Data
-
-Parameter          | Required | Description
--------------------|----------|-------------------------------------------------------------------------------
-api_key            | ✓        | Your api key for authentication.
-company_novicap_id | ✓        | The NoviCap ID of the company.
-user               | ✓        | The user you want to create, in json format (see the following table)
+| Parameter          | Type   | Required | Description                                                           |
+|--------------------|--------|----------|-----------------------------------------------------------------------|
+| api_key            | String | ✓        | Your API key for authentication                                       |
+| company_novicap_id | String | ✓        | The `novicap_id` of the company you want to add the user to           |
+| user               | Object | ✓        | The user you want to create, in JSON format (see the following table) |
 
 The user object should have the following fields:
 
-Parameter          | Required | Description
--------------------|----------|----------------------------------------------------------
-first_name         | ✓        | The user's first name
-last_name          | ✓        | The user's last name
-email              | ✓        | The user's last name
-phone              |          | The user's phone
-language           |          | An ISO 639-1 code (e.g. ‘en’) for the user's language
+| Parameter  | Type   | Required | Format             | Description           |
+|------------|--------|----------|-----------|-----------------------|
+| first_name | String | ✓        |           | The user's first name |
+| last_name  | String | ✓        |           | The user's last name  |
+| email      | String | ✓        |           | The user's email      |
+| phone      | String |          |           | The user's phone      |
+| language   | String |          | ISO 639-1 | The user's language   |
 
 ### Response
 
-A successful response is an empty JSON with a 201 created HTTP status code.
+A successful response is an empty JSON with a 201 Created HTTP status code.
+
+### Status Codes
+
+| Code | Meaning              | Description                                         |
+|------|----------------------|-----------------------------------------------------|
+| 201  | Created              | The user has been created                           |
+| 409  | Conflict             | The company is already associated with another user |
+| 422  | Unprocessable Entity | The user has not been created because of errors     |
