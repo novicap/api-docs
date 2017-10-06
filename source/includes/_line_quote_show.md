@@ -84,8 +84,6 @@ This endpoint allows you to retrieve the data for a quote using an existing quot
 
 A successful response is a JSON payload with the following fields:
 
-A successful response is a JSON payload with these fields:
-
 | Attribute    | Type   | Unit | Description                                                    |
 |--------------|--------|------|----------------------------------------------------------------|
 | status       | String |      | One of "ok", "processing", or "review".                        |
