@@ -18,6 +18,8 @@ curl -H "Content-Type: application/json" \
 
 This endpoint allows you to create a user in a company that has no users associated.
 
+If the company is not using NoviCap yet, it will be created and associated to you.
+
 If the user does not have an account on NoviCap yet, he/she will receive an email to set the password.
 
 ### HTTP Request
@@ -45,15 +47,15 @@ If the user does not have an account on NoviCap yet, he/she will receive an emai
 }
 ```
 
-| Parameter          | Type   | Required | Format    | Description                                                 |
-|--------------------|--------|----------|-----------|-------------------------------------------------------------|
-| api_key            | String | ✓        |           | Your API key for authentication                             |
-| company_novicap_id | String | ✓        |           | The `novicap_id` of the company you want to add the user to |
-| first_name         | String | ✓        |           | The user's first name                                       |
-| last_name          | String | ✓        |           | The user's last name                                        |
-| email              | String | ✓        |           | The user's email                                            |
-| phone              | String |          |           | The user's phone                                            |
-| language           | String |          | ISO 639-1 | The user's language                                         |
+| Parameter          | Type   | Required | Format    | Description                                               |
+|--------------------|--------|----------|-----------|-----------------------------------------------------------|
+| api_key            | String | ✓        |           | Your API key for authentication                           |
+| company_novicap_id | String | ✓        |           | The NoviCap ID of the company you want to add the user to |
+| first_name         | String | ✓        |           | The user's first name                                     |
+| last_name          | String | ✓        |           | The user's last name                                      |
+| email              | String | ✓        |           | The user's email                                          |
+| phone              | String |          |           | The user's phone                                          |
+| language           | String |          | ISO 639-1 | The user's language                                       |
 
 ### Response
 

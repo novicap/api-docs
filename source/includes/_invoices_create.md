@@ -36,6 +36,8 @@ curl -H "Content-Type: application/json" \
 
 This endpoint allows you to create an invoice for a company.
 
+If the company is not using NoviCap yet, it will be created and associated to you.
+
 ### HTTP Request
 
 `POST https://api.novicap.com/v1/invoices`
