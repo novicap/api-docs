@@ -15,6 +15,7 @@ curl -H "Content-Type: application/json" \
     {
       "debtor_novicap_id": "ESB12345678",
       "status": "ok",
+      "credit_limit": 50000.0,
       "interest_rate": 4.8,
       "invoice_handling_fee": 0.5,
       "advance_rate": 70.0
@@ -72,6 +73,7 @@ This endpoint allows you to retrieve the data for a quote using an existing quot
         "properties": {
           "debtor_novicap_id": { "type": "string" },
           "status": { "type": "string" },
+          "credit_limit": { "type": ["null", "number"] },
           "advance_rate": { "type": ["null", "number"] },
           "interest_rate": { "type": ["null", "number"] },
           "invoice_handling_fee": { "type": ["null", "number"] }
@@ -95,6 +97,7 @@ Each debtor in `debtors` has these fields:
 | Attribute            | Type   | Unit | Description                                                                         |
 |----------------------|--------|------|-------------------------------------------------------------------------------------|
 | advance_rate         | Number | %    | The percentage of the total value of the invoice NoviCap will advance               |
+| credit_limit         | Number | €    | The size of the credit line NoviCap can provide to the company for this debtor      |
 | debtor_novicap_id    | String |      | The NoviCap ID of the debtor company                                                |
 | interest_rate        | Number | %    | The annual interest rate NoviCap will charge as a percentage of the amount advanced |
 | invoice_handling_fee | Number | %    | The fee NoviCap will charge as a percentage of the amount advanced                  |
