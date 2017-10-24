@@ -65,7 +65,7 @@ This endpoint allows you to retrieve the data for a quote using an existing quot
   "type": "object",
   "properties": {
     "status": { "type": "string" },
-    "credit_limit": { "type": "number" },
+    "credit_limit": { "type": ["null", "number"] },
     "debtors": {
       "type": "array",
       "items": {
