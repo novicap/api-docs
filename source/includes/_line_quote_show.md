@@ -12,6 +12,7 @@ curl -H "Content-Type: application/json" \
   "status": "ok",
   "company_novicap_id": "ESA12345678",
   "credit_limit": 70000.0,
+  "provisional_quote": false,
   "debtors": [
     {
       "debtor_novicap_id": "ESB12345678",
@@ -66,10 +67,11 @@ This endpoint allows you to retrieve the data for a quote using an existing quot
   "type": "object",
   "properties": {
     "status": { "type": "string" },
-    "company_novicap_id": { "type": "string" },
+    "company_novicap_id": { "type": ["null", "string"] },
     "credit_limit": { "type": ["null", "number"] },
+    "provisional_quote": { "type": ["null", "boolean"] },
     "debtors": {
-      "type": "array",
+      "type": ["null", "array"],
       "items": {
         "type": "object",
         "properties": {
@@ -88,12 +90,13 @@ This endpoint allows you to retrieve the data for a quote using an existing quot
 
 A successful response is a JSON payload with the following fields:
 
-| Attribute          | Type   | Unit | Description                                                    |
-|--------------------|--------|------|----------------------------------------------------------------|
-| status             | String |      | One of "ok", "processing", or "review"                         |
-| company_novicap_id | String |      | The NoviCap ID of the company associated to the quote          |
-| credit_limit       | Number | €    | The size of the credit line NoviCap can provide to the company |
-| debtors            | Array  |      | A list of debtors that were priced as part of the quote        |
+| Attribute          | Type    | Unit | Description                                                                                                                 |
+|--------------------|---------|------|-----------------------------------------------------------------------------------------------------------------------------|
+| status             | String  |      | One of "ok", "processing", or "review"                                                                                      |
+| company_novicap_id | String  |      | The NoviCap ID of the company associated to the quote                                                                       |
+| credit_limit       | Number  | €    | The size of the credit line NoviCap can provide to the company                                                              |
+| provisional_quote  | Boolean |      | Indicates if the quote is provisional and if the credit limit could be higher when more financial documentation is provided |
+| debtors            | Array   |      | A list of debtors that were priced as part of the quote                                                                     |
 
 Each debtor in `debtors` has these fields:
 
