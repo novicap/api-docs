@@ -580,6 +580,7 @@ You must submit one company at a time, but you may submit as many debtors per co
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"company_novicap_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ESA12345678"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"credit_limit"</span><span class="p">:</span><span class="w"> </span><span class="mf">70000.0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"provisional_quote"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="nt">"debtors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nt">"debtor_novicap_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ESB12345678"</span><span class="p">,</span><span class="w">
@@ -651,10 +652,11 @@ You must submit one company at a time, but you may submit as many debtors per co
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"company_novicap_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"company_novicap_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"null"</span><span class="p">,</span><span class="w"> </span><span class="s2">"string"</span><span class="p">]</span><span class="w"> </span><span class="p">},</span><span class="w">
     </span><span class="nt">"credit_limit"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"null"</span><span class="p">,</span><span class="w"> </span><span class="s2">"number"</span><span class="p">]</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"provisional_quote"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"null"</span><span class="p">,</span><span class="w"> </span><span class="s2">"boolean"</span><span class="p">]</span><span class="w"> </span><span class="p">},</span><span class="w">
     </span><span class="nt">"debtors"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"null"</span><span class="p">,</span><span class="w"> </span><span class="s2">"array"</span><span class="p">],</span><span class="w">
       </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -698,6 +700,12 @@ You must submit one company at a time, but you may submit as many debtors per co
 <td>Number</td>
 <td>€</td>
 <td>The size of the credit line NoviCap can provide to the company</td>
+</tr>
+<tr>
+<td>provisional_quote</td>
+<td>Boolean</td>
+<td></td>
+<td>Indicates if the quote is provisional and if the credit limit could be higher when more financial documentation is provided</td>
 </tr>
 <tr>
 <td>debtors</td>
