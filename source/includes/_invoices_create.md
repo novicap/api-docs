@@ -63,15 +63,15 @@ If the company is not using NoviCap yet, it will be created and associated to yo
 }
 ```
 
-| Parameter          | Type   | Required | Format   | Description                                               |
-|--------------------|--------|----------|----------|-----------------------------------------------------------|
-| api_key            | String | ✓        |          | Your API key for authentication                           |
-| reference          | String | ✓        |          | The reference used by the company for this invoice        |
-| company_novicap_id | String | ✓        |          | The NoviCap ID of the company associated with the invoice |
-| debtor_novicap_id  | String | ✓        |          | The NoviCap ID of the debtor associated with the invoice  |
-| amount             | String | ✓        | cents    | The total amount of the invoice                           |
-| issued_at          | String | ✓        | ISO 8601 | The date when the invoice was issued                      |
-| due_at             | String | ✓        | ISO 8601 | The invoice due date                                      |
+| Parameter          | Type    | Required | Format   | Description                                               |
+|--------------------|-------- |----------|----------|-----------------------------------------------------------|
+| api_key            | String  | ✓        |          | Your API key for authentication                           |
+| reference          | String  | ✓        |          | The reference used by the company for this invoice        |
+| company_novicap_id | String  | ✓        |          | The NoviCap ID of the company associated with the invoice |
+| debtor_novicap_id  | String  | ✓        |          | The NoviCap ID of the debtor associated with the invoice  |
+| amount             | Integer | ✓        | cents    | The total amount of the invoice                           |
+| issued_at          | String  | ✓        | ISO 8601 | The date when the invoice was issued                      |
+| due_at             | String  | ✓        | ISO 8601 | The invoice due date                                      |
 
 ### Response
 
