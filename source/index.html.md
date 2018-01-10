@@ -8,6 +8,9 @@ toc_footers:
   - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
 
 includes:
+  - introduction
+  - authentication
+  - permissions
   - novicap_ids
   - light_integration
   - api
@@ -29,32 +32,8 @@ includes:
 search: true
 ---
 
-# Introduction
 
-Welcome to the NoviCap early payments API.
-You can use our API to receive automated quotes for invoices, synchronize invoices to our platform and communicate invoice status updates to our system.
 
-There are two steps for integrating with us, the first is to use the light integration to enable customers to onboard and open a factoring facility with us (sign legal, upload docs,...).
 
-After the initial onboarding is complete and a company is activated, you can trade invoices automatically through the API and there is no more need for the customer to login to NoviCap.
 
-If you do not have access to the API yet, please [sign up here](https://app.novicap.com/partner_registration) and reach out to api@novicap.com to enable API access for your partner account.
 
-# Authentication
-
-> To authorize while using the endpoint `line_quote`:
-
-```shell
-curl "https://api.novicap.com/v1/line_quote" --data api_key=abcd
-```
-
-> where `abcd` should be replaced with your API key.
-
-We use API keys to authenticate. You can generate a new API key by logging into your partner account at [novicap.com](https://www.novicap.com)
-
-The API key should be included in all requests to the server as an HTTP request parameter named `api_key`.
-
-# Permissions
-
-Not all API endpoints are available and you must have specific permission to use an endpoint.
-If you get receive an error while trying to access a specific endpoint, do not hesitate to contact our API team at api@novicap.com to request access.
