@@ -29,6 +29,17 @@ curl -X POST https://api.novicap.com/v1/token \
 
 > where `abcd` should be replaced with your current API key and `wxyz` with your current Refresh Token.
 
+> The format of the response is as follows:
+
+```shell
+{
+  "token_type": "bearer",
+  "access_token": "new_access_token",
+  "refresh_token": "new_refresh_token",
+  "expires_in": 86400 (in seconds)
+}
+```
+
 By default the API key does not expire, although is possible to make them expire after 1 day.
 You can enable this option by logging into your partner account at [novicap.com](https://www.novicap.com)
 
