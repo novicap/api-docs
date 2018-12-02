@@ -122,7 +122,8 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="introduction">Introduction</h1>
+        
+          <h1 id="introduction">Introduction</h1>
 
 <p>Welcome to the NoviCap early payments API.
 You can use our API to receive automated quotes for invoices, synchronize invoices to our platform and communicate invoice status updates to our system.</p>
@@ -133,23 +134,58 @@ You can use our API to receive automated quotes for invoices, synchronize invoic
 
 <p>If you do not have access to the API yet, please <a href="https://app.novicap.com/partner_registration">sign up here</a> and reach out to api@novicap.com to enable API access for your partner account.</p>
 
-<h1 id="authentication">Authentication</h1>
+          <h1 id="authentication">Authentication</h1>
 
 <blockquote>
-<p>To authorize while using the endpoint <code class="prettyprint">line_quote</code>:</p>
+<p>To authorize while using the endpoint <code class="prettyprint">line_quote</code>, there are two ways:</p>
 </blockquote>
 <pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/v1/line_quote"</span> --data <span class="nv">api_key</span><span class="o">=</span>abcd
+
+curl -H <span class="s2">"Authorization: Bearer abcd"</span> https://api.novicap.com/v1/line_quote
 </code></pre>
 
 <blockquote>
 <p>where <code class="prettyprint">abcd</code> should be replaced with your API key.</p>
 </blockquote>
 
-<p>We use API keys to authenticate. You can generate a new API key by logging into your partner account at <a href="https://www.novicap.com">novicap.com</a></p>
+<p>We use an API key to authenticate which can be found in your partner portal &gt; settings under API key section at <a href="https://www.novicap.com">novicap.com</a>. It is possible to refresh the API key automatically by enabling this in your partner portal &gt; settings &gt; activate at <a href="https://www.novicap.com">novicap.com</a></p>
 
-<p>The API key should be included in all requests to the server as an HTTP request parameter named <code class="prettyprint">api_key</code>.</p>
+<p>The API key should be included in all requests to the server either as a HTTP request parameter named <code class="prettyprint">api_key</code> or inside an <code class="prettyprint">Authorization: Bearer</code> HTTP request header.</p>
 
-<h1 id="permissions">Permissions</h1>
+<h2 id="refresh-token-authentication">Refresh Token Authentication</h2>
+
+<blockquote>
+<p>To refresh the API key, there are three ways:</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST https://api.novicap.com/v1/token?api_key<span class="o">=</span>abcd&amp;refresh_token<span class="o">=</span>wxyz
+
+curl -X POST -H <span class="s1">'Authorization: Basic abcd'</span> https://api.novicap.com/v1/token <span class="se">\</span>
+     --data <span class="s1">'{ "refresh_token": "wxyz" }'</span>
+
+curl -X POST https://api.novicap.com/v1/token <span class="se">\</span>
+     --data <span class="s1">'{ "client_secret": "abcd", "refresh_token": "wxyz" }'</span>
+</code></pre>
+
+<blockquote>
+<p>where <code class="prettyprint">abcd</code> should be replaced with your current API key and <code class="prettyprint">wxyz</code> with your current Refresh Token.</p>
+
+<p>The format of the response is as follows:</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="o">{</span>
+  <span class="s2">"token_type"</span>: <span class="s2">"bearer"</span>,
+  <span class="s2">"access_token"</span>: <span class="s2">"new_access_token"</span>,
+  <span class="s2">"refresh_token"</span>: <span class="s2">"new_refresh_token"</span>,
+  <span class="s2">"expires_in"</span>: 86400 <span class="o">(</span><span class="k">in </span>seconds<span class="o">)</span>
+<span class="o">}</span>
+</code></pre>
+
+<p>By default the API key does not expire, although is possible to make them expire after 1 day.
+You can enable this option by logging into your partner account at <a href="https://www.novicap.com">novicap.com</a></p>
+
+<p>When enabled, you are no longer able to generate new API keys in the partner account and you will be required to refresh your api key with the refresh token API endpoint when it expires.
+The refresh token can be found un your partner portal &gt; settings under Refresh Token API section at <a href="https://www.novicap.com">novicap.com</a>.</p>
+
+          <h1 id="permissions">Permissions</h1>
 
 <p>Not all API endpoints are available and you must have specific permission to use an endpoint.
 If you get receive an error while trying to access a specific endpoint, do not hesitate to contact our API team at api@novicap.com to request access.</p>
@@ -1070,7 +1106,7 @@ You must submit one company at a time, but you may submit as many debtors per co
   "reference": "20170832",
   "company_novicap_id": "ESA46103834",
   "debtor_novicap_id": "ESB66367129",
-  "amount": 150000,
+  "amount": 1500.00,
   "issued_at": "2017-08-12",
   "due_at": "2017-10-12"
 }'</span> <span class="se">\</span>
@@ -1084,7 +1120,7 @@ You must submit one company at a time, but you may submit as many debtors per co
   </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I-1A2B"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20170832"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"invoice_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">150000</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"invoice_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1500.00</span><span class="p">,</span><span class="w">
     </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MERCADONA SA"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"company_novicap_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ESA46103834"</span><span class="p">,</span><span class="w">
@@ -1165,9 +1201,9 @@ You must submit one company at a time, but you may submit as many debtors per co
 </tr>
 <tr>
 <td>amount</td>
-<td>Integer</td>
+<td>Number</td>
 <td>✓</td>
-<td>cents</td>
+<td></td>
 <td>The total amount of the invoice</td>
 </tr>
 <tr>
@@ -1240,7 +1276,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 <tr>
 <td>invoice_amount</td>
 <td>Number</td>
-<td>cents</td>
+<td>€</td>
 <td>The total amount of the invoice</td>
 </tr>
 <tr>
@@ -1337,7 +1373,7 @@ You must submit one company at a time, but you may submit as many debtors per co
     </span><span class="p">{</span><span class="w">
       </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I-1A2B"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20170832"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"invoice_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">150000</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"invoice_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1500.00</span><span class="p">,</span><span class="w">
       </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MERCADONA SA"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"company_novicap_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ESA46103834"</span><span class="p">,</span><span class="w">
@@ -1473,7 +1509,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 <tr>
 <td>invoice_amount</td>
 <td>Number</td>
-<td>cents</td>
+<td>€</td>
 <td>The total amount of the invoice</td>
 </tr>
 <tr>
@@ -1554,7 +1590,7 @@ You must submit one company at a time, but you may submit as many debtors per co
   </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I-1A2B"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20170832"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"invoice_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">150000</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"invoice_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1500.00</span><span class="p">,</span><span class="w">
     </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MERCADONA SA"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"company_novicap_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ESA46103834"</span><span class="p">,</span><span class="w">
@@ -1664,7 +1700,7 @@ You must submit one company at a time, but you may submit as many debtors per co
 <tr>
 <td>invoice_amount</td>
 <td>Number</td>
-<td>cents</td>
+<td>€</td>
 <td>The total amount of the invoice</td>
 </tr>
 <tr>
