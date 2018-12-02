@@ -7,7 +7,7 @@ curl -H "Content-Type: application/json" \
   "reference": "20170832",
   "company_novicap_id": "ESA46103834",
   "debtor_novicap_id": "ESB66367129",
-  "amount": 150000,
+  "amount": 1500.00,
   "issued_at": "2017-08-12",
   "due_at": "2017-10-12"
 }' \
@@ -21,7 +21,7 @@ curl -H "Content-Type: application/json" \
   "data": {
     "id": "I-1A2B",
     "reference": "20170832",
-    "invoice_amount": 150000,
+    "invoice_amount": 1500.00,
     "currency": "EUR",
     "company_name": "MERCADONA SA",
     "company_novicap_id": "ESA46103834",
@@ -69,7 +69,7 @@ If the company is not using NoviCap yet, it will be created and associated to yo
 | reference          | String  | ✓        |          | The reference used by the company for this invoice        |
 | company_novicap_id | String  | ✓        |          | The NoviCap ID of the company associated with the invoice |
 | debtor_novicap_id  | String  | ✓        |          | The NoviCap ID of the debtor associated with the invoice  |
-| amount             | Integer | ✓        | cents    | The total amount of the invoice                           |
+| amount             | Number  | ✓        |          | The total amount of the invoice                           |
 | issued_at          | String  | ✓        | ISO 8601 | The date when the invoice was issued                      |
 | due_at             | String  | ✓        | ISO 8601 | The invoice due date                                      |
 
@@ -108,7 +108,7 @@ An invoice has the following fields:
 |--------------------|--------|----------|-----------------------------------------------------------|
 | id                 | String |          | The ID of the invoice                                     |
 | reference          | String |          | The reference used by the company for this invoice        |
-| invoice_amount     | Number | cents    | The total amount of the invoice                           |
+| invoice_amount     | Number | €        | The total amount of the invoice                           |
 | currency           | String | ISO 4217 | The currency of invoice                                   |
 | company_name       | String |          | The name of the company                                   |
 | company_novicap_id | String |          | The NoviCap ID of the company associated with the invoice |

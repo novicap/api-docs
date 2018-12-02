@@ -12,7 +12,7 @@ curl -H "Content-Type: application/json" \
   "data": {
     "id": "I-1A2B",
     "reference": "20170832",
-    "invoice_amount": 150000,
+    "invoice_amount": 1500.00,
     "currency": "EUR",
     "company_name": "MERCADONA SA",
     "company_novicap_id": "ESA46103834",
@@ -86,7 +86,7 @@ An invoice has the following fields:
 |--------------------|--------|----------|-----------------------------------------------------------|
 | id                 | String |          | The ID of the invoice                                     |
 | reference          | String |          | The reference used by the company for this invoice        |
-| invoice_amount     | Number | cents    | The total amount of the invoice                           |
+| invoice_amount     | Number | €        | The total amount of the invoice                           |
 | currency           | String | ISO 4217 | The currency of invoice                                   |
 | company_name       | String |          | The name of the company                                   |
 | company_novicap_id | String |          | The NoviCap ID of the company associated with the invoice |
