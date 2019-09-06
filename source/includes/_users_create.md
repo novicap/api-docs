@@ -59,7 +59,11 @@ If the user does not have an account on NoviCap yet, he/she will receive an emai
 
 ### Response
 
-A successful response is a JSON with a 201 Created HTTP status code.
+A successful response a 201 Created HTTP status code and a URL the user should be redirected to.
+
+| Attribute   | Type   | Unit | Description                                                 |
+|-------------|--------|------|-------------------------------------------------------------|
+| redirect_to | String |      | A URL (including authentication parameters) for redirection |
 
 ### Status Codes
 
