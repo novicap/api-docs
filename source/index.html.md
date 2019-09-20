@@ -14,19 +14,18 @@ includes:
   - novicap_ids
   - light_integration
   - api
-  - account_create
-  - companies
-  - invoice_comments_create
-  - invoice_comments_index
-  - invoices_acceptance_create
-  - invoices_approved_by_debtor
-  - invoices_create
-  - invoices_index
-  - invoices_paid_by_debtor
-  - invoices_show
+  - search
   - line_quote_create
   - line_quote_show
-  - search
+  - companies
+  - invoices_create
+  - invoices_index
+  - invoices_show
+  - invoices_acceptance_create
+  - invoices_approved_by_debtor
+  - invoices_paid_by_debtor
+  - invoice_comments_create
+  - invoice_comments_index
   - users_create
   - errors
 

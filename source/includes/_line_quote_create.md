@@ -95,5 +95,5 @@ A successful response is a JSON payload with the following fields:
 
 | Code | Meaning              | Description                                                              |
 |------|----------------------|--------------------------------------------------------------------------|
-|  202 | Accepted             | The line quote request has been received and our system is processing it |
-|  422 | Unprocessable Entity | The request is not correct (bad schema)                                  |
+| 202  | Accepted             | The line quote request has been received and our system is processing it |
+| 422  | Unprocessable Entity | The company NoviCap ID is not present                                    |
