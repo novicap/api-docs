@@ -19,11 +19,12 @@ curl -H "Content-Type: application/json" \
 
 ```json
 {
-  "redirect_to": "https://esx7895123h.novicap.com?token=12345",
+  "redirect_to": "https://esx7895123h.novicap.com?token=12345"
 }
 ```
 
-Allows you to create 
+Allows you to create:
+
 - a company
 - debtors inside that company
 - the first user of that company
