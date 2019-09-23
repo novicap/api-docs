@@ -57,16 +57,16 @@ and provides a URL which you can redirect to which logs the user into the platfo
 }
 ```
 
-| Parameter          | Type   | Required | Format    | Description                                                                   |
-|--------------------|--------|----------|-----------|-------------------------------------------------------------------------------|
-| api_key            | String | ✓        |           | Your API key for authentication                                               |
-| company_novicap_id | String | ✓        |           | The NoviCap ID of the company you want to add the user to                     |
-| debtor_novicap_ids | Array  |          |           | A list of NoviCap IDs of the debtors you want to add to the company's account |
-| first_name         | String | ✓        |           | The user's first name                                                         |
-| last_name          | String | ✓        |           | The user's last name                                                          |
-| email              | String | ✓        |           | The user's email                                                              |
-| phone              | String |          |           | The user's phone                                                              |
-| language           | String |          | ISO 639-1 | The user's language                                                           |
+| Parameter          | Type   | Required | Format    | Description                                                                                                        |
+|--------------------|--------|----------|-----------|--------------------------------------------------------------------------------------------------------------------|
+| api_key            | String | ✓        |           | Your API key for authentication                                                                                    |
+| company_novicap_id | String | ✓        |           | The NoviCap ID of the company you want to add the user to                                                          |
+| debtor_novicap_ids | Array  | ✓        |           | A list of NoviCap IDs of the debtors you want to add to the company's account (can be an empty array, but not nil) |
+| first_name         | String | ✓        |           | The user's first name                                                                                              |
+| last_name          | String | ✓        |           | The user's last name                                                                                               |
+| email              | String | ✓        |           | The user's email                                                                                                   |
+| phone              | String |          |           | The user's phone                                                                                                   |
+| language           | String |          | ISO 639-1 | The user's language                                                                                                |
 
 ### Response
 
