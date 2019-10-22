@@ -53,15 +53,18 @@ country   | "ES"    |          | An ISO Alpha-2 country code. The company should
 {
   "$schema": "http://json-schema.org/draft-04/schema",
   "description": "Search result representation in json schema",
-  "type": "object",
-  "properties": {
-    "country": { "type": "string" },
-    "is_public_entity": { "type": "boolean" },
-    "location": { "type": "string" },
-    "name": { "type": "string" },
-    "novicap_id": { "type": "string" },
-    "registration_number": { "type": "string" },
-    "size": { "type": "string" }
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+        "country": { "type": "string" },
+        "is_public_entity": { "type": "boolean" },
+        "location": { "type": "string" },
+        "name": { "type": "string" },
+        "novicap_id": { "type": "string" },
+        "registration_number": { "type": "string" },
+        "size": { "type": "string" }
+    }
   }
 }
 ```
