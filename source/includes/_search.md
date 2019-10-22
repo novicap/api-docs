@@ -9,15 +9,26 @@ curl "https://api.novicap.com/v1/search?api_key=abcd&query=PREPARTS+SL&country=E
 > The above command returns JSON structured like this:
 
 ```json
-{
-  "name": "PRECISSION PARTS PREPARTS SL.",
-  "location": "Barcelona",
-  "is_public_entity": false,
-  "registration_number": "B65354490",
-  "country": "ES",
-  "size": "unknown",
-  "novicap_id": "ESB65354490"
-}
+[
+    {
+        "name": "PRECISSION PARTS PREPARTS SL.",
+        "location": "Barcelona",
+        "is_public_entity": false,
+        "registration_number": "B65354490",
+        "country": "ES",
+        "size": "",
+        "novicap_id": "ESB65354490"
+    },
+    {
+        "name": "PREPARTS SL.",
+        "location": "Madrid",
+        "is_public_entity": false,
+        "registration_number": "B12344321",
+        "country": "ES",
+        "size": "",
+        "novicap_id": "ESB65354490"
+    },
+]
 ```
 
 Searches for a company in our database. Returns a unique `novicap_id` which is used to represent that company in all other requests.
