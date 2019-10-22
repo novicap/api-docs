@@ -69,7 +69,7 @@ country   | "ES"    |          | An ISO Alpha-2 country code. The company should
 }
 ```
 
-A successful response is a JSON payload with these fields:
+A successful response is a JSON payload with and array where each item contains the following fields:
 
 Variable            | Type    | Description
 --------------------|---------|--------------------------------------------------------------------------------------------------------------
