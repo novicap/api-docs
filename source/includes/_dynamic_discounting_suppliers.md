@@ -41,16 +41,33 @@ If your account has more than one legal entity, you must include a `debtor_id` a
 ```json
 {
   "$schema": "http://json-schema.org/draft-04/schema",
+  "description": "Suppliers endpoint json schema",
   "type": "object",
-  "required": ["api_key", "company_novicap_id", "first_name", "last_name", "email"],
+  "required": ["product_id", "suppliers"],
   "properties": {
-    "api_key": { "type": "string" },
-    "company_novicap_id": { "type": "string" },
-    "first_name": { "type": "string" },
-    "last_name": { "type": "string" },
-    "email": { "type": "string" },
-    "phone": { "type": ["null", "string"] },
-    "language": { "type": ["null", "string"] }
+    "api_key": {"type": "string"},
+    "product_id": {"type": "number"},
+    "suppliers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["company_id", "company_name", "contact_email", "apr", "fixed_fee_percentage"],
+        "properties": {
+          "debtor_id": {"type": "string"},
+          "country_code": {"type": "string"},
+          "company_id": {"type": "string"},
+          "company_name": {"type": "string"},
+          "contact_first_name": {"type": "string"},
+          "contact_last_name": {"type": "string"},
+          "contact_email": {"type": "string"},
+          "contact_phone": {"type": ["string", "number"]},
+          "apr": {"type": "number"},
+          "fixed_fee_percentage": {"type": "number"},
+          "early_payment_cutoff_in_days": {"type": "integer"},
+          "iban": {"type": "string"}
+        }
+      }
+    }
   }
 }
 ```
