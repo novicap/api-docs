@@ -136,7 +136,7 @@ curl -H "Content-Type: application/json" \
   "api_key": "abcd",
   "product_id": 123,
 }' \
-"https://api.novicap.com/v1/dynamic_discounting/invoices/123"
+"https://api.novicap.com/v1/dynamic_discounting/invoices/DDI-ABCDE"
 ```
 
 > The above command returns a empty JSON payload with the 202 ACCEPTED status.
@@ -148,7 +148,7 @@ The invoice cannot be deleted if it's already in a payment instruction.
 
 ### HTTP Request
 
-`DELETE https://api.novicap.com/v1/dynamic_discounting/invoices/:id`
+`DELETE https://api.novicap.com/v1/dynamic_discounting/invoices/:transaction_id`
 
 ### Parameters
 
@@ -159,20 +159,20 @@ The invoice cannot be deleted if it's already in a payment instruction.
   "$schema": "http://json-schema.org/draft-04/schema",
   "description": "Invoices destroy endpoint json schema",
 	"type": "object",
-	"required": ["product_id", "id"],
+	"required": ["product_id", "transaction_id"],
 	"properties": {
 		"api_key": { "type": "string" },
 		"product_id": { "type": "number" },
-		"id": { "type": "number" }
+		"transaction_id": { "type": "number" }
 	}
 }
 ```
 
-| Parameter  | Type   | Required | Format | Description                                                             |
-|------------+--------+----------+--------+-------------------------------------------------------------------------|
-| api_key    | String |          |        | Your API key for authentication                                         |
-| product_id | Number | ✓        |        | The ID of the product, visible in the Novicap platform near the API key |
-| id         | Number | ✓        |        | The ID of the invoice, visible in the invoice payload when retrieved    |
+| Parameter      | Type   | Required | Format | Description                                                             |
+|----------------+--------+----------+--------+-------------------------------------------------------------------------|
+| api_key        | String |          |        | Your API key for authentication                                         |
+| product_id     | Number | ✓        |        | The ID of the product, visible in the Novicap platform near the API key |
+| transaction_id | Number | ✓        |        | The transaction id of the invoice, visible in the invoice get payload   |
 
 
 ### Response
