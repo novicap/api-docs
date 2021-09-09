@@ -15,7 +15,7 @@ curl -H "Content-Type: application/json" \
     "contact_phone": "+44724565898",
     "apr": 10,
     "fixed_fee_percentage": 0.5,
-    "early_payment_cutoff_in_days": 5,
+    "early_payment_cutoff_in_days": 5
   ]
 }' \
 "https://api.novicap.com/v1/dynamic_discounting/suppliers"
@@ -41,7 +41,7 @@ If your account has more than one legal entity, you must include a `debtor_id` a
 ```json
 {
   "$schema": "http://json-schema.org/draft-04/schema",
-  "description": "Suppliers endpoint json schema",
+  "description": "Schema for POST /v1/dynamic_discounting/suppliers",
   "type": "object",
   "required": ["product_id", "suppliers"],
   "properties": {
