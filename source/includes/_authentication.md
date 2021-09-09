@@ -8,7 +8,7 @@ curl "https://api.novicap.com/v1/dynamic_discounting/suppliers" --data api_key=a
 curl -H "Authorization: Bearer abcd" "https://api.novicap.com/v1/dynamic_discounting/suppliers"
 ```
 
-> where `abcd` should be replaced with your API key. Note that this particular endpoint also requires a valid product_id in the request (see [/v1/dynamic_discounting/suppliers](!add-suppliers)).
+> where `abcd` should be replaced with your API key. Note that this particular endpoint also requires a valid product_id in the request (see [/v1/dynamic_discounting/suppliers](#add-suppliers)).
 
 We use an API key to authenticate which can be found by logging into your account at [novicap.com](https://www.novicap.com) and generating it under your user profile. All API hits will be associated with your user and an indefinite audit log is accessible from your account.
 
