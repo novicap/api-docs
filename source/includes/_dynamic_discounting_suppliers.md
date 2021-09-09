@@ -98,3 +98,50 @@ If your account has more than one legal entity, you must include a `debtor_id` a
 ### Response
 
 A successful response has a 201 Created HTTP status code.
+
+## Retrieve suppliers
+
+```shell
+curl -H "Content-Type: application/json" \
+-X GET -d '{
+  "api_key": "abcd",
+  "product_id": 123,
+}' \
+"https://api.novicap.com/v1/dynamic_discounting/suppliers"
+```
+
+> The above command returns an array of Supplier objects in the JSON payload with the 200 OK status.
+
+This endpoint returns all the suppliers in your dynamic discounting product.
+
+
+### HTTP Request
+
+`GET https://api.novicap.com/v1/dynamic_discounting/suppliers`
+
+### Parameters
+
+> The params for this endpoint should match this JSON schema:
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "description": "Suppliers index endpoint json schema",
+	"type": "object",
+	"required": ["product_id"],
+	"properties": {
+		"api_key": { "type": "string" },
+		"product_id": { "type": "number" }
+	}
+}
+```
+
+| Parameter  | Type   | Required | Format | Description                                                             |
+|------------+--------+----------+--------+-------------------------------------------------------------------------|
+| api_key    | String |          |        | Your API key for authentication                                         |
+| product_id | Number | ✓        |        | The ID of the product, visible in the Novicap platform near the API key |
+
+
+### Response
+
+A successful response has a 200 Created HTTP status code along with an array of supplier objects described above.
