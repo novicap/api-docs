@@ -6,16 +6,18 @@ curl -H "Content-Type: application/json" \
   "api_key": "abcd",
   "product_id": 123,
   "suppliers": [
-    "country_code": "GB",
-    "company_id": "00445790",
-    "company_name": "Tesco PLC",
-    "contact_first_name": "John",
-    "contact_last_name": "Smith",
-    "contact_email": "john.smith@company.com",
-    "contact_phone": "+44724565898",
-    "apr": 10,
-    "fixed_fee_percentage": 0.5,
-    "early_payment_cutoff_in_days": 5
+    {
+      "country_code": "GB",
+      "company_id": "00445790",
+      "company_name": "Tesco PLC",
+      "contact_first_name": "John",
+      "contact_last_name": "Smith",
+      "contact_email": "john.smith@company.com",
+      "contact_phone": "+44724565898",
+      "apr": 10,
+      "fixed_fee_percentage": 0.5,
+      "early_payment_cutoff_in_days": 5
+    }
   ]
 }' \
 "https://api.novicap.com/v1/dynamic_discounting/suppliers"
