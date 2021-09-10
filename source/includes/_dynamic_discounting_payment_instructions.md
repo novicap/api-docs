@@ -1,11 +1,10 @@
 ## Create payment instruction
 
 ```shell
-curl -H "Content-Type: application/json" \
--X POST -d '{
+curl -H "Content-Type: application/json" -X POST -i -d '{
   "api_key": "abcd",
-  "product_id": 123,
-}' \
+  "product_id": 123
+  }' \
 "https://api.novicap.com/v1/dynamic_discounting/payment_instructions"
 ```
 
@@ -52,10 +51,10 @@ A successful response has a 201 Created HTTP status code along with the list of 
 ## Retrieve payment instructions
 
 ```shell
-curl -H "Content-Type: application/json" \
+curl -H "Content-Type: application/json" -X GET -i -d '{
 -X GET -d '{
   "api_key": "abcd",
-  "product_id": 123,
+  "product_id": 123
 }' \
 "https://api.novicap.com/v1/dynamic_discounting/payment_instructions"
 ```

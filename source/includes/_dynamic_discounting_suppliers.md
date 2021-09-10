@@ -1,8 +1,7 @@
 ## Add suppliers
 
 ```shell
-curl -H "Content-Type: application/json" \
--X POST -d '{
+curl -i -H "Content-Type: application/json" -X POST -i -d '{
   "api_key": "abcd",
   "product_id": 123,
   "suppliers": [
@@ -104,10 +103,9 @@ A successful response has a 201 Created HTTP status code.
 ## Retrieve suppliers
 
 ```shell
-curl -H "Content-Type: application/json" \
--X GET -d '{
+curl -i -H "Content-Type: application/json" -X GET -i -d '{
   "api_key": "abcd",
-  "product_id": 123,
+  "product_id": 123
 }' \
 "https://api.novicap.com/v1/dynamic_discounting/suppliers"
 ```

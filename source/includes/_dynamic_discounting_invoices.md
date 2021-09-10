@@ -1,15 +1,16 @@
 ## Add invoices
 
 ```shell
-curl -H "Content-Type: application/json" \
--X POST -d '{
+curl -i -H "Content-Type: application/json" -X POST -i -d '{
   "api_key": "abcd",
   "product_id": 123,
   "invoices": [
-    "company_id": "00445790",
-    "reference": "A1234",
-    "amount": 1000,
-    "due_at": "2021/10/30",
+    {
+      "company_id": "00445790",
+      "reference": "A1234",
+      "amount": 1000,
+      "due_at": "2021/10/30"
+    }
   ]
 }' \
 "https://api.novicap.com/v1/dynamic_discounting/invoices"
@@ -34,7 +35,7 @@ If your account has more than one legal entity, you must include a `debtor_id` a
 
 ```json
 {
-  "$schema": "http://json-schema.org/draft-04/schema",
+
   "description": "Invoices create endpoint json schema",
 	"type": "object",
 	"required": ["product_id", "invoices"],
@@ -83,18 +84,16 @@ A successful response has a 201 Created HTTP status code.
 ## Retrieve invoices
 
 ```shell
-curl -H "Content-Type: application/json" \
--X GET -d '{
+curl -i -H "Content-Type: application/json" -X GET -i -d '{
   "api_key": "abcd",
-  "product_id": 123,
+  "product_id": 123
 }' \
 "https://api.novicap.com/v1/dynamic_discounting/invoices"
 ```
 
 > The above command returns an array of Invoice objects in the JSON payload with the 200 OK status.
 
-This endpoint returns all the invoices in your dynamic discounting product.
-
+This endpoint returns all the invoices registered in your product.
 
 ### HTTP Request
 
@@ -131,24 +130,24 @@ A successful response has a 200 Created HTTP status code along with an array of 
 ## Delete invoice
 
 ```shell
-curl -H "Content-Type: application/json" \
--X DELETE -d '{
+curl -i -H "Content-Type: application/json" -X DELETE -i -d '{
   "api_key": "abcd",
-  "product_id": 123,
+  "product_id": 123
 }' \
-"https://api.novicap.com/v1/dynamic_discounting/invoices/123"
+"https://api.novicap.com/v1/dynamic_discounting/invoices/DDI-ABCD"
 ```
 
 > The above command returns a empty JSON payload with the 202 ACCEPTED status.
 
 This endpoint permanently deletes the invoice. This cannot be undone.
 
-The invoice cannot be deleted if it's already in a payment instruction.
+The URL must contain a valid transaction ID, matching one returned from [GET /v1/dynamic_discounting/invoices](#retrieve-invoices). The transaction ID is not the same as the reference of the invoice submitted by you.
 
+We may have already notified the supplier of the invoice, and they may have already accepted financing, so take care when using this endpoint. The invoice cannot be deleted if it is already part of a payment instruction.
 
 ### HTTP Request
 
-`DELETE https://api.novicap.com/v1/dynamic_discounting/invoices/:id`
+`DELETE https://api.novicap.com/v1/dynamic_discounting/invoices/:transaction_id`
 
 ### Parameters
 
@@ -159,11 +158,10 @@ The invoice cannot be deleted if it's already in a payment instruction.
   "$schema": "http://json-schema.org/draft-04/schema",
   "description": "Invoices destroy endpoint json schema",
 	"type": "object",
-	"required": ["product_id", "id"],
+	"required": ["product_id"],
 	"properties": {
 		"api_key": { "type": "string" },
 		"product_id": { "type": "number" },
-		"id": { "type": "number" }
 	}
 }
 ```
@@ -172,7 +170,6 @@ The invoice cannot be deleted if it's already in a payment instruction.
 |------------+--------+----------+--------+-------------------------------------------------------------------------|
 | api_key    | String |          |        | Your API key for authentication                                         |
 | product_id | Number | ✓        |        | The ID of the product, visible in the Novicap platform near the API key |
-| id         | Number | ✓        |        | The ID of the invoice, visible in the invoice payload when retrieved    |
 
 
 ### Response
