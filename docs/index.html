@@ -161,8 +161,7 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
           <h1 id="dynamic-discounting">Dynamic discounting</h1>
 
           <h2 id="add-suppliers">Add suppliers</h2>
-<pre class="highlight shell"><code>curl -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--X POST -d <span class="s1">'{
+<pre class="highlight shell"><code>curl -i -H <span class="s2">"Content-Type: application/json"</span> -X POST -i -d <span class="s1">'{
   "api_key": "abcd",
   "product_id": 123,
   "suppliers": [
@@ -395,10 +394,9 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <p>A successful response has a 201 Created HTTP status code.</p>
 
 <h2 id="retrieve-suppliers">Retrieve suppliers</h2>
-<pre class="highlight shell"><code>curl -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--X GET -d <span class="s1">'{
+<pre class="highlight shell"><code>curl -i -H <span class="s2">"Content-Type: application/json"</span> -X GET -i -d <span class="s1">'{
   "api_key": "abcd",
-  "product_id": 123,
+  "product_id": 123
 }'</span> <span class="se">\</span>
 <span class="s2">"https://api.novicap.com/v1/dynamic_discounting/suppliers"</span>
 </code></pre>
@@ -460,15 +458,16 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <p>A successful response has a 200 Created HTTP status code along with an array of supplier objects described above.</p>
 
           <h2 id="add-invoices">Add invoices</h2>
-<pre class="highlight shell"><code>curl -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--X POST -d <span class="s1">'{
+<pre class="highlight shell"><code>curl -i -H <span class="s2">"Content-Type: application/json"</span> -X POST -i -d <span class="s1">'{
   "api_key": "abcd",
   "product_id": 123,
   "invoices": [
-    "company_id": "00445790",
-    "reference": "A1234",
-    "amount": 1000,
-    "due_at": "2021/10/30",
+    {
+      "company_id": "00445790",
+      "reference": "A1234",
+      "amount": 1000,
+      "due_at": "2021/10/30"
+    }
   ]
 }'</span> <span class="se">\</span>
 <span class="s2">"https://api.novicap.com/v1/dynamic_discounting/invoices"</span>
@@ -494,7 +493,7 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <p>The params for this endpoint should match this JSON schema:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema"</span><span class="p">,</span><span class="w">
+
   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invoices create endpoint json schema"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"product_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"invoices"</span><span class="p">],</span><span class="w">
@@ -616,10 +615,9 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <p>A successful response has a 201 Created HTTP status code.</p>
 
 <h2 id="retrieve-invoices">Retrieve invoices</h2>
-<pre class="highlight shell"><code>curl -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--X GET -d <span class="s1">'{
+<pre class="highlight shell"><code>curl -i -H <span class="s2">"Content-Type: application/json"</span> -X GET -i -d <span class="s1">'{
   "api_key": "abcd",
-  "product_id": 123,
+  "product_id": 123
 }'</span> <span class="se">\</span>
 <span class="s2">"https://api.novicap.com/v1/dynamic_discounting/invoices"</span>
 </code></pre>
@@ -628,7 +626,7 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <p>The above command returns an array of Invoice objects in the JSON payload with the 200 OK status.</p>
 </blockquote>
 
-<p>This endpoint returns all the invoices in your dynamic discounting product.</p>
+<p>This endpoint returns all the invoices registered in your product.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -681,12 +679,11 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <p>A successful response has a 200 Created HTTP status code along with an array of invoice objects described above.</p>
 
 <h2 id="delete-invoice">Delete invoice</h2>
-<pre class="highlight shell"><code>curl -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--X DELETE -d <span class="s1">'{
+<pre class="highlight shell"><code>curl -i -H <span class="s2">"Content-Type: application/json"</span> -X DELETE -i -d <span class="s1">'{
   "api_key": "abcd",
-  "product_id": 123,
+  "product_id": 123
 }'</span> <span class="se">\</span>
-<span class="s2">"https://api.novicap.com/v1/dynamic_discounting/invoices/123"</span>
+<span class="s2">"https://api.novicap.com/v1/dynamic_discounting/invoices/DDI-ABCD"</span>
 </code></pre>
 
 <blockquote>
@@ -695,11 +692,13 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 
 <p>This endpoint permanently deletes the invoice. This cannot be undone.</p>
 
-<p>The invoice cannot be deleted if it&rsquo;s already in a payment instruction.</p>
+<p>The URL must contain a valid transaction ID, matching one returned from <a href="#retrieve-invoices">GET /v1/dynamic_discounting/invoices</a>. The transaction ID is not the same as the reference of the invoice submitted by you.</p>
+
+<p>We may have already notified the supplier of the invoice, and they may have already accepted financing, so take care when using this endpoint. The invoice cannot be deleted if it is already part of a payment instruction.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">DELETE https://api.novicap.com/v1/dynamic_discounting/invoices/:id</code></p>
+<p><code class="prettyprint">DELETE https://api.novicap.com/v1/dynamic_discounting/invoices/:transaction_id</code></p>
 
 <h3 id="parameters">Parameters</h3>
 
@@ -710,12 +709,11 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
   </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invoices destroy endpoint json schema"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"product_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"id"</span><span class="p">],</span><span class="w">
+    </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"product_id"</span><span class="p">],</span><span class="w">
     </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
         </span><span class="nt">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+    </span><span class="err">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -742,13 +740,6 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <td></td>
 <td>The ID of the product, visible in the Novicap platform near the API key</td>
 </tr>
-<tr>
-<td>id</td>
-<td>Number</td>
-<td>✓</td>
-<td></td>
-<td>The ID of the invoice, visible in the invoice payload when retrieved</td>
-</tr>
 </tbody></table>
 
 <h3 id="response">Response</h3>
@@ -756,11 +747,10 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <p>A successful response has a 202 Accepted HTTP status code.</p>
 
           <h2 id="create-payment-instruction">Create payment instruction</h2>
-<pre class="highlight shell"><code>curl -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--X POST -d <span class="s1">'{
+<pre class="highlight shell"><code>curl -H <span class="s2">"Content-Type: application/json"</span> -X POST -i -d <span class="s1">'{
   "api_key": "abcd",
-  "product_id": 123,
-}'</span> <span class="se">\</span>
+  "product_id": 123
+  }'</span> <span class="se">\</span>
 <span class="s2">"https://api.novicap.com/v1/dynamic_discounting/payment_instructions"</span>
 </code></pre>
 
@@ -830,13 +820,13 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <p>A successful response has a 201 Created HTTP status code along with the list of invoices included in the payment instruction.</p>
 
 <h2 id="retrieve-payment-instructions">Retrieve payment instructions</h2>
-<pre class="highlight shell"><code>curl -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
--X GET -d <span class="s1">'{
-  "api_key": "abcd",
-  "product_id": 123,
-}'</span> <span class="se">\</span>
-<span class="s2">"https://api.novicap.com/v1/dynamic_discounting/payment_instructions"</span>
-</code></pre>
+<pre class="highlight shell"><code>curl -H <span class="s2">"Content-Type: application/json"</span> -X GET -i -d <span class="s1">'{
+-X GET -d '</span><span class="o">{</span>
+  <span class="s2">"api_key"</span>: <span class="s2">"abcd"</span>,
+  <span class="s2">"product_id"</span>: 123
+<span class="o">}</span><span class="s1">' \
+"https://api.novicap.com/v1/dynamic_discounting/payment_instructions"
+</span></code></pre>
 
 <blockquote>
 <p>The above command returns a JSON payload with the 200 OK status.</p>
