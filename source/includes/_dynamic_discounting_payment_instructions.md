@@ -31,7 +31,8 @@ If your account has more than one legal entity, you must include a `company_id`,
 	"required": ["product_id"],
 	"properties": {
 		"api_key": { "type": "string" },
-		"product_id": { "type": "number" }
+		"product_id": { "type": "number" },
+		"debtor_id": { "type": "string" }
 	}
 }
 ```
@@ -40,13 +41,11 @@ If your account has more than one legal entity, you must include a `company_id`,
 |------------+--------+----------+--------+-------------------------------------------------------------------------|
 | api_key    | String |          |        | Your API key for authentication                                         |
 | product_id | Number | ✓        |        | The ID of the product, visible in the Novicap platform near the API key |
-| company_id | Number |          |        | The ID of the entity, if your account has more then one legal entity    |
+| debtor_id | Number |          |        | The ID of the entity, if your account has more then one legal entity    |
 
 ### Response
 
 A successful response has a 201 Created HTTP status code along with the list of invoices included in the payment instruction.
-
-
 
 ## Retrieve payment instructions
 
