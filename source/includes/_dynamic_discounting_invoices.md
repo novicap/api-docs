@@ -9,7 +9,8 @@ curl -i -H "Content-Type: application/json" -X POST -i -d '{
       "company_id": "00445790",
       "reference": "A1234",
       "amount": 1000,
-      "due_at": "2021/10/30"
+      "due_at": "2021/10/30",
+      "custom_invoice_data": { system_reference: "1234", generated_by: "..." }
     }
   ]
 }' \
@@ -52,7 +53,8 @@ If your account has more than one legal entity, you must include a `debtor_id` a
 					"company_id": { "type": "string" },
 					"reference": { "type": "string" },
 					"amount": { "type": "number" },
-					"due_at": { "type": "string" }
+					"due_at": { "type": "string" },
+					"custom_invoice_data": { "type": "object" }
 				}
 			}
 		}
@@ -62,8 +64,6 @@ If your account has more than one legal entity, you must include a `debtor_id` a
 
 | Parameter  | Type   | Required | Format | Description                                                             |
 |------------+--------+----------+--------+-------------------------------------------------------------------------|
-| api_key    | String |          |        | Your API key for authentication                                         |
-| product_id | Number | ✓        |        | The ID of the product, visible in the Novicap platform near the API key |
 | invoices   | Array  | ✓        |        | An array of objects matching the invoice schema below                  |
 
 #### Invoices
@@ -75,6 +75,7 @@ If your account has more than one legal entity, you must include a `debtor_id` a
 | reference                    | String        | ✓                 |                         |               | The reference of the invoice                                                                                                         |   |
 | amount                       | String        |                   |                         |               | The amount of the invoice                                                                                                            |   |
 | due_at                       | String        |                   |                         |               | The date on which the invoice is due                                                                                                 |   |
+| custom_invoice_data          | Object        |                   |                         |               | Any custom data you want to save for the invoice                                                                                     |   |
 
 ### Response
 
@@ -91,7 +92,6 @@ curl -i -H "Content-Type: application/json" -X GET -i -d '{
 "https://api.novicap.com/v1/dynamic_discounting/invoices"
 ```
 
-> The above command returns an array of Invoice objects in the JSON payload with the 200 OK status.
 
 This endpoint returns all the invoices registered in your product.
 
@@ -116,11 +116,31 @@ This endpoint returns all the invoices registered in your product.
 }
 ```
 
-| Parameter  | Type   | Required | Format | Description                                                             |
-|------------+--------+----------+--------+-------------------------------------------------------------------------|
-| api_key    | String |          |        | Your API key for authentication                                         |
-| product_id | Number | ✓        |        | The ID of the product, visible in the Novicap platform near the API key |
+> The above command returns an array of Invoice objects in the JSON payload with the 200 OK status.
 
+```shell
+{
+  "invoices": [
+    {
+      "company_id": "00445790",
+      "company_id": "A61866125",
+      "reference": "A1234",
+      "transaction_id": "DDI-7SNOF",
+      "amount": 1000,
+      "discount": 100.0,
+      "facilitator_fee": 20.0,
+      "accepted_at": "2021-09-30T00:00:00.437Z",
+      "due_at": "2021-09-30T00:00:00.437Z",
+      "management_status": "",
+      "payment_instruction_id": "TQEZHG",
+      "custom_company_data": { status: "active", addresses: "..." },
+      "custom_invoice_data": { system_reference: "1234", generated_by: "..." }
+    },
+    {...},
+    {...}
+  ]
+}
+```
 
 ### Response
 
@@ -161,15 +181,10 @@ We may have already notified the supplier of the invoice, and they may have alre
 	"required": ["product_id"],
 	"properties": {
 		"api_key": { "type": "string" },
-		"product_id": { "type": "number" },
+		"product_id": { "type": "number" }
 	}
 }
 ```
-
-| Parameter  | Type   | Required | Format | Description                                                             |
-|------------+--------+----------+--------+-------------------------------------------------------------------------|
-| api_key    | String |          |        | Your API key for authentication                                         |
-| product_id | Number | ✓        |        | The ID of the product, visible in the Novicap platform near the API key |
 
 
 ### Response

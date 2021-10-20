@@ -15,7 +15,8 @@ curl -i -H "Content-Type: application/json" -X POST -i -d '{
       "contact_phone": "+44724565898",
       "apr": 10,
       "fixed_fee_percentage": 0.5,
-      "early_payment_cutoff_in_days": 5
+      "early_payment_cutoff_in_days": 5,
+      "custom_company_data": { status: "active", addresses: "..." }
     }
   ]
 }' \
@@ -65,7 +66,8 @@ If your account has more than one legal entity, you must include a `debtor_id` a
           "apr": {"type": "number"},
           "fixed_fee_percentage": {"type": "number"},
           "early_payment_cutoff_in_days": {"type": "integer"},
-          "iban": {"type": "string"}
+          "iban": {"type": "string"},
+          "custom_company_data": {"type": "object"}
         }
       }
     }
@@ -75,8 +77,6 @@ If your account has more than one legal entity, you must include a `debtor_id` a
 
 | Parameter  | Type   | Required | Format | Description                                                             |
 |------------+--------+----------+--------+-------------------------------------------------------------------------|
-| api_key    | String |          |        | Your API key for authentication                                         |
-| product_id | Number | ✓        |        | The ID of the product, visible in the Novicap platform near the API key |
 | suppliers  | Array  | ✓        |        | An array of objects matching the supplier schema below                  |
 
 #### Suppliers
@@ -95,6 +95,7 @@ If your account has more than one legal entity, you must include a `debtor_id` a
 | fixed_fee_percentage         | Number        | Percentage points | ✓                       |               | The fixed fee, as a percentage of the face value of the invoice, you want the supplier to pay, in percentage points e.g. 0.5% -> 0.5 |   |
 | early_payment_cutoff_in_days | Number        |                   |                         | 10            | This number of days before the due date, we stop allowing the supplier to accept financing                                           |   |
 | iban                         | String        | IBAN              |                         |               | The IBAN code of the bank account you pay to when making payments to the supplier                                                    |   |
+| custom_company_data          | Object        |                   |                         |               | Any custom data you want to save for the supplier                                                                                    |   |
 
 ### Response
 
@@ -110,7 +111,6 @@ curl -i -H "Content-Type: application/json" -X GET -i -d '{
 "https://api.novicap.com/v1/dynamic_discounting/suppliers"
 ```
 
-> The above command returns an array of Supplier objects in the JSON payload with the 200 OK status.
 
 This endpoint returns all the suppliers in your dynamic discounting product.
 
@@ -136,10 +136,29 @@ This endpoint returns all the suppliers in your dynamic discounting product.
 }
 ```
 
-| Parameter  | Type   | Required | Format | Description                                                             |
-|------------+--------+----------+--------+-------------------------------------------------------------------------|
-| api_key    | String |          |        | Your API key for authentication                                         |
-| product_id | Number | ✓        |        | The ID of the product, visible in the Novicap platform near the API key |
+> The above command returns an array of Supplier objects in the JSON payload with the 200 OK status.
+
+```shell
+{
+  "suppliers": [
+    {
+      "country_code": "GB",
+      "company_id": "00445790",
+      "company_name": "Tesco PLC",
+      "contact_first_name": "John",
+      "contact_last_name": "Smith",
+      "contact_email": "john.smith@company.com",
+      "contact_phone": "+44724565898",
+      "apr": 10,
+      "fixed_fee_percentage": 0.5,
+      "early_payment_cutoff_in_days": 5,
+      "custom_company_data": { status: "active", addresses: "..." }
+    },
+    {...},
+    {...}
+  ]
+}
+```
 
 
 ### Response
