@@ -39,8 +39,6 @@ If your account has more than one legal entity, you must include a `company_id`,
 
 | Parameter  | Type   | Required | Format | Description                                                             |
 |------------+--------+----------+--------+-------------------------------------------------------------------------|
-| api_key    | String |          |        | Your API key for authentication                                         |
-| product_id | Number | ✓        |        | The ID of the product, visible in the Novicap platform near the API key |
 | debtor_id | Number |          |        | The ID of the entity, if your account has more then one legal entity    |
 
 ### Response
@@ -58,10 +56,7 @@ curl -H "Content-Type: application/json" -X GET -i -d '{
 "https://api.novicap.com/v1/dynamic_discounting/payment_instructions"
 ```
 
-> The above command returns a JSON payload with the 200 OK status.
-
 This endpoint returns all the payments instructions with an array of invoices included with every instruction.
-
 
 ### HTTP Request
 
@@ -84,10 +79,38 @@ This endpoint returns all the payments instructions with an array of invoices in
 }
 ```
 
-| Parameter  | Type   | Required | Format | Description                                                             |
-|------------+--------+----------+--------+-------------------------------------------------------------------------|
-| api_key    | String |          |        | Your API key for authentication                                         |
-| product_id | Number | ✓        |        | The ID of the product, visible in the Novicap platform near the API key |
+> The above command returns the following JSON payload with the 200 OK status.
+
+```shell
+{
+  "payment_instructions": [
+    {
+      "payment_instruction_id": "TQEZHG",
+      "invoices": [
+				{
+          "company_id": "00445790",
+          "reference": "A1234",
+          "transaction_id": "DDI-7SNOF",
+          "amount": 1000,
+          "discount": 100.0,
+          "facilitator_fee": 20.0,
+          "accepted_at": "2021-09-30T00:00:00.437Z",
+          "due_at": "2021-09-30T00:00:00.437Z",
+          "management_status": "",
+          "supplier_registration_number": "A12345679",
+          "debtor_registration_number": "A12345678",
+          "payment_instruction_id": "TQEZHG",
+          "rectified_invoice_url": ""
+        },
+        {...},
+        {...}
+      ]
+    },
+    {...},
+    {...}
+  ]
+}
+```
 
 ### Response
 
