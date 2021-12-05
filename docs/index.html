@@ -303,7 +303,7 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <td>✓</td>
 <td>Depends on country code</td>
 <td></td>
-<td>The ID of the supplier (see <a href="!identifying-companies">identifying companies</a>])</td>
+<td>The ID of the supplier (see <a href="#identifying-companies">identifying companies</a>])</td>
 <td></td>
 </tr>
 <tr>
@@ -567,12 +567,12 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <td>invoices</td>
 <td>Array</td>
 <td>✓</td>
-<td></td>
-<td>An array of objects matching the invoice schema below</td>
+<td>Array of [invoice objects][#invoice-create]</td>
+<td>A list of invoices to create</td>
 </tr>
 </tbody></table>
 
-<h4 id="invoices">Invoices</h4>
+<h3 id="invoice-create">Invoice (create)</h3>
 
 <table><thead>
 <tr>
@@ -600,7 +600,7 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <td>✓</td>
 <td>Depends on country code</td>
 <td></td>
-<td>The ID of the supplier (see <a href="!identifying-companies">identifying companies</a>])</td>
+<td>The ID of the supplier (see <a href="#identifying-companies">identifying companies</a>])</td>
 <td></td>
 </tr>
 <tr>
@@ -720,12 +720,12 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <tr>
 <td>invoices</td>
 <td>Array</td>
-<td></td>
+<td>Array of <a href="#invoice-index">invoice objects</a></td>
 <td>A list of all invoices in the product</td>
 </tr>
 </tbody></table>
 
-<h4 id="invoices">Invoices</h4>
+<h3 id="invoice-index">Invoice (index)</h3>
 
 <p>Each invoice object has the following schema:</p>
 
@@ -741,13 +741,13 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <td>supplier_id</td>
 <td>String</td>
 <td>Depends on country</td>
-<td>The ID of the supplier (see <a href="!identifying-companies">identifying companies</a>])</td>
+<td>The ID of the supplier (see <a href="#identifying-companies">identifying companies</a>])</td>
 </tr>
 <tr>
 <td>debtor_id</td>
 <td>String</td>
 <td>Depends on country</td>
-<td>The ID of the debtor (see <a href="!identifying-companies">identifying companies</a>])</td>
+<td>The ID of the debtor (see <a href="#identifying-companies">identifying companies</a>])</td>
 </tr>
 <tr>
 <td>reference</td>
@@ -857,8 +857,8 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
     </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"product_id"</span><span class="p">],</span><span class="w">
     </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">},</span><span class="w">
-    </span><span class="err">}</span><span class="w">
+        </span><span class="nt">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -1026,7 +1026,7 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 </tr>
 </tbody></table>
 
-<h4 id="payment-instructions">Payment instructions</h4>
+<h3 id="payment-instructions">Payment instructions</h3>
 
 <table><thead>
 <tr>
@@ -1045,7 +1045,7 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <tr>
 <td>invoices</td>
 <td>Array</td>
-<td>See <a href="!invoices">invoices</a></td>
+<td>A list of <a href="#invoices-index">invoice objects</a></td>
 <td>A list of invoices associated with this payment instruction</td>
 </tr>
 </tbody></table>

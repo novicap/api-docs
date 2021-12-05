@@ -63,18 +63,18 @@ If an invoice already exists under the product with the same supplier and refere
 }
 ```
 
-| Parameter  | Type   | Required | Format | Description                                                             |
-|------------+--------+----------+--------+-------------------------------------------------------------------------|
-| api_key    | String |          |        | Your API key for authentication                                         |
-| product_id | Number | ✓        |        | The ID of the product, visible in the Novicap platform near the API key |
-| invoices   | Array  | ✓        |        | An array of objects matching the invoice schema below                  |
+| Parameter  | Type   | Required | Format                                      | Description                                                             |
+|------------+--------+----------+---------------------------------------------+-------------------------------------------------------------------------|
+| api_key    | String |          |                                             | Your API key for authentication                                         |
+| product_id | Number | ✓        |                                             | The ID of the product, visible in the Novicap platform near the API key |
+| invoices   | Array  | ✓        | Array of [invoice objects][#invoice-create] | A list of invoices to create                                            |
 
-#### Invoices
+### Invoice (create)
 
 | Parameter           | Type   | Required | Format                                     | Default value | Description                                                                                                           |                                                  |
 |---------------------+--------+----------+--------------------------------------------+---------------+-----------------------------------------------------------------------------------------------------------------------+--------------------------------------------------|
 | debtor_id           | String |          |                                            |               | If your account contains more than one legal entity, this is the ID of the entity that pays invoices to this supplier |                                                  |
-| supplier_id         | String | ✓        | Depends on country code                    |               | The ID of the supplier (see [identifying companies](!identifying-companies)])                                         |                                                  |
+| supplier_id         | String | ✓        | Depends on country code                    |               | The ID of the supplier (see [identifying companies](#identifying-companies)])                                         |                                                  |
 | reference           | String | ✓        |                                            |               | The reference of the invoice                                                                                          |                                                  |
 | amount              | String | ✓        |                                            |               | The amount of the invoice                                                                                             |                                                  |
 | due_at              | String | ✓        | ISO 8601                                |               | The date on which the invoice is due                                                                                  |                                                  |
@@ -83,7 +83,6 @@ If an invoice already exists under the product with the same supplier and refere
 ### Response
 
 A successful response has a 201 Created HTTP status code.
-
 
 ## Retrieve invoices
 
@@ -130,18 +129,18 @@ This endpoint returns all the invoices registered in your product.
 
 A successful response has a 200 Created HTTP status code along with an array of invoice objects.
 
-| Parameter | Type  | Format | Description                           |
-|-----------+-------+--------+---------------------------------------|
-| invoices  | Array |        | A list of all invoices in the product |
+| Parameter | Type  | Format                                     | Description                           |
+|-----------+-------+--------------------------------------------+---------------------------------------|
+| invoices  | Array | Array of [invoice objects](#invoice-index) | A list of all invoices in the product |
 
-#### Invoices
+### Invoice (index)
 
 Each invoice object has the following schema:
 
 | Parameter              | Type   | Format             | Description                                                                          |
 |------------------------+--------+--------------------+--------------------------------------------------------------------------------------|
-| supplier_id            | String | Depends on country | The ID of the supplier (see [identifying companies](!identifying-companies)])        |
-| debtor_id              | String | Depends on country | The ID of the debtor (see [identifying companies](!identifying-companies)])          |
+| supplier_id            | String | Depends on country | The ID of the supplier (see [identifying companies](#identifying-companies)])        |
+| debtor_id              | String | Depends on country | The ID of the debtor (see [identifying companies](#identifying-companies)])          |
 | reference              | String |                    | The reference you gave us - unique for each pair of debtor and supplier              |
 | transaction_id         | String |                    | A unique reference for this invoice in our system                                    |
 | amount                 | Number |                    | The amount (face value) of the invoice                                               |
@@ -189,7 +188,7 @@ The invoice cannot be deleted if it is already part of a payment instruction. If
 	"required": ["product_id"],
 	"properties": {
 		"api_key": { "type": "string" },
-		"product_id": { "type": "number" },
+		"product_id": { "type": "number" }
 	}
 }
 ```

@@ -88,12 +88,12 @@ This endpoint returns all the payments instructions associated with the product.
 | api_key    | String |          |        | Your API key for authentication                                         |
 | product_id | Number | ✓        |        | The ID of the product, visible in the Novicap platform near the API key |
 
-#### Payment instructions
+### Payment instructions
 
-| Parameter              | Type   | Format                    | Description                                                 |
-|------------------------+--------+---------------------------+-------------------------------------------------------------|
-| payment_instruction_id | String |                           | A unique ID for this payment instruction                    |
-| invoices               | Array  | See [invoices](!invoices) | A list of invoices associated with this payment instruction |
+| Parameter              | Type   | Format                                       | Description                                                 |
+|------------------------+--------+----------------------------------------------+-------------------------------------------------------------|
+| payment_instruction_id | String |                                              | A unique ID for this payment instruction                    |
+| invoices               | Array  | A list of [invoice objects](#invoices-index) | A list of invoices associated with this payment instruction |
 
 ### Response
 
