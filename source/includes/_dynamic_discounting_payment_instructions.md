@@ -12,7 +12,7 @@ curl -H "Content-Type: application/json" -X POST -i -d '{
 
 This endpoint creates a payment instruction for all the invoices accepted by the supplier which hasn't been included in an instruction already.
 
-If your account has more than one legal entity, you must include a `company_id`, representing the entity which will pay invoices to suppliers.
+If your account has more than one legal entity, you must include a `debtor_id`, representing the entity which will pay invoices to suppliers.
 
 
 ### HTTP Request
@@ -41,11 +41,11 @@ If your account has more than one legal entity, you must include a `company_id`,
 |------------+--------+----------+--------+-------------------------------------------------------------------------|
 | api_key    | String |          |        | Your API key for authentication                                         |
 | product_id | Number | ✓        |        | The ID of the product, visible in the Novicap platform near the API key |
-| debtor_id | Number |          |        | The ID of the entity, if your account has more then one legal entity    |
+| debtor_id  | Number |          |        | The ID of the entity, if your account has more then one legal entity    |
 
 ### Response
 
-A successful response has a 201 Created HTTP status code along with the list of invoices included in the payment instruction.
+A successful response has a 201 Created HTTP status code along with a payment instruction object described below.
 
 ## Retrieve payment instructions
 
@@ -60,8 +60,7 @@ curl -H "Content-Type: application/json" -X GET -i -d '{
 
 > The above command returns a JSON payload with the 200 OK status.
 
-This endpoint returns all the payments instructions with an array of invoices included with every instruction.
-
+This endpoint returns all the payments instructions associated with the product.
 
 ### HTTP Request
 
@@ -88,6 +87,13 @@ This endpoint returns all the payments instructions with an array of invoices in
 |------------+--------+----------+--------+-------------------------------------------------------------------------|
 | api_key    | String |          |        | Your API key for authentication                                         |
 | product_id | Number | ✓        |        | The ID of the product, visible in the Novicap platform near the API key |
+
+#### Payment instructions
+
+| Parameter              | Type   | Format                    | Description                                                 |
+|------------------------+--------+---------------------------+-------------------------------------------------------------|
+| payment_instruction_id | String |                           | A unique ID for this payment instruction                    |
+| invoices               | Array  | See [invoices](!invoices) | A list of invoices associated with this payment instruction |
 
 ### Response
 
