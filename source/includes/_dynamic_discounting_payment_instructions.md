@@ -90,9 +90,9 @@ This endpoint returns all the payments instructions associated with the product.
 
 ### Payment instructions
 
-| Parameter              | Type   | Format                                       | Description                                                 |
-|------------------------+--------+----------------------------------------------+-------------------------------------------------------------|
-| payment_instruction_id | String |                                              | A unique ID for this payment instruction                    |
+| Parameter              | Type   | Format                                      | Description                                                 |
+|------------------------+--------+---------------------------------------------+-------------------------------------------------------------|
+| payment_instruction_id | String |                                             | A unique ID for this payment instruction                    |
 | invoices               | Array  | Array of [invoice objects](#invoices-index) | A list of invoices associated with this payment instruction |
 
 ### Response

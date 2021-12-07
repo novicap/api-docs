@@ -14,7 +14,7 @@ curl -i -H "Content-Type: application/json" -X POST -i -d '{
       "contact_email": "john.smith@company.com",
       "contact_phone": "+44724565898",
       "apr": 10,
-      "custom_invoice_data": { "internal_id": "supplier-001", "tags": ["batch 1"] }
+      "custom_supplier_data": { "internal_id": "supplier-001", "tags": ["batch 1"] }
     }
   ]
 }' \
