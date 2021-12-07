@@ -45,7 +45,7 @@ If your account has more than one legal entity, you must include a `debtor_id`, 
 
 ### Response
 
-A successful response has a 201 Created HTTP status code along with a [payment instruction object](#payment_instruction) described below.
+A successful response has a 201 Created HTTP status code along with a [payment instruction object](#payment-instruction) described below.
 
 ## Retrieve payment instructions
 
@@ -99,7 +99,7 @@ This endpoint returns all the payments instructions associated with the product.
 | Parameter              | Type   | Format                                      | Description                                                 |
 |------------------------+--------+---------------------------------------------+-------------------------------------------------------------|
 | payment_instruction_id | String |                                             | A unique ID for this payment instruction                    |
-| invoices               | Array  | Array of [invoice objects](#invoices-index) | A list of invoices associated with this payment instruction |
+| invoices               | Array  | Array of [invoice objects](#invoice-index) | A list of invoices associated with this payment instruction |
 | payments               | Array  | Array of [payment objects](#payment)        | A list of payments to make, one per supplier                |
 
 ### Payment
