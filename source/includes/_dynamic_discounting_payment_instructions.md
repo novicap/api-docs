@@ -27,13 +27,13 @@ If your account has more than one legal entity, you must include a `debtor_id`, 
 {
   "$schema": "http://json-schema.org/draft-04/schema",
   "description": "Payment instructions create endpoint json schema",
-	"type": "object",
-	"required": ["product_id"],
-	"properties": {
-		"api_key": { "type": "string" },
-		"product_id": { "type": "number" },
-		"debtor_id": { "type": "string" }
-	}
+  "type": "object",
+  "required": ["product_id"],
+  "properties": {
+    "api_key": { "type": "string" },
+    "product_id": { "type": "number" },
+    "debtor_id": { "type": "string" }
+  }
 }
 ```
 
@@ -45,7 +45,7 @@ If your account has more than one legal entity, you must include a `debtor_id`, 
 
 ### Response
 
-A successful response has a 201 Created HTTP status code along with a payment instruction object described below.
+A successful response has a 201 Created HTTP status code along with a [payment instruction object](#payment_instruction) described below.
 
 ## Retrieve payment instructions
 
@@ -74,12 +74,12 @@ This endpoint returns all the payments instructions associated with the product.
 {
   "$schema": "http://json-schema.org/draft-04/schema",
   "description": "Payment instructions index endpoint json schema",
-	"type": "object",
-	"required": ["product_id"],
-	"properties": {
-		"api_key": { "type": "string" },
-		"product_id": { "type": "number" }
-	}
+  "type": "object",
+  "required": ["product_id"],
+  "properties": {
+    "api_key": { "type": "string" },
+    "product_id": { "type": "number" }
+  }
 }
 ```
 
@@ -89,6 +89,12 @@ This endpoint returns all the payments instructions associated with the product.
 | product_id | Number | ✓        |        | The ID of the product, visible in the Novicap platform near the API key |
 
 ### Payment instructions
+
+| Parameter            | Type  | Format                                                       | Description                                  |
+|----------------------+-------+--------------------------------------------------------------+----------------------------------------------|
+| payment_instructions | Array | Array of [payment instruction objects](#payment-instruction) | List of payment instructions in your account |
+
+### Payment instruction
 
 | Parameter              | Type   | Format                                      | Description                                                 |
 |------------------------+--------+---------------------------------------------+-------------------------------------------------------------|

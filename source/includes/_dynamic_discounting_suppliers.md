@@ -81,22 +81,21 @@ If your account has more than one legal entity, you must include a `debtor_id` a
 
 ### Suppliers
 
-| Parameter                    | Type          | Required          | Format                                     | Default value          | Description                                                                                                                          |                                                   |
-|------------------------------+---------------+-------------------+--------------------------------------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------|
-| debtor_id                    | String        |                   |                                            |                        | If your account contains more than one legal entity, this is the ID of the entity that pays invoices to this supplier                |                                                   |
-| country_code                 | String        |                   | ISO 3166 alpha-2                           | ES                     | The country code of the supplier                                                                                                     |                                                   |
-| supplier_id                  | String        | ✓                 | Depends on country code                    |                        | The ID of the supplier (see [identifying companies](#identifying-companies))                                                         |                                                   |
-| supplier_name                | String        | ✓                 |                                            |                        | The name of the supplier                                                                                                             |                                                   |
-| contact_first_name           | String        |                   |                                            |                        | The first name of the supplier contact                                                                                               |                                                   |
-| contact_last_name            | String        |                   |                                            |                        | The last name of the supplier contact                                                                                                |                                                   |
-| contact_email                | String        | ✓                 |                                            |                        | The email of the supplier contact                                                                                                    |                                                   |
-| contact_phone                | String/Number |                   |                                            |                        | The full phone number of the supplier contact, including country code                                                                |                                                   |
-| apr                          | Number        | Percentage points | ✓                                          |                        | The APR your want this supplier to pay in percentage points e.g. 10% -> 10                                                           |                                                   |
-| fixed_fee_percentage         | Number        | Percentage points |                                            | Configured per product | The fixed fee, as a percentage of the face value of the invoice, you want the supplier to pay, in percentage points e.g. 0.5% -> 0.5 |                                                   |
-| early_payment_cutoff_in_days | Number        |                   |                                            | 10                     | This number of days before the due date, we stop allowing the supplier to accept financing                                           |                                                   |
-| iban                         | String        | IBAN              |                                            |                        | The IBAN code of the bank account you pay to when making payments to the supplier                                                    |                                                   |
-| custom_supplier_data         | Object        |                   | Any valid JSON, maximum of 8192 characters |                        |                                                                                                                                      | Any data you want to associate with this supplier |
-|                              |               |                   |                                            |                        |                                                                                                                                      |                                                   |
+| Parameter                    | Type          | Required | Format                                     | Default value          | Description                                                                                                                          |                                                   |
+|------------------------------+---------------+----------+--------------------------------------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------|
+| debtor_id                    | String        |          |                                            |                        | If your account contains more than one legal entity, this is the ID of the entity that pays invoices to this supplier                |                                                   |
+| country_code                 | String        |          | ISO 3166 alpha-2                           | ES                     | The country code of the supplier                                                                                                     |                                                   |
+| supplier_id                  | String        | ✓        | Depends on country code                    |                        | The ID of the supplier (see [identifying companies](#identifying-companies))                                                         |                                                   |
+| supplier_name                | String        | ✓        |                                            |                        | The name of the supplier                                                                                                             |                                                   |
+| contact_first_name           | String        |          |                                            |                        | The first name of the supplier contact                                                                                               |                                                   |
+| contact_last_name            | String        |          |                                            |                        | The last name of the supplier contact                                                                                                |                                                   |
+| contact_email                | String        | ✓        |                                            |                        | The email of the supplier contact                                                                                                    |                                                   |
+| contact_phone                | String/Number |          |                                            |                        | The full phone number of the supplier contact, including country code                                                                |                                                   |
+| apr                          | Number        | ✓        | Percentage points                          |                        | The APR your want this supplier to pay in percentage points e.g. 10% -> 10                                                           |                                                   |
+| fixed_fee_percentage         | Number        |          | Percentage points                          | Configured per product | The fixed fee, as a percentage of the face value of the invoice, you want the supplier to pay, in percentage points e.g. 0.5% -> 0.5 |                                                   |
+| early_payment_cutoff_in_days | Number        |          |                                            | 10                     | This number of days before the due date, we stop allowing the supplier to accept financing                                           |                                                   |
+| iban                         | String        |          | IBAN                                       |                        | The IBAN code of the bank account you pay to when making payments to the supplier                                                    |                                                   |
+| custom_supplier_data         | Object        |          | Any valid JSON, maximum of 8192 characters |                        |                                                                                                                                      | Any data you want to associate with this supplier |
 
 ### Response
 
@@ -129,12 +128,12 @@ This endpoint returns all the suppliers in your dynamic discounting product.
 {
   "$schema": "http://json-schema.org/draft-04/schema",
   "description": "Suppliers index endpoint json schema",
-	"type": "object",
-	"required": ["product_id"],
-	"properties": {
-		"api_key": { "type": "string" },
-		"product_id": { "type": "number" }
-	}
+  "type": "object",
+  "required": ["product_id"],
+  "properties": {
+    "api_key": { "type": "string" },
+    "product_id": { "type": "number" }
+  }
 }
 ```
 
