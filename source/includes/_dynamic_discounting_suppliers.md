@@ -95,7 +95,7 @@ If your account has more than one legal entity, you must include a `debtor_id` a
 | fixed_fee_percentage         | Number        |          | Percentage points                          | Configured per product | The fixed fee, as a percentage of the face value of the invoice, you want the supplier to pay, in percentage points e.g. 0.5% -> 0.5 |                                                   |
 | early_payment_cutoff_in_days | Number        |          |                                            | 10                     | This number of days before the due date, we stop allowing the supplier to accept financing                                           |                                                   |
 | iban                         | String        |          | IBAN                                       |                        | The IBAN code of the bank account you pay to when making payments to the supplier                                                    |                                                   |
-| custom_supplier_data         | Object        |          | Any valid JSON, maximum of 8192 characters |                        |                                                                                                                                      | Any data you want to associate with this supplier |
+| custom_supplier_data         | Object        |          | Any valid JSON, maximum of 8192 characters | []                     |                                                                                                                                      | Any data you want to associate with this supplier |
 
 ### Response
 
