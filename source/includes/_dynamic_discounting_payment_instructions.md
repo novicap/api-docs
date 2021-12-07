@@ -107,9 +107,9 @@ This endpoint returns all the payments instructions associated with the product.
 | Parameter     | Type   | Format                               | Description                                                                                                    |
 |---------------+--------+--------------------------------------+----------------------------------------------------------------------------------------------------------------|
 | supplier_name | String |                                      | Name of the supplier to pay                                                                                    |
-| supplier_id   | String | Depends on country code              | The ID of the supplier to pay (see [identifying companies](#identifying-companies)                             |
+| supplier_id   | String | Depends on country code              | The ID of the supplier to pay (see [identifying companies](#identifying-companies))                             |
 | debtor_name   | String |                                      | Name of the legal entity that should make the payment, which matters if you have more than one in your account |
-| debtor_id     | String | Depends on country code              | The ID of the legal entity that should make the payment (see [identifying companies](#identifying-companies)   |
+| debtor_id     | String | Depends on country code              | The ID of the legal entity that should make the payment (see [identifying companies](#identifying-companies))   |
 | amount        | Number |                                      | The amount you should pay the supplier                                                                         |
 | iban          | String | IBAN                                 | The bank account you should pay into (if you give it to us)                                                    |
 | references    | String | Seperated by ', ' (comma then space) | A list of invoice references included in this payment                                                          |
