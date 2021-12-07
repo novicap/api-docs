@@ -74,7 +74,7 @@ If an invoice already exists under the product with the same supplier and refere
 | Parameter           | Type   | Required | Format                                     | Default value | Description                                                                                                           |                                                  |
 |---------------------+--------+----------+--------------------------------------------+---------------+-----------------------------------------------------------------------------------------------------------------------+--------------------------------------------------|
 | debtor_id           | String |          |                                            |               | If your account contains more than one legal entity, this is the ID of the entity that pays invoices to this supplier |                                                  |
-| supplier_id         | String | ✓        | Depends on country code                    |               | The ID of the supplier (see [identifying companies](#identifying-companies)])                                         |                                                  |
+| supplier_id         | String | ✓        | Depends on country code                    |               | The ID of the supplier (see [identifying companies](#identifying-companies))                                         |                                                  |
 | reference           | String | ✓        |                                            |               | The reference of the invoice                                                                                          |                                                  |
 | amount              | String | ✓        |                                            |               | The amount of the invoice                                                                                             |                                                  |
 | due_at              | String | ✓        | ISO 8601                                |               | The date on which the invoice is due                                                                                  |                                                  |
@@ -139,8 +139,8 @@ Each invoice object has the following schema:
 
 | Parameter              | Type   | Format             | Description                                                                          |
 |------------------------+--------+--------------------+--------------------------------------------------------------------------------------|
-| supplier_id            | String | Depends on country | The ID of the supplier (see [identifying companies](#identifying-companies)])        |
-| debtor_id              | String | Depends on country | The ID of the debtor (see [identifying companies](#identifying-companies)])          |
+| supplier_id            | String | Depends on country | The ID of the supplier (see [identifying companies](#identifying-companies))        |
+| debtor_id              | String | Depends on country | The ID of the debtor (see [identifying companies](#identifying-companies))          |
 | reference              | String |                    | The reference you gave us - unique for each pair of debtor and supplier              |
 | transaction_id         | String |                    | A unique reference for this invoice in our system                                    |
 | amount                 | Number |                    | The amount (face value) of the invoice                                               |
