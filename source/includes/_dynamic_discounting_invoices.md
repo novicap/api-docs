@@ -71,14 +71,25 @@ If an invoice already exists under the product with the same supplier and refere
 
 ### Invoice (create)
 
-| Parameter           | Type   | Required | Format                                     | Default value | Description                                                                                                           |                                                  |
-|---------------------+--------+----------+--------------------------------------------+---------------+-----------------------------------------------------------------------------------------------------------------------+--------------------------------------------------|
-| debtor_id           | String |          |                                            |               | If your account contains more than one legal entity, this is the ID of the entity that pays invoices to this supplier |                                                  |
-| supplier_id         | String | ✓        | Depends on country code                    |               | The ID of the supplier (see [identifying companies](#identifying-companies))                                         |                                                  |
-| reference           | String | ✓        |                                            |               | The reference of the invoice                                                                                          |                                                  |
-| amount              | String | ✓        |                                            |               | The amount of the invoice                                                                                             |                                                  |
-| due_at              | String | ✓        | ISO 8601                                |               | The date on which the invoice is due                                                                                  |                                                  |
-| custom_invoice_data | Object |          | Any valid JSON, maximum of 8192 characters |               |                                                                                                                       | Any data you want to associate with this invoice |
+| Parameter              | Type   | Required | Format                                      | Default value | Description                                                                                                           |                                                  |
+|------------------------+--------+----------+---------------------------------------------+---------------+-----------------------------------------------------------------------------------------------------------------------+--------------------------------------------------|
+| debtor_id              | String |          |                                             |               | If your account contains more than one legal entity, this is the ID of the entity that pays invoices to this supplier |                                                  |
+| supplier_id            | String | ✓        | Depends on country code                     |               | The ID of the supplier (see [identifying companies](#identifying-companies))                                          |                                                  |
+| reference              | String | ✓        |                                             |               | The reference of the invoice                                                                                          |                                                  |
+| amount                 | String | ✓        |                                             |               | The amount of the invoice                                                                                             |                                                  |
+| due_at                 | String | ✓        | ISO 8601                                    |               | The date on which the invoice is due                                                                                  |                                                  |
+| custom_invoice_data    | Object |          | Any valid JSON, maximum of 8192 characters  | {}            |                                                                                                                       | Any data you want to associate with this invoice |
+| adjustments_to_invoice | Array  |          | Array of [adjustment objects](#adjustments) | []            | A list of changes to the invoice amount that should be applied before the discount                                    |                                                  |
+| adjustments_to_payment | Array  |          | Array of [adjustment objects](#adjustments) | []            | A list of changes to the invoice amount that should be applied after the discount                                     |                                                  |
+
+### Adjustments
+
+You may have pre-existing credit notes that you want to apply to an invoice. These can apply before we calculate a discount based on the APR, or after. The supplier will be shown these adjustments inside the platform.
+
+| Parameter     | Type   | Required | Format | Default value | Description                                                                                                    |
+|---------------+--------+----------+--------+---------------+----------------------------------------------------------------------------------------------------------------|
+| adjustment_id | String | ✓        |        |               | An ID that is unique to this invoice                                                                           |
+| adjustment    | Number | ✓        |        |               | The adjustment to the amount of the invoice that you want to make. For a credit note, this should be negative. |
 
 ### Response
 
@@ -137,22 +148,25 @@ A successful response has a 200 Created HTTP status code along with an array of 
 
 Each invoice object has the following schema:
 
-| Parameter              | Type   | Format             | Description                                                                          |
-|------------------------+--------+--------------------+--------------------------------------------------------------------------------------|
-| supplier_id            | String | Depends on country | The ID of the supplier (see [identifying companies](#identifying-companies))        |
-| debtor_id              | String | Depends on country | The ID of the debtor (see [identifying companies](#identifying-companies))          |
-| reference              | String |                    | The reference you gave us - unique for each pair of debtor and supplier              |
-| transaction_id         | String |                    | A unique reference for this invoice in our system                                    |
-| amount                 | Number |                    | The amount (face value) of the invoice                                               |
-| discount               | Number |                    | The total discount that the supplier agreed to in return for early payment           |
-| facilitator_fee        | Number |                    | The amount we will charge you for processing this invoice                            |
-| accepted_at            | String | ISO 8601           | The date the supplier (most recently) accepted early payment of this invoice         |
-| due_at                 | String | ISO 8601           | The date this invoice is due                                                         |
-| management_status      | String |                    | An internal invoice status that may help you track how the invoice is doing    |
-| rectified_invoice_url  | String | URL                | A link to the rectified invoice PDF generated by the supplier. Expires after 1 week. |
-| payment_instruction_id | String |                    | The payment instruction that this invoice is included in                             |
-| custom_invoice_data    | Object | Any valid JSON     | The custom invoice data you gave us                                                  |
-| custom_supplier_data   | Object | Any valid JSON     | The custom supplier data you gave us                                                 |
+| Parameter              | Type   | Format                                      | Description                                                                          |
+|------------------------+--------+---------------------------------------------+--------------------------------------------------------------------------------------|
+| supplier_id            | String | Depends on country                          | The ID of the supplier (see [identifying companies](#identifying-companies))         |
+| debtor_id              | String | Depends on country                          | The ID of the debtor (see [identifying companies](#identifying-companies))           |
+| reference              | String |                                             | The reference you gave us - unique for each pair of debtor and supplier              |
+| transaction_id         | String |                                             | A unique reference for this invoice in our system                                    |
+| amount                 | Number |                                             | The amount (face value) of the invoice                                               |
+| discount               | Number |                                             | The total discount that the supplier agreed to in return for early payment           |
+| facilitator_fee        | Number |                                             | The amount we will charge you for processing this invoice                            |
+| accepted_at            | String | ISO 8601                                    | The date the supplier (most recently) accepted early payment of this invoice         |
+| due_at                 | String | ISO 8601                                    | The date this invoice is due                                                         |
+| management_status      | String |                                             | An internal invoice status that may help you track how the invoice is doing          |
+| rectified_invoice_url  | String | URL                                         | A link to the rectified invoice PDF generated by the supplier. Expires after 1 week. |
+| payment_instruction_id | String |                                             | The payment instruction that this invoice is included in                             |
+| custom_invoice_data    | Object | Any valid JSON                              | The custom invoice data you gave us                                                  |
+| custom_supplier_data   | Object | Any valid JSON                              | The custom supplier data you gave us                                                 |
+| adjustments_to_invoice | Array  | Array of [adjustment objects](!adjustments) | The pre-discount ajustments you gave us                                              |
+| adjustments_to_payment | Array  | Array of [adjustment objects](!adjustments) | The post-discount ajustments you gave us                                             |
+
 
 ## Delete invoice
 

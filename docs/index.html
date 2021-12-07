@@ -635,9 +635,59 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <td>Object</td>
 <td></td>
 <td>Any valid JSON, maximum of 8192 characters</td>
-<td></td>
+<td>{}</td>
 <td></td>
 <td>Any data you want to associate with this invoice</td>
+</tr>
+<tr>
+<td>adjustments_to_invoice</td>
+<td>Array</td>
+<td></td>
+<td>Array of <a href="#adjustments">adjustment objects</a></td>
+<td>[]</td>
+<td>A list of changes to the invoice amount that should be applied before the discount</td>
+<td></td>
+</tr>
+<tr>
+<td>adjustments_to_payment</td>
+<td>Array</td>
+<td></td>
+<td>Array of <a href="#adjustments">adjustment objects</a></td>
+<td>[]</td>
+<td>A list of changes to the invoice amount that should be applied after the discount</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="adjustments">Adjustments</h3>
+
+<p>You may have pre-existing credit notes that you want to apply to an invoice. These can apply before we calculate a discount based on the APR, or after. The supplier will be shown these adjustments inside the platform.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Format</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>adjustment_id</td>
+<td>String</td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td>An ID that is unique to this invoice</td>
+</tr>
+<tr>
+<td>adjustment</td>
+<td>Number</td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td>The adjustment to the amount of the invoice that you want to make. For a credit note, this should be negative.</td>
 </tr>
 </tbody></table>
 
@@ -820,6 +870,18 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <td>Object</td>
 <td>Any valid JSON</td>
 <td>The custom supplier data you gave us</td>
+</tr>
+<tr>
+<td>adjustments_to_invoice</td>
+<td>Array</td>
+<td>Array of <a href="!adjustments">adjustment objects</a></td>
+<td>The pre-discount ajustments you gave us</td>
+</tr>
+<tr>
+<td>adjustments_to_payment</td>
+<td>Array</td>
+<td>Array of <a href="!adjustments">adjustment objects</a></td>
+<td>The post-discount ajustments you gave us</td>
 </tr>
 </tbody></table>
 
