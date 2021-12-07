@@ -67,7 +67,7 @@ If an invoice already exists under the product with the same supplier and refere
 |------------+--------+----------+---------------------------------------------+-------------------------------------------------------------------------|
 | api_key    | String |          |                                             | Your API key for authentication                                         |
 | product_id | Number | ✓        |                                             | The ID of the product, visible in the Novicap platform near the API key |
-| invoices   | Array  | ✓        | Array of [invoice objects][#invoice-create] | A list of invoices to create                                            |
+| invoices   | Array  | ✓        | Array of [invoice objects](#invoice-create) | A list of invoices to create                                            |
 
 ### Invoice (create)
 
