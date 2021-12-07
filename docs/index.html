@@ -1140,6 +1140,66 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <td>Array of <a href="#invoices-index">invoice objects</a></td>
 <td>A list of invoices associated with this payment instruction</td>
 </tr>
+<tr>
+<td>payments</td>
+<td>Array</td>
+<td>Array of <a href="#payment">payment objects</a></td>
+<td>A list of payments to make, one per supplier</td>
+</tr>
+</tbody></table>
+
+<h3 id="payment">Payment</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Format</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>supplier_name</td>
+<td>String</td>
+<td></td>
+<td>Name of the supplier to pay</td>
+</tr>
+<tr>
+<td>supplier_id</td>
+<td>String</td>
+<td>Depends on country code</td>
+<td>The ID of the supplier to pay (see <a href="#identifying-companies">identifying companies</a></td>
+</tr>
+<tr>
+<td>debtor_name</td>
+<td>String</td>
+<td></td>
+<td>Name of the legal entity that should make the payment, which matters if you have more than one in your account</td>
+</tr>
+<tr>
+<td>debtor_id</td>
+<td>String</td>
+<td>Depends on country code</td>
+<td>The ID of the legal entity that should make the payment (see <a href="#identifying-companies">identifying companies</a></td>
+</tr>
+<tr>
+<td>amount</td>
+<td>Number</td>
+<td></td>
+<td>The amount you should pay the supplier</td>
+</tr>
+<tr>
+<td>iban</td>
+<td>String</td>
+<td>IBAN</td>
+<td>The bank account you should pay into (if you give it to us)</td>
+</tr>
+<tr>
+<td>references</td>
+<td>String</td>
+<td>Seperated by &rsquo;, &rsquo; (comma then space)</td>
+<td>A list of invoice references included in this payment</td>
+</tr>
 </tbody></table>
 
 <h3 id="response">Response</h3>
