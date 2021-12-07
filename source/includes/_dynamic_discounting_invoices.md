@@ -37,29 +37,50 @@ If an invoice already exists under the product with the same supplier and refere
 
 ```json
 {
-
-  "description": "Invoices create endpoint json schema",
-	"type": "object",
-	"required": ["product_id", "invoices"],
-	"properties": {
-		"api_key": { "type": "string" },
-		"product_id": { "type": "number" },
-		"invoices": {
-			"type":"array",
-			"items": {
-				"type": "object",
-				"required": ["supplier_id", "reference", "amount", "due_at"],
-				"properties": {
-					"debtor_id": { "type": "string" },
-					"supplier_id": { "type": "string" },
-					"reference": { "type": "string" },
-					"amount": { "type": "number" },
-					"due_at": { "type": "string" },
-                    "custom_invoice_data": {"type": "object"}
-				}
-			}
-		}
-	}
+    "description": "Invoices create endpoint json schema",
+	  "type": "object",
+	  "required": ["product_id", "invoices"],
+	  "properties": {
+		    "api_key": { "type": "string" },
+		    "product_id": { "type": "number" },
+		    "invoices": {
+			      "type":"array",
+			      "items": {
+				        "type": "object",
+				        "required": ["supplier_id", "reference", "amount", "due_at"],
+				        "properties": {
+					          "debtor_id": { "type": "string" },
+					          "supplier_id": { "type": "string" },
+					          "reference": { "type": "string" },
+					          "amount": { "type": "number" },
+					          "due_at": { "type": "string" },
+                    "custom_invoice_data": {"type": "object"},
+                    "adjustments_to_invoice": {
+                        "type": "array",
+                        "required": ["adjustment_id", "adjustment"],
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "adjustment_id": { "type": "string" },
+                                "adjustment": { "type": "number" }
+                            }
+                        }
+                    },
+                    "adjustments_to_payment": {
+                        "type": "array",
+                        "required": ["adjustment_id", "adjustment"],
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "adjustment_id": { "type": "string" },
+                                "adjustment": { "type": "number" }
+                            }
+                        }
+                    }
+				        }
+			      }
+		    }
+	  }
 }
 ```
 
