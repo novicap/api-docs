@@ -122,13 +122,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  middleman (~> 4.0.0)
-  middleman-autoprefixer (~> 2.7.0)
-  middleman-gh-pages (~> 0.0.3)
-  middleman-sprockets (~> 4.0.0.rc)
-  middleman-syntax (~> 2.1.0)
-  redcarpet (~> 3.3.2)
-  rouge (~> 1.10.1)
+  middleman
+  middleman-autoprefixer
+  middleman-gh-pages
+  middleman-sprockets
+  middleman-syntax
+  redcarpet
+  rouge
 
 BUNDLED WITH
    1.17.2
