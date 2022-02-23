@@ -8,3 +8,4 @@ gem 'middleman-autoprefixer'
 gem "middleman-sprockets"
 gem 'rouge'
 gem 'redcarpet'
+gem 'did_you_mean'
