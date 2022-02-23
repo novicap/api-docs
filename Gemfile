@@ -8,6 +8,8 @@ gem 'middleman-autoprefixer'
 gem "middleman-sprockets"
 gem 'rouge'
 gem 'redcarpet'
+
+# Something odd's going on here - not sure why I needed these
 gem 'did_you_mean'
 gem 'etc'
 gem 'fileutils'
