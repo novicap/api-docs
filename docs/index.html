@@ -14,11 +14,11 @@
   background-color: #272822;
 }
 .highlight .err {
-  color: #151515;
-  background-color: #ac4142;
+  color: #272822;
+  background-color: #f92672;
 }
-.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
-  color: #505050;
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cpf, .highlight .c1, .highlight .cs {
+  color: #75715e;
 }
 .highlight .cp {
   color: #f4bf75;
@@ -27,45 +27,48 @@
   color: #f4bf75;
 }
 .highlight .o, .highlight .ow {
-  color: #d0d0d0;
+  color: #f8f8f2;
 }
 .highlight .p, .highlight .pi {
-  color: #d0d0d0;
+  color: #f8f8f2;
 }
 .highlight .gi {
-  color: #90a959;
+  color: #a6e22e;
 }
 .highlight .gd {
-  color: #ac4142;
+  color: #f92672;
 }
 .highlight .gh {
-  color: #6a9fb5;
-  background-color: #151515;
+  color: #66d9ef;
+  background-color: #272822;
   font-weight: bold;
 }
 .highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
-  color: #aa759f;
+  color: #ae81ff;
 }
 .highlight .kc {
-  color: #d28445;
+  color: #fd971f;
 }
 .highlight .kt {
-  color: #d28445;
+  color: #fd971f;
 }
 .highlight .kd {
-  color: #d28445;
+  color: #fd971f;
 }
-.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
-  color: #90a959;
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #a6e22e;
+}
+.highlight .sa {
+  color: #ae81ff;
 }
 .highlight .sr {
-  color: #75b5aa;
+  color: #a1efe4;
 }
 .highlight .si {
-  color: #8f5536;
+  color: #cc6633;
 }
 .highlight .se {
-  color: #8f5536;
+  color: #cc6633;
 }
 .highlight .nn {
   color: #f4bf75;
@@ -77,13 +80,13 @@
   color: #f4bf75;
 }
 .highlight .na {
-  color: #6a9fb5;
+  color: #66d9ef;
 }
-.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
-  color: #90a959;
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx {
+  color: #a6e22e;
 }
 .highlight .ss {
-  color: #90a959;
+  color: #a6e22e;
 }
     </style>
     <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
@@ -95,7 +98,7 @@
     <a href="#" id="nav-button">
       <span>
         NAV
-        <img src="images/navbar.png" />
+        <img src="images/navbar.png" alt="" />
       </span>
     </a>
     <div class="tocify-wrapper">
@@ -129,110 +132,25 @@
           <h1 id="authentication">Authentication</h1>
 
 <blockquote>
-<p>To authorize while using the endpoint <code class="prettyprint">dynamic_discounting/suppliers</code>, there are two ways:</p>
+<p>To authorize while using the endpoint <code class="prettyprint">dynamic_discounting/suppliers</code>, any of these will work:</p>
 </blockquote>
-<pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/v1/dynamic_discounting/suppliers"</span> --data <span class="nv">api_key</span><span class="o">=</span>abcd
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="s2">"https://api.novicap.com/v1/dynamic_discounting/suppliers"</span> <span class="nt">--data</span> <span class="s1">'{ "api_key": "abcd", "product_id": 123 }'</span>
 
-curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"https://api.novicap.com/v1/dynamic_discounting/suppliers"</span>
-</code></pre>
+curl <span class="nt">-H</span> <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"https://api.novicap.com/v1/dynamic_discounting/suppliers"</span> <span class="nt">--data</span> <span class="s1">'{ "product_id": 123 }'</span>
 
+curl <span class="nt">-H</span> <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"https://api.novicap.com/v1/dynamic_discounting/suppliers?product_id=123"</span>
+</code></pre></div>
 <blockquote>
-<p>where <code class="prettyprint">abcd</code> should be replaced with your API key. Note that this particular endpoint also requires a valid product_id in the request (see <a href="#add-suppliers">/v1/dynamic_discounting/suppliers</a>).</p>
+<p>where <code class="prettyprint">abcd</code> should be replaced with your API key, and <code class="prettyprint">123</code> with your product ID. We advise using a JSON payload instead of putting data into the URL, as it is required for more some endpoints that accept things like arrays and objects.</p>
 </blockquote>
 
 <p>We use an API key to authenticate which can be found by logging into your account at <a href="https://www.novicap.com">novicap.com</a> and generating it under your user profile. All API hits will be associated with your user and an indefinite audit log is accessible from your account.</p>
 
 <p>The API key should be included in all requests to the server either as a HTTP request parameter named <code class="prettyprint">api_key</code> or inside an <code class="prettyprint">Authorization: Bearer</code> HTTP request header.</p>
 
+<p>All API requests target a particular product inside your account, such as factoring or dynamic discounting. Each product has an ID which you can find inside the platform near the API key. The product ID should be included in all requests as a HTTP request parameter named <code class="prettyprint">product_id</code>.</p>
+
 <p>OAuth 2.0 authentication is available on request. The exact implementation will depend on your authentication provider and workflow.</p>
-
-          <h1 id="permissions">Permissions</h1>
-
-<p>Available endpoints depend on the configuration of your account. If you receive a 403 error while trying to access a specific endpoint, please contact support@novicap.com to request access.</p>
-
-          <h1 id="identifying-companies">Identifying companies</h1>
-
-<p>Our system uses a unique ID for each company (supplier or debtor) composed of the <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 2-letter country code</a> and an ID depending on the country. It is required for us to correctly identify the legal entity we&rsquo;re dealing with.</p>
-
-<p>In the United Kingdom, this is defined as <code class="prettyprint">GB</code> and the 8 digit Companies House number. For example, Tesco PLC has a country code of <code class="prettyprint">GB</code> and an ID of <code class="prettyprint">00445790</code>.</p>
-
-<p>In Spain, this is defined as <code class="prettyprint">ES</code> and the CIF code. For example, Mercadona SA has a country code of <code class="prettyprint">ES</code> and an ID of <code class="prettyprint">A46103834</code>.</p>
-
-          <h1 id="dynamic-discounting">Dynamic discounting</h1>
-
-          <h2 id="add-suppliers">Add suppliers</h2>
-<pre class="highlight shell"><code>curl -i -H <span class="s2">"Content-Type: application/json"</span> -X POST -i -d <span class="s1">'{
-  "api_key": "abcd",
-  "product_id": 123,
-  "suppliers": [
-    {
-      "country_code": "GB",
-      "supplier_id": "00445790",
-      "supplier_name": "Tesco PLC",
-      "contact_first_name": "John",
-      "contact_last_name": "Smith",
-      "contact_email": "john.smith@company.com",
-      "contact_phone": "+44724565898",
-      "apr": 10,
-      "custom_supplier_data": { "internal_id": "supplier-001", "tags": ["batch 1"] }
-    }
-  ]
-}'</span> <span class="se">\</span>
-<span class="s2">"https://api.novicap.com/v1/dynamic_discounting/suppliers"</span>
-</code></pre>
-
-<blockquote>
-<p>The above command returns a empty JSON payload with the 201 CREATED status.</p>
-</blockquote>
-
-<p>This endpoint adds suppliers to your dynamic discounting product. You must add suppliers before you add invoices for those suppliers.</p>
-
-<p>The company will receive an onboarding email chain, and we may reach out to the company by phone to assist in onboarding.</p>
-
-<p>If your account has more than one legal entity, you must include a <code class="prettyprint">debtor_id</code> along with every supplier, representing the entity which will pay invoices to that supplier.</p>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">POST https://api.novicap.com/v1/dynamic_discounting/suppliers</code></p>
-
-<h3 id="parameters">Parameters</h3>
-
-<blockquote>
-<p>The params for this endpoint should match this JSON schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Schema for POST /v1/dynamic_discounting/suppliers"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"product_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"suppliers"</span><span class="p">],</span><span class="w">
-  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">},</span><span class="w">
-    </span><span class="nt">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="p">},</span><span class="w">
-    </span><span class="nt">"suppliers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"supplier_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"supplier_name"</span><span class="p">,</span><span class="w"> </span><span class="s2">"contact_email"</span><span class="p">,</span><span class="w"> </span><span class="s2">"apr"</span><span class="p">],</span><span class="w">
-        </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"debtor_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">},</span><span class="w">
-          </span><span class="nt">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">},</span><span class="w">
-          </span><span class="nt">"supplier_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">},</span><span class="w">
-          </span><span class="nt">"supplier_name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">},</span><span class="w">
-          </span><span class="nt">"contact_first_name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">},</span><span class="w">
-          </span><span class="nt">"contact_last_name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">},</span><span class="w">
-          </span><span class="nt">"contact_email"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">},</span><span class="w">
-          </span><span class="nt">"contact_phone"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"string"</span><span class="p">,</span><span class="w"> </span><span class="s2">"number"</span><span class="p">]},</span><span class="w">
-          </span><span class="nt">"apr"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="p">},</span><span class="w">
-          </span><span class="nt">"fixed_fee_percentage"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="p">},</span><span class="w">
-          </span><span class="nt">"early_payment_cutoff_in_days"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"integer"</span><span class="p">},</span><span class="w">
-          </span><span class="nt">"iban"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">},</span><span class="w">
-          </span><span class="nt">"custom_supplier_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">}</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
 
 <table><thead>
 <tr>
@@ -257,6 +175,103 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <td></td>
 <td>The ID of the product, visible in the Novicap platform near the API key</td>
 </tr>
+</tbody></table>
+
+          <h1 id="permissions">Permissions</h1>
+
+<p>Available endpoints depend on the configuration of your account. If you receive a 403 error while trying to access a specific endpoint, please contact support@novicap.com to request access.</p>
+
+          <h1 id="identifying-companies">Identifying companies</h1>
+
+<p>Our system uses a unique ID for each company (supplier or debtor) composed of the <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 2-letter country code</a> and an ID depending on the country. It is required for us to correctly identify the legal entity we&rsquo;re dealing with.</p>
+
+<p>In the United Kingdom, this is defined as <code class="prettyprint">GB</code> and the 8 digit Companies House number. For example, Tesco PLC has a country code of <code class="prettyprint">GB</code> and an ID of <code class="prettyprint">00445790</code>.</p>
+
+<p>In Spain, this is defined as <code class="prettyprint">ES</code> and the CIF code. For example, Mercadona SA has a country code of <code class="prettyprint">ES</code> and an ID of <code class="prettyprint">A46103834</code>.</p>
+
+          <h1 id="dynamic-discounting">Dynamic discounting</h1>
+
+          <h2 id="add-suppliers">Add suppliers</h2>
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-i</span> <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">-X</span> POST <span class="nt">-i</span> <span class="nt">-d</span> <span class="s1">'{
+  "api_key": "abcd",
+  "product_id": 123,
+  "suppliers": [
+    {
+      "country_code": "GB",
+      "supplier_id": "00445790",
+      "supplier_name": "Tesco PLC",
+      "contact_first_name": "John",
+      "contact_last_name": "Smith",
+      "contact_email": "john.smith@company.com",
+      "contact_phone": "+44724565898",
+      "apr": 10,
+      "custom_supplier_data": { "internal_id": "supplier-001", "tags": ["batch 1"] }
+    }
+  ]
+}'</span> <span class="se">\</span>
+<span class="s2">"https://api.novicap.com/v1/dynamic_discounting/suppliers"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns a empty JSON payload with the 201 CREATED status.</p>
+</blockquote>
+
+<p>This endpoint adds suppliers to your dynamic discounting product. You must add suppliers before you add invoices for those suppliers.</p>
+
+<p>The company will receive an onboarding email chain, and we may reach out to the company by phone to assist in onboarding.</p>
+
+<p>If your account has more than one legal entity, you must include a <code class="prettyprint">debtor_id</code> along with every supplier, representing the entity which will pay invoices to that supplier.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://api.novicap.com/v1/dynamic_discounting/suppliers</code></p>
+
+<h3 id="parameters">Parameters</h3>
+
+<blockquote>
+<p>The params for this endpoint should match this JSON schema:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Schema for POST /v1/dynamic_discounting/suppliers"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"product_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"suppliers"</span><span class="p">],</span><span class="w">
+  </span><span class="nl">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">},</span><span class="w">
+    </span><span class="nl">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="p">},</span><span class="w">
+    </span><span class="nl">"suppliers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"supplier_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"supplier_name"</span><span class="p">,</span><span class="w"> </span><span class="s2">"contact_email"</span><span class="p">,</span><span class="w"> </span><span class="s2">"apr"</span><span class="p">],</span><span class="w">
+        </span><span class="nl">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"debtor_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">},</span><span class="w">
+          </span><span class="nl">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">},</span><span class="w">
+          </span><span class="nl">"supplier_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">},</span><span class="w">
+          </span><span class="nl">"supplier_name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">},</span><span class="w">
+          </span><span class="nl">"contact_first_name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">},</span><span class="w">
+          </span><span class="nl">"contact_last_name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">},</span><span class="w">
+          </span><span class="nl">"contact_email"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">},</span><span class="w">
+          </span><span class="nl">"contact_phone"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"string"</span><span class="p">,</span><span class="w"> </span><span class="s2">"number"</span><span class="p">]},</span><span class="w">
+          </span><span class="nl">"apr"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="p">},</span><span class="w">
+          </span><span class="nl">"fixed_fee_percentage"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="p">},</span><span class="w">
+          </span><span class="nl">"early_payment_cutoff_in_days"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"integer"</span><span class="p">},</span><span class="w">
+          </span><span class="nl">"iban"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">},</span><span class="w">
+          </span><span class="nl">"custom_supplier_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Format</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
 <tr>
 <td>suppliers</td>
 <td>Array</td>
@@ -403,13 +418,12 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <p>A successful response has a 201 Created HTTP status code.</p>
 
 <h2 id="retrieve-suppliers">Retrieve suppliers</h2>
-<pre class="highlight shell"><code>curl -i -H <span class="s2">"Content-Type: application/json"</span> -X GET -i -d <span class="s1">'{
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-i</span> <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">-X</span> GET <span class="nt">-i</span> <span class="nt">-d</span> <span class="s1">'{
   "api_key": "abcd",
   "product_id": 123
 }'</span> <span class="se">\</span>
 <span class="s2">"https://api.novicap.com/v1/dynamic_discounting/suppliers"</span>
-</code></pre>
-
+</code></pre></div>
 <blockquote>
 <p>The above command returns an array of Supplier objects in the JSON payload with the 200 OK status.</p>
 </blockquote>
@@ -425,49 +439,23 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <blockquote>
 <p>The params for this endpoint should match this JSON schema:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Suppliers index endpoint json schema"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"product_id"</span><span class="p">],</span><span class="w">
-  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">}</span><span class="w">
+<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Suppliers index endpoint json schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"product_id"</span><span class="p">],</span><span class="w">
+  </span><span class="nl">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Required</th>
-<th>Format</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>api_key</td>
-<td>String</td>
-<td></td>
-<td></td>
-<td>Your API key for authentication</td>
-</tr>
-<tr>
-<td>product_id</td>
-<td>Number</td>
-<td>✓</td>
-<td></td>
-<td>The ID of the product, visible in the Novicap platform near the API key</td>
-</tr>
-</tbody></table>
-
+</span></code></pre></div>
 <h3 id="response">Response</h3>
 
-<p>A successful response has a 200 Created HTTP status code along with an array of supplier objects described above.</p>
+<p>A successful response has a 200 OK HTTP status code along with an array of supplier objects described above.</p>
 
           <h2 id="add-invoices">Add invoices</h2>
-<pre class="highlight shell"><code>curl -i -H <span class="s2">"Content-Type: application/json"</span> -X POST -i -d <span class="s1">'{
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-i</span> <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">-X</span> POST <span class="nt">-i</span> <span class="nt">-d</span> <span class="s1">'{
   "api_key": "abcd",
   "product_id": 123,
   "invoices": [
@@ -481,8 +469,7 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
   ]
 }'</span> <span class="se">\</span>
 <span class="s2">"https://api.novicap.com/v1/dynamic_discounting/invoices"</span>
-</code></pre>
-
+</code></pre></div>
 <blockquote>
 <p>The above command returns a empty JSON payload with the 201 CREATED status.</p>
 </blockquote>
@@ -493,7 +480,7 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 
 <p>If your account has more than one legal entity, you must include a <code class="prettyprint">debtor_id</code> along with every supplier, representing the entity which will pay invoices to that supplier.</p>
 
-<p>If an invoice already exists under the product with the same supplier and reference, and the invoice is not yet part of a payment instruction, we attempt to update it. If the supplier has already accepted early payment and the update changes the <code class="prettyprint">amount</code>, <code class="prettyprint">due_at</code>, or <code class="prettyprint">adjustments_to_invoice</code>, we will cancel acceptance and ask the supplier to accept the new terms instead.</p>
+<p>If an invoice already exists under the product with the same supplier and reference, and the invoice is not yet part of a payment instruction, we attempt to update it. If the supplier has already accepted early payment and the update changes the <code class="prettyprint">amount</code>, <code class="prettyprint">due_at</code>, or <code class="prettyprint">invoice_adjustments</code>, we will cancel acceptance and ask the supplier to accept the new terms instead.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -504,44 +491,33 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <blockquote>
 <p>The params for this endpoint should match this JSON schema:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invoices create endpoint json schema"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"product_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"invoices"</span><span class="p">],</span><span class="w">
-  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"invoices"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"array"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"supplier_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"reference"</span><span class="p">,</span><span class="w"> </span><span class="s2">"amount"</span><span class="p">,</span><span class="w"> </span><span class="s2">"due_at"</span><span class="p">],</span><span class="w">
-        </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"debtor_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
-          </span><span class="nt">"supplier_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
-          </span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
-          </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">},</span><span class="w">
-          </span><span class="nt">"due_at"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
-          </span><span class="nt">"custom_invoice_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">},</span><span class="w">
-          </span><span class="nt">"adjustments_to_invoice"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"adjustment_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"adjustment"</span><span class="p">],</span><span class="w">
-            </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-              </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
-              </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"adjustment_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
-                </span><span class="nt">"adjustment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">}</span><span class="w">
-              </span><span class="p">}</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-          </span><span class="p">},</span><span class="w">
-          </span><span class="nt">"adjustments_to_payment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"adjustment_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"adjustment"</span><span class="p">],</span><span class="w">
-            </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-              </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
-              </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"adjustment_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
-                </span><span class="nt">"adjustment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">}</span><span class="w">
+<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invoices create endpoint json schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"product_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"invoices"</span><span class="p">],</span><span class="w">
+  </span><span class="nl">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"invoices"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"array"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"supplier_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"reference"</span><span class="p">,</span><span class="w"> </span><span class="s2">"amount"</span><span class="p">,</span><span class="w"> </span><span class="s2">"due_at"</span><span class="p">],</span><span class="w">
+        </span><span class="nl">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"debtor_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"supplier_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"due_at"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"custom_invoice_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">},</span><span class="w">
+          </span><span class="nl">"invoice_adjustments"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"adjustment_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"adjustment"</span><span class="p">],</span><span class="w">
+            </span><span class="nl">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"adjustment_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+                </span><span class="nl">"adjustment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">}</span><span class="w">
               </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
           </span><span class="p">}</span><span class="w">
@@ -550,8 +526,7 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-
+</span></code></pre></div>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -561,20 +536,6 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <th>Description</th>
 </tr>
 </thead><tbody>
-<tr>
-<td>api_key</td>
-<td>String</td>
-<td></td>
-<td></td>
-<td>Your API key for authentication</td>
-</tr>
-<tr>
-<td>product_id</td>
-<td>Number</td>
-<td>✓</td>
-<td></td>
-<td>The ID of the product, visible in the Novicap platform near the API key</td>
-</tr>
 <tr>
 <td>invoices</td>
 <td>Array</td>
@@ -652,28 +613,19 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <td>Any data you want to associate with this invoice</td>
 </tr>
 <tr>
-<td>adjustments_to_invoice</td>
+<td>invoice_adjustments</td>
 <td>Array</td>
 <td></td>
-<td>Array of <a href="#adjustments">adjustment objects</a></td>
+<td>Array of <a href="#invoice-adjustment">adjustment objects</a></td>
 <td>[]</td>
 <td>A list of changes to the invoice amount that should be applied before the discount</td>
 <td></td>
 </tr>
-<tr>
-<td>adjustments_to_payment</td>
-<td>Array</td>
-<td></td>
-<td>Array of <a href="#adjustments">adjustment objects</a></td>
-<td>[]</td>
-<td>A list of changes to the invoice amount that should be applied after the discount</td>
-<td></td>
-</tr>
 </tbody></table>
 
-<h3 id="adjustments">Adjustments</h3>
+<h3 id="invoice-adjustment">Invoice adjustment</h3>
 
-<p>You may have pre-existing credit notes that you want to apply to an invoice. These can apply before we calculate a discount based on the APR, or after. The supplier will be shown these adjustments inside the platform.</p>
+<p>You may have pre-existing credit notes that you want to apply to an invoice. These apply before we calculate a discount based on the APR. The supplier will be shown these adjustments inside the platform.</p>
 
 <table><thead>
 <tr>
@@ -691,7 +643,7 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <td>✓</td>
 <td></td>
 <td></td>
-<td>An ID that is unique to this invoice</td>
+<td>A reference which we show to the supplier</td>
 </tr>
 <tr>
 <td>adjustment</td>
@@ -708,13 +660,12 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <p>A successful response has a 201 Created HTTP status code.</p>
 
 <h2 id="retrieve-invoices">Retrieve invoices</h2>
-<pre class="highlight shell"><code>curl -i -H <span class="s2">"Content-Type: application/json"</span> -X GET -i -d <span class="s1">'{
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-i</span> <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">-X</span> GET <span class="nt">-i</span> <span class="nt">-d</span> <span class="s1">'{
   "api_key": "abcd",
   "product_id": 123
 }'</span> <span class="se">\</span>
 <span class="s2">"https://api.novicap.com/v1/dynamic_discounting/invoices"</span>
-</code></pre>
-
+</code></pre></div>
 <blockquote>
 <p>The above command returns an array of Invoice objects in the JSON payload with the 200 OK status.</p>
 </blockquote>
@@ -730,46 +681,20 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <blockquote>
 <p>The params for this endpoint should match this JSON schema:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Suppliers index endpoint json schema"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"product_id"</span><span class="p">],</span><span class="w">
-  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">}</span><span class="w">
+<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Suppliers index endpoint json schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"product_id"</span><span class="p">],</span><span class="w">
+  </span><span class="nl">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Required</th>
-<th>Format</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>api_key</td>
-<td>String</td>
-<td></td>
-<td></td>
-<td>Your API key for authentication</td>
-</tr>
-<tr>
-<td>product_id</td>
-<td>Number</td>
-<td>✓</td>
-<td></td>
-<td>The ID of the product, visible in the Novicap platform near the API key</td>
-</tr>
-</tbody></table>
-
+</span></code></pre></div>
 <h3 id="response">Response</h3>
 
-<p>A successful response has a 200 Created HTTP status code along with an array of invoice objects.</p>
+<p>A successful response has a 200 OK HTTP status code along with an array of invoice objects.</p>
 
 <table><thead>
 <tr>
@@ -884,29 +809,22 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <td>The custom supplier data you gave us</td>
 </tr>
 <tr>
-<td>adjustments_to_invoice</td>
+<td>invoice_adjustments</td>
 <td>Array</td>
-<td>Array of <a href="!adjustments">adjustment objects</a></td>
+<td>Array of <a href="#invoice-adjustment">adjustment objects</a></td>
 <td>The pre-discount ajustments you gave us</td>
-</tr>
-<tr>
-<td>adjustments_to_payment</td>
-<td>Array</td>
-<td>Array of <a href="!adjustments">adjustment objects</a></td>
-<td>The post-discount ajustments you gave us</td>
 </tr>
 </tbody></table>
 
 <h2 id="delete-invoice">Delete invoice</h2>
-<pre class="highlight shell"><code>curl -i -H <span class="s2">"Content-Type: application/json"</span> -X DELETE -i -d <span class="s1">'{
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-i</span> <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">-X</span> DELETE <span class="nt">-i</span> <span class="nt">-d</span> <span class="s1">'{
   "api_key": "abcd",
   "product_id": 123
 }'</span> <span class="se">\</span>
 <span class="s2">"https://api.novicap.com/v1/dynamic_discounting/invoices/DDI-ABCD"</span>
-</code></pre>
-
+</code></pre></div>
 <blockquote>
-<p>The above command returns a empty JSON payload with the 202 ACCEPTED status.</p>
+<p>The above command returns a empty JSON payload with the 200 ACCEPTED status.</p>
 </blockquote>
 
 <p>This endpoint permanently deletes the invoice. This cannot be undone.</p>
@@ -924,55 +842,28 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <blockquote>
 <p>The params for this endpoint should match this JSON schema:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invoices destroy endpoint json schema"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"product_id"</span><span class="p">],</span><span class="w">
-  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">}</span><span class="w">
+<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invoices destroy endpoint json schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"product_id"</span><span class="p">],</span><span class="w">
+  </span><span class="nl">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Required</th>
-<th>Format</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>api_key</td>
-<td>String</td>
-<td></td>
-<td></td>
-<td>Your API key for authentication</td>
-</tr>
-<tr>
-<td>product_id</td>
-<td>Number</td>
-<td>✓</td>
-<td></td>
-<td>The ID of the product, visible in the Novicap platform near the API key</td>
-</tr>
-</tbody></table>
-
+</span></code></pre></div>
 <h3 id="response">Response</h3>
 
-<p>A successful response has a 202 Accepted HTTP status code.</p>
+<p>A successful response has a 200 OK HTTP status code.</p>
 
           <h2 id="create-payment-instruction">Create payment instruction</h2>
-<pre class="highlight shell"><code>curl -H <span class="s2">"Content-Type: application/json"</span> -X POST -i -d <span class="s1">'{
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">-X</span> POST <span class="nt">-i</span> <span class="nt">-d</span> <span class="s1">'{
   "api_key": "abcd",
   "product_id": 123
   }'</span> <span class="se">\</span>
 <span class="s2">"https://api.novicap.com/v1/dynamic_discounting/payment_instructions"</span>
-</code></pre>
-
+</code></pre></div>
 <blockquote>
 <p>The above command returns a JSON payload with the 201 CREATED status.</p>
 </blockquote>
@@ -990,19 +881,18 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <blockquote>
 <p>The params for this endpoint should match this JSON schema:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payment instructions create endpoint json schema"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"product_id"</span><span class="p">],</span><span class="w">
-  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"debtor_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">}</span><span class="w">
+<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payment instructions create endpoint json schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"product_id"</span><span class="p">],</span><span class="w">
+  </span><span class="nl">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"debtor_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-
+</span></code></pre></div>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1012,20 +902,6 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <th>Description</th>
 </tr>
 </thead><tbody>
-<tr>
-<td>api_key</td>
-<td>String</td>
-<td></td>
-<td></td>
-<td>Your API key for authentication</td>
-</tr>
-<tr>
-<td>product_id</td>
-<td>Number</td>
-<td>✓</td>
-<td></td>
-<td>The ID of the product, visible in the Novicap platform near the API key</td>
-</tr>
 <tr>
 <td>debtor_id</td>
 <td>Number</td>
@@ -1040,14 +916,13 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <p>A successful response has a 201 Created HTTP status code along with a <a href="#payment-instruction">payment instruction object</a> described below.</p>
 
 <h2 id="retrieve-payment-instructions">Retrieve payment instructions</h2>
-<pre class="highlight shell"><code>curl -H <span class="s2">"Content-Type: application/json"</span> -X GET -i -d <span class="s1">'{
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">-X</span> GET <span class="nt">-i</span> <span class="nt">-d</span> <span class="s1">'{
 -X GET -d '</span><span class="o">{</span>
   <span class="s2">"api_key"</span>: <span class="s2">"abcd"</span>,
   <span class="s2">"product_id"</span>: 123
 <span class="o">}</span><span class="s1">' \
 "https://api.novicap.com/v1/dynamic_discounting/payment_instructions"
-</span></code></pre>
-
+</span></code></pre></div>
 <blockquote>
 <p>The above command returns a JSON payload with the 200 OK status.</p>
 </blockquote>
@@ -1063,43 +938,17 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <blockquote>
 <p>The params for this endpoint should match this JSON schema:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payment instructions index endpoint json schema"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"product_id"</span><span class="p">],</span><span class="w">
-  </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">}</span><span class="w">
+<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payment instructions index endpoint json schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"product_id"</span><span class="p">],</span><span class="w">
+  </span><span class="nl">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Required</th>
-<th>Format</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>api_key</td>
-<td>String</td>
-<td></td>
-<td></td>
-<td>Your API key for authentication</td>
-</tr>
-<tr>
-<td>product_id</td>
-<td>Number</td>
-<td>✓</td>
-<td></td>
-<td>The ID of the product, visible in the Novicap platform near the API key</td>
-</tr>
-</tbody></table>
-
+</span></code></pre></div>
 <h3 id="payment-instructions">Payment instructions</h3>
 
 <table><thead>
@@ -1197,14 +1046,235 @@ curl -H <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"h
 <tr>
 <td>references</td>
 <td>String</td>
-<td>Seperated by &rsquo;, &rsquo; (comma then space)</td>
+<td>Seperated by &lsquo;, &rsquo; (comma then space)</td>
 <td>A list of invoice references included in this payment</td>
 </tr>
 </tbody></table>
 
 <h3 id="response">Response</h3>
 
+<p>A successful response has a 200 OK HTTP status code along with the list of <a href="!payment-instruction">payment instructions</a> and the included invoices.</p>
+
+          <h2 id="create-payment-adjustment">Create payment adjustment</h2>
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">-X</span> POST <span class="nt">-i</span> <span class="nt">-d</span> <span class="s1">'{
+  "api_key": "abcd",
+  "product_id": 123,
+  "payment_adjustments": [
+    {
+      "supplier_id": "00445790",
+      "reference": "ADJ-001",
+      "amount": -100
+    }
+  ]
+}'</span> <span class="se">\</span>
+<span class="s2">"https://api.novicap.com/v1/dynamic_discounting/payment_adjustments"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns a JSON payload with the 201 CREATED status.</p>
+</blockquote>
+
+<p>This endpoint creates an adjustment to the next payment to a supplier. It can be used to collect outstanding credit notes from the next payment you make, instead of attaching adjustments to individual invoices using <a href="#invoice-adjustment">invoice adjustments</a>.</p>
+
+<p>If your account has more than one legal entity, you must include a <code class="prettyprint">debtor_id</code>. The next time that entity (but not others) creates a payment instruction to the given supplier, the payment adjustment will be applied.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://api.novicap.com/v1/dynamic_discounting/payment_adjustments</code></p>
+
+<h3 id="parameters">Parameters</h3>
+
+<blockquote>
+<p>The params for this endpoint should match this JSON schema:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payment adjustment create endpoint json schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"product_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"payment_adjustments"</span><span class="p">],</span><span class="w">
+  </span><span class="nl">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"payment_adjustments"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"supplier_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"reference"</span><span class="p">,</span><span class="w"> </span><span class="s2">"amount"</span><span class="p">],</span><span class="w">
+        </span><span class="nl">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"debtor_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"supplier_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"custom_payment_adjustment_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="w"> </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Format</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>payment_adjustments</td>
+<td>Array</td>
+<td>✓</td>
+<td>Array of <a href="#payment-adjustment-create">payment adjustment objects</a></td>
+<td>The payment adjustments you want to add or update</td>
+</tr>
+</tbody></table>
+
+<h3 id="payment-adjustment-create"> Payment adjustment (create)</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Format</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>debtor_id</td>
+<td>String</td>
+<td></td>
+<td></td>
+<td>If your account contains more than one legal entity, this is the ID of the entity that has the payment adjustment</td>
+</tr>
+<tr>
+<td>supplier_id</td>
+<td>String</td>
+<td>✓</td>
+<td>Depends on country code</td>
+<td>The ID of the supplier (see <a href="#identifying-companies">identifying companies</a>)</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>✓</td>
+<td></td>
+<td>The reference of the payment adjustment that will be shown to the supplier</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>Number</td>
+<td>✓</td>
+<td></td>
+<td>The amount of the payment adjustment. For credit notes, this should be negative.</td>
+</tr>
+<tr>
+<td>custom_payment_adjustment_data</td>
+<td>Object</td>
+<td></td>
+<td>Any valid JSON, maximum of 8192 characters</td>
+<td>Any data you want to associate with this payment adjustment</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<p>A successful response has a 201 Created HTTP status code.</p>
+
+<h2 id="retrieve-payment-adjustments">Retrieve payment adjustments</h2>
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">-X</span> GET <span class="nt">-i</span> <span class="nt">-d</span> <span class="s1">'{
+-X GET -d '</span><span class="o">{</span>
+  <span class="s2">"api_key"</span>: <span class="s2">"abcd"</span>,
+  <span class="s2">"product_id"</span>: 123
+<span class="o">}</span><span class="s1">' \
+"https://api.novicap.com/v1/dynamic_discounting/payment_adjustments"
+</span></code></pre></div>
+<blockquote>
+<p>The above command returns a JSON payload with the 200 OK status.</p>
+</blockquote>
+
+<p>This endpoint returns all the payments adjustments associated with the product.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://api.novicap.com/v1/dynamic_discounting/payment_adjustments</code></p>
+
+<h3 id="parameters">Parameters</h3>
+
+<blockquote>
+<p>The params for this endpoint should match this JSON schema:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://json-schema.org/draft-04/schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payment adjustments index endpoint json schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"product_id"</span><span class="p">],</span><span class="w">
+  </span><span class="nl">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<h3 id="response">Response</h3>
+
 <p>A successful response has a 200 OK HTTP status code along with the list of payment instructions and the included invoices.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Format</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>payment_adjustments</td>
+<td>Array</td>
+<td>Array of <a href="#payment-adjustment-index">payment adjustment objects</a></td>
+<td>List of payment adjustments in your account</td>
+</tr>
+</tbody></table>
+
+<h3 id="payment-adjustment-index">Payment adjustment (index)</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>debtor_id</td>
+<td>String</td>
+<td>If your account contains more than one legal entity, this is the ID of the entity that has the payment adjustment</td>
+</tr>
+<tr>
+<td>supplier_id</td>
+<td>String</td>
+<td>The ID of the supplier (see <a href="#identifying-companies">identifying companies</a>)</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>The reference of the payment adjustment that is shown to the supplier</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>Number</td>
+<td>The amount of the payment adjustment. For credit notes, this should be negative.</td>
+</tr>
+<tr>
+<td>custom_payment_adjustment_data</td>
+<td>Object</td>
+<td>Any data you gave us to associate with this payment adjustment</td>
+</tr>
+<tr>
+<td>payment_instruction_id</td>
+<td>String</td>
+<td>The ID of the payment instruction that this adjustment was applied to, if it has been applied</td>
+</tr>
+</tbody></table>
 
           <h2 id="errors">Errors</h2>
 
