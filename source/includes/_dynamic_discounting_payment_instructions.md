@@ -39,8 +39,6 @@ If your account has more than one legal entity, you must include a `debtor_id`, 
 
 | Parameter  | Type   | Required | Format | Description                                                             |
 |------------+--------+----------+--------+-------------------------------------------------------------------------|
-| api_key    | String |          |        | Your API key for authentication                                         |
-| product_id | Number | ✓        |        | The ID of the product, visible in the Novicap platform near the API key |
 | debtor_id  | Number |          |        | The ID of the entity, if your account has more then one legal entity    |
 
 ### Response
@@ -83,11 +81,6 @@ This endpoint returns all the payments instructions associated with the product.
 }
 ```
 
-| Parameter  | Type   | Required | Format | Description                                                             |
-|------------+--------+----------+--------+-------------------------------------------------------------------------|
-| api_key    | String |          |        | Your API key for authentication                                         |
-| product_id | Number | ✓        |        | The ID of the product, visible in the Novicap platform near the API key |
-
 ### Payment instructions
 
 | Parameter            | Type  | Format                                                       | Description                                  |
@@ -117,4 +110,4 @@ This endpoint returns all the payments instructions associated with the product.
 
 ### Response
 
-A successful response has a 200 OK HTTP status code along with the list of payment instructions and the included invoices.
+A successful response has a 200 OK HTTP status code along with the list of [payment instructions](!payment-instruction) and the included invoices.

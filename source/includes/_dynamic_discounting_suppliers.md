@@ -75,8 +75,6 @@ If your account has more than one legal entity, you must include a `debtor_id` a
 
 | Parameter  | Type   | Required | Format                                  | Description                                                             |
 |------------+--------+----------+-----------------------------------------+-------------------------------------------------------------------------|
-| api_key    | String |          |                                         | Your API key for authentication                                         |
-| product_id | Number | ✓        |                                         | The ID of the product, visible in the Novicap platform near the API key |
 | suppliers  | Array  | ✓        | Array of [supplier objects](#suppliers) | A list of suppliers you want to add                                     |
 
 ### Suppliers
@@ -137,12 +135,6 @@ This endpoint returns all the suppliers in your dynamic discounting product.
 }
 ```
 
-| Parameter  | Type   | Required | Format | Description                                                             |
-|------------+--------+----------+--------+-------------------------------------------------------------------------|
-| api_key    | String |          |        | Your API key for authentication                                         |
-| product_id | Number | ✓        |        | The ID of the product, visible in the Novicap platform near the API key |
-
-
 ### Response
 
-A successful response has a 200 Created HTTP status code along with an array of supplier objects described above.
+A successful response has a 200 OK HTTP status code along with an array of supplier objects described above.
