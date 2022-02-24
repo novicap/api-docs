@@ -125,6 +125,7 @@ A successful response has a 200 OK HTTP status code along with the list of payme
 | debtor_id                      | String | If your account contains more than one legal entity, this is the ID of the entity that has the payment adjustment |
 | supplier_id                    | String | The ID of the supplier (see [identifying companies](#identifying-companies))                                      |
 | reference                      | String | The reference of the payment adjustment that is shown to the supplier                                             |
+| transaction_id                 | String | A unique internal ID used for the destroy endpoint                                                                |
 | amount                         | Number | The amount of the payment adjustment. For credit notes, this should be negative.                                  |
 | custom_payment_adjustment_data | Object | Any data you gave us to associate with this payment adjustment                                                    |
 | payment_instruction_id         | String | The ID of the payment instruction that this adjustment was applied to, if it has been applied                     |
