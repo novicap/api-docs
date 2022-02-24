@@ -363,13 +363,21 @@
 <p>Please contact <a href="support@novicap.com">support@novicap.com</a> if you have any questions.</p>
 <h1 id='authentication'>Authentication</h1>
 <blockquote>
-<p>To authorize while using the endpoint <code>dynamic_discounting/suppliers</code>, any of these will work:</p>
+<p>To authorize while using a GET endpoint:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.novicap.com/v1/dynamic_discounting/suppliers"</span> <span class="nt">--data</span> <span class="s1">'{ "api_key": "abcd", "product_id": 123 }'</span>
-
-curl <span class="nt">-H</span> <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"https://api.novicap.com/v1/dynamic_discounting/suppliers"</span> <span class="nt">--data</span> <span class="s1">'{ "product_id": 123 }'</span>
-
-curl <span class="nt">-H</span> <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"https://api.novicap.com/v1/dynamic_discounting/suppliers?product_id=123"</span>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-H</span> <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"https://api.novicap.com/v1/dynamic_discounting/suppliers?product_id=123"</span>
+</code></pre></div>
+<blockquote>
+<p>To authorize while using a POST endpoint, you have more options, since a JSON payload is accepted. Either of these is valid:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-H</span> <span class="s2">"Authorization: Bearer abcd"</span> <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">-X</span> POST <span class="nt">-i</span> <span class="nt">-d</span> <span class="s1">'{"payment_adjustments": []}'</span> <span class="se">\</span>
+<span class="s2">"https://api.novicap.com/v1/dynamic_discounting/payment_adjustments?product_id=123"</span>
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">-X</span> POST <span class="nt">-i</span> <span class="nt">-d</span> <span class="s1">'{
+  "api_key": "abcd",
+  "product_id": 123,
+  "payment_adjustments": []
+}'</span> <span class="se">\</span>
+<span class="s2">"https://api.novicap.com/v1/dynamic_discounting/suppliers"</span>
 </code></pre></div>
 <blockquote>
 <p>where <code>abcd</code> should be replaced with your API key, and <code>123</code> with your product ID. We advise using a JSON payload instead of putting data into the URL, as it is required for more some endpoints that accept things like arrays and objects.</p>
@@ -377,36 +385,11 @@ curl <span class="nt">-H</span> <span class="s2">"Authorization: Bearer abcd"</s
 
 <p>We use an API key to authenticate which can be found by logging into your account at <a href="https://www.novicap.com">novicap.com</a> and generating it under your user profile. All API hits will be associated with your user and an indefinite audit log is accessible from your account.</p>
 
-<p>The API key should be included in all requests to the server either as a HTTP request parameter named <code>api_key</code> or inside an <code>Authorization: Bearer</code> HTTP request header.</p>
+<p>The API key should be included in all requests to the server either as a HTTP request parameter named <code>api_key</code>, inside a JSON payload with key <code>api_key</code>, or inside an <code>Authorization: Bearer</code> HTTP request header.</p>
 
-<p>All API requests target a particular product inside your account, such as factoring or dynamic discounting. Each product has an ID which you can find inside the platform near the API key. The product ID should be included in all requests as a HTTP request parameter named <code>product_id</code>.</p>
+<p>All API requests target a particular product inside your account, such as factoring or dynamic discounting. Each product has an ID which you can find inside the platform near the API key. The product ID should be included in all requests as a HTTP request parameter named <code>product_id</code> or inside a JSON payload with key <code>product_id</code>.</p>
 
 <p>OAuth 2.0 authentication is available on request. The exact implementation will depend on your authentication provider and workflow.</p>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Required</th>
-<th>Format</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>api_key</td>
-<td>String</td>
-<td></td>
-<td></td>
-<td>Your API key for authentication</td>
-</tr>
-<tr>
-<td>product_id</td>
-<td>Number</td>
-<td>✓</td>
-<td></td>
-<td>The ID of the product, visible in the Novicap platform near the API key</td>
-</tr>
-</tbody></table>
 <h1 id='permissions'>Permissions</h1>
 <p>Available endpoints depend on the configuration of your account. If you receive a 403 error while trying to access a specific endpoint, please contact support@novicap.com to request access.</p>
 <h1 id='identifying-companies'>Identifying companies</h1>
@@ -1393,6 +1376,11 @@ curl <span class="nt">-H</span> <span class="s2">"Authorization: Bearer abcd"</s
 <td>reference</td>
 <td>String</td>
 <td>The reference of the payment adjustment that is shown to the supplier</td>
+</tr>
+<tr>
+<td>transaction_id</td>
+<td>String</td>
+<td>A unique internal ID used for the destroy endpoint</td>
 </tr>
 <tr>
 <td>amount</td>
