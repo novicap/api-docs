@@ -3,23 +3,23 @@
 > To authorize while using a GET endpoint:
 
 ```shell
-curl -H "Authorization: Bearer abcd" "https://api.novicap.com/v1/dynamic_discounting/suppliers?product_id=123"
+curl --header "Authorization: Bearer abcd" "https://api.novicap.com/v1/dynamic_discounting/suppliers?product_id=123"
 ```
 
 > To authorize while using a POST endpoint, you have more options, since a JSON payload is accepted. Either of these is valid:
 
 ```shell
-curl -H "Authorization: Bearer abcd" -H "Content-Type: application/json" -X POST -i -d '{"payment_adjustments": []}' \
+curl --header "Authorization: Bearer abcd" --header "Content-Type: application/json" --data '{"payment_adjustments": []}' \
 "https://api.novicap.com/v1/dynamic_discounting/payment_adjustments?product_id=123"
 ```
 
 ```shell
-curl -H "Content-Type: application/json" -X POST -i -d '{
+curl --header "Content-Type: application/json" --data '{
   "api_key": "abcd",
   "product_id": 123,
   "payment_adjustments": []
 }' \
-"https://api.novicap.com/v1/dynamic_discounting/suppliers"
+"https://api.novicap.com/v1/dynamic_discounting/payment_adjustments"
 ```
 
 > where `abcd` should be replaced with your API key, and `123` with your product ID. We advise using a JSON payload instead of putting data into the URL, as it is required for more some endpoints that accept things like arrays and objects.

@@ -1,9 +1,7 @@
 ## Add invoices
 
 ```shell
-curl -i -H "Content-Type: application/json" -X POST -i -d '{
-  "api_key": "abcd",
-  "product_id": 123,
+curl --header "Authorization: Bearer abcd" --header "Content-Type: application/json" --data '{
   "invoices": [
     {
       "supplier_id": "00445790",
@@ -14,7 +12,7 @@ curl -i -H "Content-Type: application/json" -X POST -i -d '{
     }
   ]
 }' \
-"https://api.novicap.com/v1/dynamic_discounting/invoices"
+"https://api.novicap.com/v1/dynamic_discounting/invoices?product_id=123"
 ```
 
 > The above command returns a empty JSON payload with the 201 CREATED status.
@@ -39,10 +37,8 @@ If an invoice already exists under the product with the same supplier and refere
 {
   "description": "Invoices create endpoint json schema",
   "type": "object",
-  "required": ["product_id", "invoices"],
+  "required": ["invoices"],
   "properties": {
-    "api_key": { "type": "string" },
-    "product_id": { "type": "number" },
     "invoices": {
       "type":"array",
       "items": {
@@ -105,11 +101,7 @@ A successful response has a 201 Created HTTP status code.
 ## Retrieve invoices
 
 ```shell
-curl -i -H "Content-Type: application/json" -X GET -i -d '{
-  "api_key": "abcd",
-  "product_id": 123
-}' \
-"https://api.novicap.com/v1/dynamic_discounting/invoices"
+curl --header "Authorization: Bearer abcd" "https://api.novicap.com/v1/dynamic_discounting/invoices?product_id=123"
 ```
 
 > The above command returns an array of Invoice objects in the JSON payload with the 200 OK status.
@@ -119,23 +111,6 @@ This endpoint returns all the invoices registered in your product.
 ### HTTP Request
 
 `GET https://api.novicap.com/v1/dynamic_discounting/invoices`
-
-### Parameters
-
-> The params for this endpoint should match this JSON schema:
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-04/schema",
-  "description": "Suppliers index endpoint json schema",
-  "type": "object",
-  "required": ["product_id"],
-  "properties": {
-    "api_key": { "type": "string" },
-    "product_id": { "type": "number" }
-  }
-}
-```
 
 ### Response
 
@@ -170,11 +145,7 @@ Each invoice object has the following schema:
 ## Delete invoice
 
 ```shell
-curl -i -H "Content-Type: application/json" -X DELETE -i -d '{
-  "api_key": "abcd",
-  "product_id": 123
-}' \
-"https://api.novicap.com/v1/dynamic_discounting/invoices/DDI-ABCD"
+curl --header "Authorization: Bearer abcd" --request DELETE "https://api.novicap.com/v1/dynamic_discounting/invoices/DDI-ABCD?product_id=123"
 ```
 
 > The above command returns a empty JSON payload with the 200 ACCEPTED status.
@@ -188,23 +159,6 @@ The invoice cannot be deleted if it is already part of a payment instruction. If
 ### HTTP Request
 
 `DELETE https://api.novicap.com/v1/dynamic_discounting/invoices/:transaction_id`
-
-### Parameters
-
-> The params for this endpoint should match this JSON schema:
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-04/schema",
-  "description": "Invoices destroy endpoint json schema",
-  "type": "object",
-  "required": ["product_id"],
-  "properties": {
-    "api_key": { "type": "string" },
-    "product_id": { "type": "number" }
-  }
-}
-```
 
 ### Response
 

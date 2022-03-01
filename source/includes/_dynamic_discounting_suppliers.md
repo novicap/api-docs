@@ -1,9 +1,7 @@
 ## Add suppliers
 
 ```shell
-curl -i -H "Content-Type: application/json" -X POST -i -d '{
-  "api_key": "abcd",
-  "product_id": 123,
+curl --header "Authorization: Bearer abcd" --header "Content-Type: application/json" --data '{
   "suppliers": [
     {
       "country_code": "GB",
@@ -18,7 +16,7 @@ curl -i -H "Content-Type: application/json" -X POST -i -d '{
     }
   ]
 }' \
-"https://api.novicap.com/v1/dynamic_discounting/suppliers"
+"https://api.novicap.com/v1/dynamic_discounting/suppliers?product_id=123"
 ```
 
 > The above command returns a empty JSON payload with the 201 CREATED status.
@@ -43,10 +41,8 @@ If your account has more than one legal entity, you must include a `debtor_id` a
   "$schema": "http://json-schema.org/draft-04/schema",
   "description": "Schema for POST /v1/dynamic_discounting/suppliers",
   "type": "object",
-  "required": ["product_id", "suppliers"],
+  "required": ["suppliers"],
   "properties": {
-    "api_key": {"type": "string"},
-    "product_id": {"type": "number"},
     "suppliers": {
       "type": "array",
       "items": {
@@ -102,38 +98,16 @@ A successful response has a 201 Created HTTP status code.
 ## Retrieve suppliers
 
 ```shell
-curl -i -H "Content-Type: application/json" -X GET -i -d '{
-  "api_key": "abcd",
-  "product_id": 123
-}' \
-"https://api.novicap.com/v1/dynamic_discounting/suppliers"
+curl --header "Authorization: Bearer abcd" "https://api.novicap.com/v1/dynamic_discounting/suppliers?product_id=123"
 ```
 
 > The above command returns an array of Supplier objects in the JSON payload with the 200 OK status.
 
 This endpoint returns all the suppliers in your dynamic discounting product.
 
-
 ### HTTP Request
 
 `GET https://api.novicap.com/v1/dynamic_discounting/suppliers`
-
-### Parameters
-
-> The params for this endpoint should match this JSON schema:
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-04/schema",
-  "description": "Suppliers index endpoint json schema",
-  "type": "object",
-  "required": ["product_id"],
-  "properties": {
-    "api_key": { "type": "string" },
-    "product_id": { "type": "number" }
-  }
-}
-```
 
 ### Response
 

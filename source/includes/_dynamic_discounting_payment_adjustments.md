@@ -1,9 +1,7 @@
 ## Create payment adjustment
 
 ```shell
-curl -H "Content-Type: application/json" -X POST -i -d '{
-  "api_key": "abcd",
-  "product_id": 123,
+curl --header "Authorization: Bearer abcd" --header "Content-Type: application/json" --data '{
   "payment_adjustments": [
     {
       "supplier_id": "00445790",
@@ -12,7 +10,7 @@ curl -H "Content-Type: application/json" -X POST -i -d '{
     }
   ]
 }' \
-"https://api.novicap.com/v1/dynamic_discounting/payment_adjustments"
+"https://api.novicap.com/v1/dynamic_discounting/payment_adjustments?product_id=123"
 ```
 
 > The above command returns a JSON payload with the 201 CREATED status.
@@ -34,10 +32,8 @@ If your account has more than one legal entity, you must include a `debtor_id`. 
   "$schema": "http://json-schema.org/draft-04/schema",
   "description": "Payment adjustment create endpoint json schema",
   "type": "object",
-  "required": ["product_id", "payment_adjustments"],
+  "required": ["payment_adjustments"],
   "properties": {
-    "api_key": { "type": "string" },
-    "product_id": { "type": "number" },
     "payment_adjustments": {
       "type": "array",
       "items": {
@@ -77,12 +73,7 @@ A successful response has a 201 Created HTTP status code.
 ## Retrieve payment adjustments
 
 ```shell
-curl -H "Content-Type: application/json" -X GET -i -d '{
--X GET -d '{
-  "api_key": "abcd",
-  "product_id": 123
-}' \
-"https://api.novicap.com/v1/dynamic_discounting/payment_adjustments"
+curl --header "Authorization: Bearer abcd" "https://api.novicap.com/v1/dynamic_discounting/payment_adjustments?product_id=123"
 ```
 
 > The above command returns a JSON payload with the 200 OK status.
@@ -92,23 +83,6 @@ This endpoint returns all the payments adjustments associated with the product.
 ### HTTP Request
 
 `GET https://api.novicap.com/v1/dynamic_discounting/payment_adjustments`
-
-### Parameters
-
-> The params for this endpoint should match this JSON schema:
-
-```json
-{
-  "$schema": "http://json-schema.org/draft-04/schema",
-  "description": "Payment adjustments index endpoint json schema",
-  "type": "object",
-  "required": ["product_id"],
-  "properties": {
-    "api_key": { "type": "string" },
-    "product_id": { "type": "number" }
-  }
-}
-```
 
 ### Response
 
@@ -129,3 +103,26 @@ A successful response has a 200 OK HTTP status code along with the list of payme
 | amount                         | Number | The amount of the payment adjustment. For credit notes, this should be negative.                                  |
 | custom_payment_adjustment_data | Object | Any data you gave us to associate with this payment adjustment                                                    |
 | payment_instruction_id         | String | The ID of the payment instruction that this adjustment was applied to, if it has been applied                     |
+
+## Delete payment adjustment
+
+```shell
+curl --header "Authorization: Bearer abcd" --request DELETE "https://api.novicap.com/v1/dynamic_discounting/payment_adjustments/DDPI-ABCD?product_id=123"
+```
+
+> The above command returns a empty JSON payload with the 200 ACCEPTED status.
+
+This endpoint permanently deletes the payment adjustment. This cannot be undone.
+
+The URL must contain a valid transaction ID, matching one returned from [GET /v1/dynamic_discounting/payment_adjustments](#retrieve-payment-adjustments). The transaction ID is not the same as the reference of the payment adjustment submitted by you.
+
+The payment adjustment cannot be deleted if it is already part of a payment instruction.
+
+### HTTP Request
+
+`DELETE https://api.novicap.com/v1/dynamic_discounting/payment_adjustments/:transaction_id`
+
+### Response
+
+A successful response has a 200 OK HTTP status code.
+
