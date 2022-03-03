@@ -86,7 +86,7 @@ This endpoint returns all the payments adjustments associated with the product.
 
 ### Response
 
-A successful response has a 200 OK HTTP status code along with the list of payment instructions and the included invoices.
+A successful response has a 200 OK HTTP status code along with the list of payment adjustments.
 
 | Parameter            | Type  | Format                                                       | Description                                  |
 |----------------------|-------|--------------------------------------------------------------|----------------------------------------------|
