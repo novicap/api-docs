@@ -994,7 +994,7 @@
 <h3 id='response-3'>Response</h3>
 <p>A successful response has a 200 OK HTTP status code.</p>
 <h2 id='create-payment-instruction'>Create payment instruction</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--header</span> <span class="s2">"Authorization: Bearer abcd"</span> <span class="nt">--header</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">--data</span> <span class="s1">'{}'</span> <span class="se">\</span>
-<span class="s2">"https://api.novicap.com/v1/dynamic_discounting/payment_instructions"</span>
+<span class="s2">"https://api.novicap.com/v1/dynamic_discounting/payment_instructions?product_id=123"</span>
 </code></pre></div>
 <blockquote>
 <p>The above command returns a JSON payload with the 201 CREATED status.</p>
