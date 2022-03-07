@@ -2,7 +2,7 @@
 
 ```shell
 curl --header "Authorization: Bearer abcd" --header "Content-Type: application/json" --data '{}' \
-"https://api.novicap.com/v1/dynamic_discounting/payment_instructions"
+"https://api.novicap.com/v1/dynamic_discounting/payment_instructions?product_id=123"
 ```
 
 > The above command returns a JSON payload with the 201 CREATED status.
