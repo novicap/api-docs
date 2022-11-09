@@ -151,6 +151,8 @@ Each rectified invoice object has the following schema:
 |-------------|--------|-------------------|---------------------------------------------------------------------|
 | reference   | String |                   | The reference of the rectified invoice, given to us by the supplier |
 | vat_percent | Number | Percentage points | The VAT percentage on the rectified invoice PDF                     |
+| vat_base    | Number |                   | The base amount to charge VAT on                                    |
+| vat_amount  | Number |                   | The amount of VAT                                                   |
 | issued_at   | String | ISO 8601          | The date on the rectified invoice PDF                               |
 
 ## Delete invoice
