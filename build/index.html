@@ -673,9 +673,9 @@
           </span><span class="nl">"custom_invoice_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">},</span><span class="w">
           </span><span class="nl">"invoice_adjustments"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"adjustment_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"adjustment"</span><span class="p">],</span><span class="w">
             </span><span class="nl">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
               </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"adjustment_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"adjustment"</span><span class="p">],</span><span class="w">
               </span><span class="nl">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="nl">"adjustment_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
                 </span><span class="nl">"adjustment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">}</span><span class="w">
@@ -970,6 +970,18 @@
 <td>Number</td>
 <td>Percentage points</td>
 <td>The VAT percentage on the rectified invoice PDF</td>
+</tr>
+<tr>
+<td>vat_base</td>
+<td>Number</td>
+<td></td>
+<td>The base amount to charge VAT on</td>
+</tr>
+<tr>
+<td>vat_amount</td>
+<td>Number</td>
+<td></td>
+<td>The amount of VAT</td>
 </tr>
 <tr>
 <td>issued_at</td>

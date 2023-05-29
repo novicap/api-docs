@@ -53,9 +53,9 @@ If an invoice already exists under the product with the same supplier and refere
           "custom_invoice_data": {"type": "object"},
           "invoice_adjustments": {
             "type": "array",
-            "required": ["adjustment_id", "adjustment"],
             "items": {
               "type": "object",
+              "required": ["adjustment_id", "adjustment"],
               "properties": {
                 "adjustment_id": { "type": "string" },
                 "adjustment": { "type": "number" }
