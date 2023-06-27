@@ -47,7 +47,7 @@ If your account has more than one legal entity, you must include a `debtor_id` a
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["supplier_id", "supplier_name", "contact_email", "apr"],
+        "required": ["supplier_id", "supplier_name", "contact_email"],
         "properties": {
           "debtor_id": {"type": "string"},
           "country_code": {"type": "string"},
@@ -85,7 +85,7 @@ If your account has more than one legal entity, you must include a `debtor_id` a
 | contact_last_name            | String        |          |                                            |                        | The last name of the supplier contact                                                                                                |                                                   |
 | contact_email                | String        | ✓        |                                            |                        | The email of the supplier contact                                                                                                    |                                                   |
 | contact_phone                | String/Number |          |                                            |                        | The full phone number of the supplier contact, including country code                                                                |                                                   |
-| apr                          | Number        | ✓        | Percentage points                          |                        | The APR your want this supplier to pay in percentage points e.g. 10% -> 10                                                           |                                                   |
+| apr                          | Number        |          | Percentage points                          | Configured per product | The APR your want this supplier to pay in percentage points e.g. 10% -> 10                                                           |                                                   |
 | fixed_fee_percentage         | Number        |          | Percentage points                          | Configured per product | The fixed fee, as a percentage of the face value of the invoice, you want the supplier to pay, in percentage points e.g. 0.5% -> 0.5 |                                                   |
 | early_payment_cutoff_in_days | Number        |          |                                            | 10                     | This number of days before the due date, we stop allowing the supplier to accept financing                                           |                                                   |
 | iban                         | String        |          | IBAN                                       |                        | The IBAN code of the bank account you pay to when making payments to the supplier                                                    |                                                   |
