@@ -1,4 +1,4 @@
-## Errors
+# Errors
 
 Any HTTP request may fail with one of the following errors.
 
