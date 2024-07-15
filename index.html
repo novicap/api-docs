@@ -350,10 +350,27 @@
                   <li>
                     <a href="#delete-payment-adjustment" class="toc-h2 toc-link" data-title="Delete payment adjustment">Delete payment adjustment</a>
                   </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#confirming-standard" class="toc-h1 toc-link" data-title="Confirming standard">Confirming standard</a>
+              <ul class="toc-list-h2">
                   <li>
-                    <a href="#errors" class="toc-h2 toc-link" data-title="Errors">Errors</a>
+                    <a href="#add-confirming-invoices" class="toc-h2 toc-link" data-title="Add confirming invoices">Add confirming invoices</a>
+                  </li>
+                  <li>
+                    <a href="#retrieve-confirming-invoices" class="toc-h2 toc-link" data-title="Retrieve confirming invoices">Retrieve confirming invoices</a>
+                  </li>
+                  <li>
+                    <a href="#delete-confirming-invoice" class="toc-h2 toc-link" data-title="Delete confirming invoice">Delete confirming invoice</a>
+                  </li>
+                  <li>
+                    <a href="#retrieve-confirming-payment-instructions" class="toc-h2 toc-link" data-title="Retrieve confirming payment instructions">Retrieve confirming payment instructions</a>
                   </li>
               </ul>
+          </li>
+          <li>
+            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </ul>
     </div>
@@ -1354,7 +1371,427 @@
 <p><code>DELETE https://api.novicap.com/v1/dynamic_discounting/payment_adjustments/:transaction_id</code></p>
 <h3 id='response-3'>Response</h3>
 <p>A successful response has a 200 OK HTTP status code.</p>
-<h2 id='errors'>Errors</h2>
+<h1 id='confirming-standard'>Confirming standard</h1><h2 id='add-confirming-invoices'>Add confirming invoices</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--header</span> <span class="s2">"Authorization: Bearer abcd"</span> <span class="nt">--header</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">--data</span> <span class="s1">'{
+  "invoices": [
+    {
+      "supplier_id": "00445790",
+      "reference": "A1234",
+      "amount": 1000,
+      "issued_at": "2024-05-30",
+      "due_at": "2024-10-30",
+    }
+  ]
+}'</span> <span class="se">\</span>
+<span class="s2">"https://api.novicap.com/v1/confirming_standard/invoices?product_id=123"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns a empty JSON payload with the 201 CREATED status.</p>
+</blockquote>
+
+<p>This endpoint adds invoices to your confirming standard product. If the supplier doesn&#39;t exist you must pass the <code>supplier_name</code> and <code>contact_email</code> to create them in the same request.</p>
+
+<p>The company will receive an onboarding email chain, and we may reach out to the company by phone to assist in onboarding.</p>
+
+<p>If your account has more than one legal entity, you must include a <code>debtor_id</code> along with every supplier, representing the entity which will pay invoices to that supplier.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST https://api.novicap.com/v1/confirming_standard/invoices</code></p>
+<h3 id='parameters'>Parameters</h3>
+<blockquote>
+<p>The params for this endpoint should match this JSON schema:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invoices create endpoint json schema"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"invoices"</span><span class="p">],</span><span class="w">
+  </span><span class="nl">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"invoices"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"array"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"required"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"supplier_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"reference"</span><span class="p">,</span><span class="w"> </span><span class="s2">"amount"</span><span class="p">,</span><span class="w"> </span><span class="s2">"issued_at"</span><span class="p">,</span><span class="w"> </span><span class="s2">"due_at"</span><span class="p">],</span><span class="w">
+        </span><span class="nl">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"debtor_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"supplier_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"supplier_name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"contact_first_name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"contact_last_name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"contact_email"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"contact_phone"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"iban"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"bic"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"reference"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"issued_at"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"due_at"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Format</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>invoices</td>
+<td>Array</td>
+<td>✓</td>
+<td>Array of <a href="#confirming-invoice-create">invoice objects</a></td>
+<td>A list of invoices to create</td>
+</tr>
+</tbody></table>
+<h3 id='confirming-invoice-create'>Confirming invoice (create)</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Format</th>
+<th>Default value</th>
+<th>Description</th>
+<th></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>debtor_id</td>
+<td>String</td>
+<td></td>
+<td></td>
+<td></td>
+<td>If your account contains more than one legal entity, this is the ID of the entity that pays invoices to this supplier</td>
+<td></td>
+</tr>
+<tr>
+<td>country_code</td>
+<td>String</td>
+<td></td>
+<td>ISO-3166-1</td>
+<td></td>
+<td>Two-letter country codes if supplier is international</td>
+<td></td>
+</tr>
+<tr>
+<td>supplier_id</td>
+<td>String</td>
+<td>✓</td>
+<td>Depends on country code</td>
+<td></td>
+<td>The ID of the supplier (see <a href="#identifying-companies">identifying companies</a>)</td>
+<td></td>
+</tr>
+<tr>
+<td>supplier_name</td>
+<td>String</td>
+<td></td>
+<td></td>
+<td></td>
+<td>The name of the supplier</td>
+<td></td>
+</tr>
+<tr>
+<td>contact_first_name</td>
+<td>String</td>
+<td></td>
+<td></td>
+<td></td>
+<td>The first name of the supplier contact</td>
+<td></td>
+</tr>
+<tr>
+<td>contact_last_name</td>
+<td>String</td>
+<td></td>
+<td></td>
+<td></td>
+<td>The last name of the supplier contact</td>
+<td></td>
+</tr>
+<tr>
+<td>contact_email</td>
+<td>String</td>
+<td></td>
+<td></td>
+<td></td>
+<td>The email of the supplier contact</td>
+<td></td>
+</tr>
+<tr>
+<td>contact_phone</td>
+<td>String/Number</td>
+<td></td>
+<td></td>
+<td></td>
+<td>The full phone number of the supplier contact, including country code</td>
+<td></td>
+</tr>
+<tr>
+<td>iban</td>
+<td>String</td>
+<td></td>
+<td>IBAN</td>
+<td></td>
+<td>The IBAN code of the bank account you pay to when making payments to the supplier</td>
+<td></td>
+</tr>
+<tr>
+<td>bic</td>
+<td>String</td>
+<td></td>
+<td>BIC</td>
+<td></td>
+<td>The BIC of the bank account you pay to when making payments to the supplier</td>
+<td></td>
+</tr>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td>The reference of the invoice</td>
+<td></td>
+</tr>
+<tr>
+<td>amount</td>
+<td>String</td>
+<td>✓</td>
+<td></td>
+<td></td>
+<td>The amount of the invoice</td>
+<td></td>
+</tr>
+<tr>
+<td>issued_at</td>
+<td>String</td>
+<td>✓</td>
+<td>ISO 8601</td>
+<td></td>
+<td>The date on which the invoice is issued</td>
+<td></td>
+</tr>
+<tr>
+<td>due_at</td>
+<td>String</td>
+<td>✓</td>
+<td>ISO 8601</td>
+<td></td>
+<td>The date on which the invoice is due</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id='response'>Response</h3>
+<p>A successful response has a 201 Created HTTP status code.</p>
+<h2 id='retrieve-confirming-invoices'>Retrieve confirming invoices</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--header</span> <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"https://api.novicap.com/v1/confirming_standard/invoices?product_id=123"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns an array of Invoice objects in the JSON payload with the 200 OK status.</p>
+</blockquote>
+
+<p>This endpoint returns all the invoices registered in your product.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET https://api.novicap.com/v1/confirming_standard/invoices</code></p>
+<h3 id='response-2'>Response</h3>
+<p>A successful response has a 200 OK HTTP status code along with an array of invoice objects.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Format</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>invoices</td>
+<td>Array</td>
+<td>Array of <a href="#confirming-invoice-index">invoice objects</a></td>
+<td>A list of all invoices in the product</td>
+</tr>
+</tbody></table>
+<h3 id='confirming-invoice-index'>Confirming invoice (index)</h3>
+<p>Each invoice object has the following schema:</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Format</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>supplier_id</td>
+<td>String</td>
+<td>Depends on country</td>
+<td>The ID of the supplier (see <a href="#identifying-companies">identifying companies</a>)</td>
+</tr>
+<tr>
+<td>debtor_id</td>
+<td>String</td>
+<td>Depends on country</td>
+<td>The ID of the debtor (see <a href="#identifying-companies">identifying companies</a>)</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>String</td>
+<td></td>
+<td>The reference you gave us - unique for each pair of debtor and supplier</td>
+</tr>
+<tr>
+<td>transaction_id</td>
+<td>String</td>
+<td></td>
+<td>A unique reference for this invoice in our system</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>Number</td>
+<td></td>
+<td>The amount (face value) of the invoice</td>
+</tr>
+<tr>
+<td>due_at</td>
+<td>String</td>
+<td>ISO 8601</td>
+<td>The date this invoice is due</td>
+</tr>
+<tr>
+<td>payment_instruction_id</td>
+<td>String</td>
+<td></td>
+<td>The payment instruction that this invoice is included in</td>
+</tr>
+</tbody></table>
+<h2 id='delete-confirming-invoice'>Delete confirming invoice</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--header</span> <span class="s2">"Authorization: Bearer abcd"</span> <span class="nt">--request</span> DELETE <span class="s2">"https://api.novicap.com/v1/confirming_standard/invoices/I-ABCD?product_id=123"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns a empty JSON payload with the 200 ACCEPTED status.</p>
+</blockquote>
+
+<p>This endpoint permanently deletes the invoice. This cannot be undone.</p>
+
+<p>The URL must contain a valid transaction ID, matching one returned from <a href="#retrieve-invoices">GET /v1/confirming_standard/invoices</a>. The transaction ID is not the same as the reference of the invoice submitted by you.</p>
+
+<p>The invoice cannot be deleted if it is already part of a payment instruction or if it has been already paid.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>DELETE https://api.novicap.com/v1/confirming_standard/invoices/:transaction_id</code></p>
+<h3 id='response-3'>Response</h3>
+<p>A successful response has a 200 OK HTTP status code.</p>
+<h2 id='retrieve-confirming-payment-instructions'>Retrieve confirming payment instructions</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">--header</span> <span class="s2">"Authorization: Bearer abcd"</span> <span class="s2">"https://api.novicap.com/v1/confirming_standard/payment_instructions?product_id=123"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns a JSON payload with the 200 OK status.</p>
+</blockquote>
+
+<p>This endpoint returns all the payments instructions associated with the product.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET https://api.novicap.com/v1/confirming_standard/payment_instructions</code></p>
+<h3 id='confirming-payment-instructions'>Confirming payment instructions</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Format</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>payment_instructions</td>
+<td>Array</td>
+<td>Array of <a href="#confirming-payment-instruction">payment instruction objects</a></td>
+<td>List of payment instructions in your account</td>
+</tr>
+</tbody></table>
+<h3 id='confirming-payment-instruction'>Confirming payment instruction</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Format</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>payment_instruction_id</td>
+<td>String</td>
+<td></td>
+<td>A unique ID for this payment instruction</td>
+</tr>
+<tr>
+<td>invoices</td>
+<td>Array</td>
+<td>Array of <a href="#confirming-invoice-index">invoice objects</a></td>
+<td>A list of invoices associated with this payment instruction</td>
+</tr>
+<tr>
+<td>payments</td>
+<td>Array</td>
+<td>Array of <a href="#confirming-payment">payment objects</a></td>
+<td>A list of payments to make, one per supplier</td>
+</tr>
+</tbody></table>
+<h3 id='confirming-payment'>Confirming payment</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Format</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>supplier_name</td>
+<td>String</td>
+<td></td>
+<td>Name of the supplier to pay</td>
+</tr>
+<tr>
+<td>supplier_id</td>
+<td>String</td>
+<td>Depends on country code</td>
+<td>The ID of the supplier to pay (see <a href="#identifying-companies">identifying companies</a>)</td>
+</tr>
+<tr>
+<td>debtor_name</td>
+<td>String</td>
+<td></td>
+<td>Name of the legal entity that should make the payment, which matters if you have more than one in your account</td>
+</tr>
+<tr>
+<td>debtor_id</td>
+<td>String</td>
+<td>Depends on country code</td>
+<td>The ID of the legal entity that should make the payment (see <a href="#identifying-companies">identifying companies</a>)</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>Number</td>
+<td></td>
+<td>The amount you should pay the supplier</td>
+</tr>
+<tr>
+<td>iban</td>
+<td>String</td>
+<td>IBAN</td>
+<td>The bank account you should pay into (if you give it to us)</td>
+</tr>
+<tr>
+<td>references</td>
+<td>String</td>
+<td>Seperated by &#39;, &#39; (comma then space)</td>
+<td>A list of invoice references included in this payment</td>
+</tr>
+</tbody></table>
+<h3 id='response'>Response</h3>
+<p>A successful response has a 200 OK HTTP status code along with the list of <a href="!confirming-payment-instruction">payment instructions</a> and the included invoices.</p>
+<h1 id='errors'>Errors</h1>
 <p>Any HTTP request may fail with one of the following errors.</p>
 
 <table><thead>
