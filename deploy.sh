@@ -22,6 +22,7 @@ Options:
 
 run_build() {
   bundle exec middleman build --clean
+  cp CNAME build/CNAME
 }
 
 parse_args() {
