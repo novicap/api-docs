@@ -1424,6 +1424,7 @@
           </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="p">},</span><span class="w">
           </span><span class="nl">"issued_at"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
           </span><span class="nl">"due_at"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"self_confirming"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boolean"</span><span class="w"> </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -1456,7 +1457,6 @@
 <th>Format</th>
 <th>Default value</th>
 <th>Description</th>
-<th></th>
 </tr>
 </thead><tbody>
 <tr>
@@ -1466,7 +1466,6 @@
 <td></td>
 <td></td>
 <td>If your account contains more than one legal entity, this is the ID of the entity that pays invoices to this supplier</td>
-<td></td>
 </tr>
 <tr>
 <td>country_code</td>
@@ -1475,7 +1474,6 @@
 <td>ISO-3166-1</td>
 <td></td>
 <td>Two-letter country codes if supplier is international</td>
-<td></td>
 </tr>
 <tr>
 <td>supplier_id</td>
@@ -1484,7 +1482,6 @@
 <td>Depends on country code</td>
 <td></td>
 <td>The ID of the supplier (see <a href="#identifying-companies">identifying companies</a>)</td>
-<td></td>
 </tr>
 <tr>
 <td>supplier_name</td>
@@ -1493,7 +1490,6 @@
 <td></td>
 <td></td>
 <td>The name of the supplier</td>
-<td></td>
 </tr>
 <tr>
 <td>contact_first_name</td>
@@ -1502,7 +1498,6 @@
 <td></td>
 <td></td>
 <td>The first name of the supplier contact</td>
-<td></td>
 </tr>
 <tr>
 <td>contact_last_name</td>
@@ -1511,7 +1506,6 @@
 <td></td>
 <td></td>
 <td>The last name of the supplier contact</td>
-<td></td>
 </tr>
 <tr>
 <td>contact_email</td>
@@ -1520,7 +1514,6 @@
 <td></td>
 <td></td>
 <td>The email of the supplier contact</td>
-<td></td>
 </tr>
 <tr>
 <td>contact_phone</td>
@@ -1529,7 +1522,6 @@
 <td></td>
 <td></td>
 <td>The full phone number of the supplier contact, including country code</td>
-<td></td>
 </tr>
 <tr>
 <td>iban</td>
@@ -1538,7 +1530,6 @@
 <td>IBAN</td>
 <td></td>
 <td>The IBAN code of the bank account you pay to when making payments to the supplier</td>
-<td></td>
 </tr>
 <tr>
 <td>bic</td>
@@ -1547,7 +1538,6 @@
 <td>BIC</td>
 <td></td>
 <td>The BIC of the bank account you pay to when making payments to the supplier</td>
-<td></td>
 </tr>
 <tr>
 <td>reference</td>
@@ -1556,7 +1546,6 @@
 <td></td>
 <td></td>
 <td>The reference of the invoice</td>
-<td></td>
 </tr>
 <tr>
 <td>amount</td>
@@ -1565,7 +1554,6 @@
 <td></td>
 <td></td>
 <td>The amount of the invoice</td>
-<td></td>
 </tr>
 <tr>
 <td>issued_at</td>
@@ -1574,7 +1562,6 @@
 <td>ISO 8601</td>
 <td></td>
 <td>The date on which the invoice is issued</td>
-<td></td>
 </tr>
 <tr>
 <td>due_at</td>
@@ -1583,7 +1570,14 @@
 <td>ISO 8601</td>
 <td></td>
 <td>The date on which the invoice is due</td>
+</tr>
+<tr>
+<td>self_confirming</td>
+<td>Boolean</td>
 <td></td>
+<td></td>
+<td>false</td>
+<td>If true, we will instruct the debtor to pay the invoice to us on the early payment date, instead of financing it</td>
 </tr>
 </tbody></table>
 <h3 id='response'>Response</h3>
