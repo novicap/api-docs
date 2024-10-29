@@ -23,7 +23,6 @@ The company will receive an onboarding email chain, and we may reach out to the 
 
 If your account has more than one legal entity, you must include a `debtor_id` along with every supplier, representing the entity which will pay invoices to that supplier.
 
-
 ### HTTP Request
 
 `POST https://api.novicap.com/v1/confirming_standard/invoices`
@@ -58,6 +57,7 @@ If your account has more than one legal entity, you must include a `debtor_id` a
           "amount": { "type": "number" },
           "issued_at": { "type": "string" },
           "due_at": { "type": "string" },
+          "self_confirming": { "type": "boolean" }
         }
       }
     }
@@ -71,22 +71,23 @@ If your account has more than one legal entity, you must include a `debtor_id` a
 
 ### Confirming invoice (create)
 
-| Parameter           | Type   | Required | Format                                      | Default value | Description                                                                                                           |                                                  |
-|---------------------|--------|----------|---------------------------------------------|---------------|-----------------------------------------------------------------------------------------------------------------------|--------------------------------------------------|
-| debtor_id           | String |          |                                             |               | If your account contains more than one legal entity, this is the ID of the entity that pays invoices to this supplier |                                                  |
-| country_code        | String |          | ISO-3166-1                     |                            | Two-letter country codes if supplier is international
-| supplier_id         | String | ✓        | Depends on country code                     |               | The ID of the supplier (see [identifying companies](#identifying-companies))                                          |                                                  |
-| supplier_name       | String |          |                                |                            | The name of the supplier                                                                                                             |                                                   |
-| contact_first_name  | String |          |                                            |                | The first name of the supplier contact                                                                                               |                                                   |
-| contact_last_name   | String |          |                                            |                | The last name of the supplier contact                                                                                                |                                                   |
-| contact_email       | String |          |                                            |                | The email of the supplier contact                                                                                                    |                                                   |
-| contact_phone       | String/Number |   |                                            |                | The full phone number of the supplier contact, including country code                                                                |                                                   |
-| iban                | String |          | IBAN                           |                            | The IBAN code of the bank account you pay to when making payments to the supplier                                                    |                                                   |
-| bic                 | String |          | BIC                            |                            | The BIC of the bank account you pay to when making payments to the supplier                                                    |                                                   |
-| reference           | String | ✓        |                                             |               | The reference of the invoice                                                                                          |                                                  |
-| amount              | String | ✓        |                                             |               | The amount of the invoice                                                                                             |                                                  |
-| issued_at           | String | ✓        | ISO 8601                                    |               | The date on which the invoice is issued                                                                                  |                                               |
-| due_at              | String | ✓        | ISO 8601                                    |               | The date on which the invoice is due                                                                                  |                                                  |
+| Parameter           | Type   | Required | Format                                      | Default value | Description                                                                                                           |
+|---------------------|--------|----------|---------------------------------------------|---------------|-----------------------------------------------------------------------------------------------------------------------|
+| debtor_id           | String |          |                                             |               | If your account contains more than one legal entity, this is the ID of the entity that pays invoices to this supplier |
+| country_code        | String |          | ISO-3166-1                     |                            | Two-letter country codes if supplier is international                                                                 |
+| supplier_id         | String | ✓        | Depends on country code                     |               | The ID of the supplier (see [identifying companies](#identifying-companies))                                          |
+| supplier_name       | String |          |                                |                            | The name of the supplier                                                                                              |
+| contact_first_name  | String |          |                                            |                | The first name of the supplier contact                                                                                |
+| contact_last_name   | String |          |                                            |                | The last name of the supplier contact                                                                                 |
+| contact_email       | String |          |                                            |                | The email of the supplier contact                                                                                     |
+| contact_phone       | String/Number |   |                                            |                | The full phone number of the supplier contact, including country code                                                 |
+| iban                | String |          | IBAN                           |                            | The IBAN code of the bank account you pay to when making payments to the supplier                                     |
+| bic                 | String |          | BIC                            |                            | The BIC of the bank account you pay to when making payments to the supplier                                           |
+| reference           | String | ✓        |                                             |               | The reference of the invoice                                                                                          |
+| amount              | String | ✓        |                                             |               | The amount of the invoice                                                                                             |
+| issued_at           | String | ✓        | ISO 8601                                    |               | The date on which the invoice is issued                                                                               |
+| due_at              | String | ✓        | ISO 8601                                    |               | The date on which the invoice is due                                                                                  |
+| self_confirming     | Boolean |         |                                             |   false       | If true, we will instruct the debtor to pay the invoice to us on the early payment date, instead of financing it      |
 
 ### Response
 
